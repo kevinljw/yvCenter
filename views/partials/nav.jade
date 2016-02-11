@@ -1,0 +1,72 @@
+nav#demo-navbar.navbar.navbar-ct-warning(role='navigation-demo')
+  .container
+    //- Brand and toggle get grouped for better mobile display
+    .navbar-header
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navigation-example-2')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a(href='/')
+        .logo-container
+          .logo
+            img(src='/img/yvLogo.jpg', alt='北基金青年志工中心 Logo')
+          .brand
+            |北基金  
+            br
+            |青年志工中心
+    //- Collect the nav links, forms, and other content for toggling
+    #navigation-example-2.collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-right
+        li.dropdown
+          a.dropdown-toggle.btn.btn-default.btn-simple(href='/about', data-toggle='dropdown')
+            | 認識我們 
+            b.caret
+          //- You can add classes for different colours on the next element
+          ul.dropdown-menu.dropdown-warning.dropdown-menu-right
+            li.dropdown-header About us
+            li
+              a(href='/about/center') 認識本中心
+            li
+              a(href='/about/toypf') 十傑基金會
+            li
+              a(href='/about/#') 十傑志工隊
+            li.divider
+            li
+              a(href='/about/#') 我們在這裡
+            li
+              a(href='/about/#') 租用資訊
+        li
+          a.btn.btn-default.btn-simple(href='tutorial.html') 
+            | 訊息快報
+        li.dropdown
+          a.dropdown-toggle.btn.btn-default.btn-simple(href='#', data-toggle='dropdown')
+            | 青年服務 
+            b.caret
+          //- You can add classes for different colours on the next element
+          ul.dropdown-menu.dropdown-warning.dropdown-menu-right
+            li.dropdown-header Youth Service
+            li
+              a(href='#') 在地好資源
+            li.divider
+            li
+              a(href='#') 青年當志工
+            li
+              a(href='#') 機構找志工
+            li.divider
+            li
+              a(href='#') 揪團去服務
+        li
+          a.btn.btn-default.btn-simple(href='tutorial.html') 
+            | 青年培力
+        li
+          a.btn.btn-default.btn-simple(href='http://www.creative-tim.com/product/paper-kit', target='_blank')
+            | 公益新鮮事
+        li
+          a.btn.btn-default.btn-simple(href='tutorial.html') 
+            | 友好連結
+        li
+          a.btn.btn-default.btn-simple(href='tutorial.html') 
+            | 成果紀錄
+
+

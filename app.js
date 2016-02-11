@@ -22,7 +22,7 @@ var expressValidator = require('express-validator');
 var sass = require('node-sass-middleware');
 var multer = require('multer');
 var upload = multer({ dest: path.join(__dirname, 'uploads') });
-
+// console.log(pat÷h.join(__dirname, 'uploads'));
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  *
@@ -37,7 +37,7 @@ var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
-
+var aboutController = require('./controllers/about')
 /**
  * API keys and Passport configuration.
  */
@@ -130,6 +130,9 @@ app.post('/account/password', passportConf.isAuthenticated, userController.postU
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
 
+app.get('/about', aboutController.getAbout);
+app.get('/about/center', aboutController.getCenter);
+app.get('/about/toypf', aboutController.getTOYPF);
 /**
  * API examples routes.
  */
