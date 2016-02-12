@@ -133,6 +133,7 @@ app.get('/account/unlink/:provider', passportConf.isAuthenticated, userControlle
 app.get('/about', aboutController.getAbout);
 app.get('/about/center', aboutController.getCenter);
 app.get('/about/toypf', aboutController.getTOYPF);
+app.get('/about/map', aboutController.getMap);
 /**
  * API examples routes.
  */

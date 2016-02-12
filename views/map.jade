@@ -1,0 +1,272 @@
+extends layout
+
+block content
+  .wrapper
+    .toypf-background
+      .filter-black
+    .profile-content.section-nude
+      .container
+        .row.owner
+          .col-md-2.col-md-offset-5.col-sm-4.col-sm-offset-4.col-xs-6.col-xs-offset-3.text-center
+            .avatar
+              img.img-circle.img-no-padding.img-responsive(src='/img/yvLogo.jpg', alt='')
+            .name
+              h4
+                | 我們在這裡
+              h5
+                | 北基金青年志工中心
+                br
+                | 交通資訊
+          img.img-no-padding.col-md-offset-3.col-md-6.col-sm-8.col-sm-offset-2.col-xs-10.col-xs-offset-1(src='/img/toypf_map-01.png', alt='')
+        .profile-tabs
+          .nav-tabs-navigation
+            .nav-tabs-wrapper
+              ul.nav.nav-tabs#tabs(data-tabs="tabs")
+                li.active
+                  a(href="#bus" data-toggle="tab")
+                    i.fa.fa-bus
+                    | 公車
+                li
+                  a(href="#train" data-toggle="tab")
+                    i.fa.fa-train
+                    | 火車
+                li
+                  a(href="#mrt" data-toggle="tab")
+                    i.fa.fa-subway
+                    | 捷運
+                li
+                  a(href="#car" data-toggle="tab")
+                    i.fa.fa-automobile
+                    | 開車
+          #my-tab-content.tab-content
+            #bus.tab-pane.active
+              .row
+                .col-md-6.col-md-offset-3
+                  ul.list-unstyled.follows
+                    li
+                      .row
+                        .col-md-2.col-md-offset-0.col-xs-3.col-xs-offset-2.mediumIcon
+                          i.fa.fa-bus
+                        .col-md-7.col-xs-4
+                          h6
+                            | 63
+                            br 
+                            small
+                              | 新湖三路口﹝台北花市﹞
+                        .col-md-3.col-xs-2
+                          a.btn.btn-default(href='http://e-bus.taipei.gov.tw/newmap/Tw/Map?rid=10847&sec=1', target='_blank')
+                            | 查看
+                    hr
+                    li
+                      .row
+                        .col-md-2.col-md-offset-0.col-xs-3.col-xs-offset-2.mediumIcon
+                          i.fa.fa-bus
+                        .col-md-7.col-xs-4
+                          h6
+                            | 204
+                            br 
+                            small
+                              | 新湖三路口﹝台北花市﹞
+                        .col-md-3.col-xs-2
+                          a.btn.btn-default(href='http://e-bus.taipei.gov.tw/newmap/Tw/Map?rid=11212&sec=0', target='_blank')
+                            | 查看
+                    hr
+                    li
+                      .row
+                        .col-md-2.col-md-offset-0.col-xs-3.col-xs-offset-2.mediumIcon
+                          i.fa.fa-bus
+                        .col-md-7.col-xs-4
+                          h6
+                            | 518
+                            br 
+                            small
+                              | 新湖三路口﹝台北花市﹞
+                        .col-md-3.col-xs-2
+                          a.btn.btn-default(href='http://e-bus.taipei.gov.tw/newmap/Tw/Map?rid=10293&sec=1', target='_blank')
+                            | 查看
+                    hr
+                    li
+                      .row
+                        .col-md-2.col-md-offset-0.col-xs-3.col-xs-offset-2.mediumIcon
+                          i.fa.fa-bus
+                        .col-md-7.col-xs-4
+                          h6
+                            | 552
+                            br 
+                            small
+                              | 新湖三路口﹝台北花市﹞
+                        .col-md-3.col-xs-2
+                          a.btn.btn-default(href='http://e-bus.taipei.gov.tw/newmap/Tw/Map?rid=11056&sec=1', target='_blank')
+                            | 查看
+                    hr
+                    li
+                      .row
+                        .col-md-2.col-md-offset-0.col-xs-3.col-xs-offset-2.mediumIcon
+                          i.fa.fa-bus
+                        .col-md-7.col-xs-4
+                          h6
+                            | 小 2
+                            br 
+                            small
+                              | 新湖三路口﹝台北花市﹞
+                        .col-md-3.col-xs-2
+                          a.btn.btn-default(href='http://e-bus.taipei.gov.tw/newmap/Tw/Map?rid=11055&sec=0', target='_blank')
+                            | 查看
+                    hr
+                    li
+                      .row
+                        .col-md-2.col-md-offset-0.col-xs-3.col-xs-offset-2.mediumIcon
+                          i.fa.fa-bus
+                        .col-md-7.col-xs-4
+                          h6
+                            | 藍 7
+                            br 
+                            small
+                              | 新湖三路口﹝台北花市﹞
+                        .col-md-3.col-xs-2
+                          a.btn.btn-default(href='http://e-bus.taipei.gov.tw/newmap/Tw/Map?rid=15361&sec=1', target='_blank')
+                            | 查看
+                    hr
+                    li
+                      .row
+                        .col-md-2.col-md-offset-0.col-xs-3.col-xs-offset-2.mediumIcon
+                          i.fa.fa-bus
+                        .col-md-7.col-xs-4
+                          h6
+                            | 藍 26
+                            br 
+                            small
+                              | 新湖三路口﹝台北花市﹞
+                        .col-md-3.col-xs-2
+                          a.btn.btn-default(href='http://e-bus.taipei.gov.tw/newmap/Tw/Map?rid=10432&sec=1', target='_blank')
+                            | 查看  
+            #train.tab-pane
+              .row
+                .col-md-8.col-md-offset-2
+                  ul.list-unstyled.follows
+                    li
+                      .row
+                        .col-md-1.col-md-offset-0.col-xs-1.col-xs-offset-1.mediumIcon
+                          i.fa.fa-train
+                        .col-md-3.col-xs-2
+                          h6
+                            | 松山車站 [西出口]
+                        .col-md-5.col-xs-3
+                          p
+                            | 松山區公所前【松山車站(八德)】
+                            br
+                            | 轉乘63、204、518、藍7
+                        .col-md-3.col-xs-2
+                          a.btn.btn-primary(href='http://twtraffic.tra.gov.tw/twrail/', target='_blank')
+                            | 查看
+            #mrt.tab-pane
+              .row
+                .col-md-8.col-md-offset-2
+                  ul.list-unstyled.follows
+                    li
+                      .row
+                        .col-md-1.col-md-offset-0.col-xs-1.col-xs-offset-1.mediumIcon
+                          i.fa.fa-subway.color-info
+                        .col-md-3.col-xs-3
+                          h6
+                            | 市政府站 - 2號出口
+                            br 
+                            small
+                              | 板南線
+                        .col-md-6.col-xs-4
+                          p
+                            | 轉乘公車: 552、小2、藍7、藍26
+                        .col-md-2.col-xs-2
+                          a.btn.btn-info(href='http://web.metro.taipei/c/stationdetail2010.asp?ID=093', target='_blank')
+                            | 查看
+                    hr
+                    li
+                      .row
+                        .col-md-1.col-md-offset-0.col-xs-1.col-xs-offset-1.mediumIcon
+                          i.fa.fa-subway.color-warning
+                        .col-md-3.col-xs-3
+                          h6
+                            | 港墘站 - 1或2號出口
+                            br 
+                            small
+                              | 文湖線
+                        .col-md-6.col-xs-4
+                          p
+                            | 2號 轉乘公車: 藍7
+                            br
+                            | 1號 轉乘公車: 藍26
+                        .col-md-2.col-xs-2
+                          a.btn.btn-warning(href='http://web.metro.taipei/c/stationdetail2010.asp?ID=024', target='_blank')
+                            | 查看
+                    hr
+                    li
+                      .row
+                        .col-md-1.col-md-offset-0.col-xs-1.col-xs-offset-1.mediumIcon
+                          i.fa.fa-subway.color-success
+                        .col-md-3.col-xs-3
+                          h6
+                            | 松山站 - 3號出口
+                            br 
+                            small
+                              | 松山-新店線
+                        .col-md-6.col-xs-4
+                          p
+                            | 「松山車站(八德)」轉乘: 63、204、518、藍7
+                        .col-md-2.col-xs-2
+                          a.btn.btn-success(href='http://web.metro.taipei/c/stationdetail2010.asp?ID=111', target='_blank')
+                            | 查看
+            #car.tab-pane.text-center
+              .row
+                .col-md-8.col-md-offset-2
+                  ul.list-unstyled.follows
+                    li
+                      .row
+                        .col-md-1.col-md-offset-0.col-xs-1.col-xs-offset-1.mediumIcon
+                          i.fa.fa-automobile
+                        .col-md-3.col-xs-2
+                          h6
+                            | 平面道路路線
+                        .col-md-8.col-xs-8
+                          p
+                            | 1.民權東路
+                            i.fa.fa-arrow-right
+                            |民權大橋
+                            i.fa.fa-arrow-right
+                            |右轉行愛路
+                            i.fa.fa-arrow-right
+                            |右轉新湖三路
+                            i.fa.fa-arrow-right
+                            |左轉民善街
+                            br
+                            | 2.松山車站(八德路四段)
+                            i.fa.fa-arrow-right
+                            |左轉成美橋
+                            i.fa.fa-arrow-right
+                            |直行舊宗路一段
+                            i.fa.fa-arrow-right
+                            |左轉新湖二路
+                            i.fa.fa-arrow-right
+                            |右轉民善街，續行即可抵達
+                    hr
+                    li
+                      .row
+                        .col-md-1.col-md-offset-0.col-xs-1.col-xs-offset-1.mediumIcon
+                          i.fa.fa-automobile
+                        .col-md-3.col-xs-2
+                          h6
+                            | 高速公路路線
+                        .col-md-8.col-xs-8
+                          p
+                            | 國道一號內湖交流道
+                            i.fa.fa-arrow-right
+                            |直行南京東路六段
+                            i.fa.fa-arrow-right
+                            |右轉舊宗路一段
+                            i.fa.fa-arrow-right
+                            |左轉新湖二路
+                            i.fa.fa-arrow-right
+                            |右轉民善街，續行即可抵達
+
+
+              a.btn.btn-warning.btn-fill(href='https://www.google.com.tw/maps/place/%E5%8D%81%E5%A4%A7%E5%82%91%E5%87%BA%E9%9D%92%E5%B9%B4%E5%9F%BA%E9%87%91%E6%9C%83/@25.0376668,121.5261453,17z/data=!3m1!4b1!4m2!3m1!1s0x3442a979aaf5842f:0xf94eeb960a61f05d', target='_blank')
+                | 打開地圖

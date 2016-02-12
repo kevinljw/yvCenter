@@ -18,3 +18,9 @@ exports.getTOYPF = function(req, res) {
     title: '十傑基金會'
   });
 };
+exports.getMap = function(req, res) {
+  // console.log("getMap")
+  res.render('map', {
+    title: '我們在這裡'
+  });
+};

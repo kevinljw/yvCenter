@@ -178,6 +178,11 @@
     margin-right: 40px;
     margin-bottom: 20px;
 }
+.mediumIcon > .fa{
+    font-size: 40px;
+/*    margin-right: 40px;*/
+/*    margin-bottom: 20px;*/
+}
 .carousel.slide h2{
     background: #000;
 }
@@ -373,4 +378,24 @@
             left: -14px;
             right: auto;
         }
+}
+
+.color-primary {
+    color: #7A9E9F;
+}
+
+.color-success {
+    color: #7AC29A;
+}
+
+.color-warning {
+    color: #F3BB45;
+}
+
+.color-danger {
+    color: #EB5E28;
+}
+
+.color-info {
+    color: #68B3C8;
 }
