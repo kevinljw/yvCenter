@@ -2069,6 +2069,10 @@ textarea.form-control {
   opacity: 0.25; }
 
 @media (min-width: 768px) {
+  .container > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-header, .container-fluid > .navbar-collapse {
+    margin-right: -15px;
+    margin-left: -15px;
+  }
   .navbar-form {
     margin-top: 21px;
     margin-bottom: 21px;
