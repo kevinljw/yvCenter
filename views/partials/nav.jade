@@ -30,15 +30,27 @@ nav#demo-navbar.navbar.navbar-ct-warning(role='navigation-demo')
             li
               a(href='/about/toypf') 十傑基金會
             li
-              a(href='/about/#') 十傑志工隊
+              a(href='/about/volunteam') 十傑志工隊
             li.divider
             li
               a(href='/about/map') 我們在這裡
             li
-              a(href='/about/#') 租用資訊
-        li
-          a.btn.btn-default.btn-simple(href='tutorial.html') 
-            | 訊息快報
+              a(href='/about/rent') 租用資訊
+        li.dropdown
+          a.dropdown-toggle.btn.btn-default.btn-simple(href='/news', data-toggle='dropdown')
+            | 訊息快報 
+            b.caret
+          //- You can add classes for different colours on the next element
+          ul.dropdown-menu.dropdown-warning.dropdown-menu-right
+            li.dropdown-header News
+            li
+              a(href='/news/tag/new-info') 最新訊息
+            li
+              a(href='/news/tag/info-deliver') 活動轉知
+            li
+              a(href='/news/tag/news-report') 新聞報導
+            li
+              a(href='/news/tag/center-activities') 中心活動
         li.dropdown
           a.dropdown-toggle.btn.btn-default.btn-simple(href='#', data-toggle='dropdown')
             | 青年服務 
@@ -47,26 +59,26 @@ nav#demo-navbar.navbar.navbar-ct-warning(role='navigation-demo')
           ul.dropdown-menu.dropdown-warning.dropdown-menu-right
             li.dropdown-header Youth Service
             li
-              a(href='#') 在地好資源
+              a(href='/youth/local') 在地好資源
             li.divider
             li
-              a(href='#') 青年當志工
+              a(href='/youth/bevo') 青年當志工
             li
-              a(href='#') 機構找志工
+              a(href='/youth/findvo') 機構找志工
             li.divider
             li
-              a(href='#') 揪團去服務
+              a(href='/youth/launchteam') 揪團去服務
         li
-          a.btn.btn-default.btn-simple(href='tutorial.html') 
+          a.btn.btn-default.btn-simple(href='/youth/empower') 
             | 青年培力
         li
-          a.btn.btn-default.btn-simple(href='http://www.creative-tim.com/product/paper-kit', target='_blank')
+          a.btn.btn-default.btn-simple(href='/novelty')
             | 公益新鮮事
         li
-          a.btn.btn-default.btn-simple(href='tutorial.html') 
+          a.btn.btn-default.btn-simple(href='/links') 
             | 友好連結
         li
-          a.btn.btn-default.btn-simple(href='tutorial.html') 
+          a.btn.btn-default.btn-simple(href='/history') 
             | 成果紀錄
 
 

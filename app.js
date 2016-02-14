@@ -22,6 +22,8 @@ var expressValidator = require('express-validator');
 var sass = require('node-sass-middleware');
 var multer = require('multer');
 var upload = multer({ dest: path.join(__dirname, 'uploads') });
+var ghost = require('./ghost-app/ghost-in-the-middle');
+
 // console.log(pat÷h.join(__dirname, 'uploads'));
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -37,7 +39,8 @@ var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
-var aboutController = require('./controllers/about')
+var aboutController = require('./controllers/about');
+var youthController = require('./controllers/youth');
 /**
  * API keys and Passport configuration.
  */
@@ -89,7 +92,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(function(req, res, next) {
-  if (req.path === '/api/upload') {
+  if (req.path === '/api/upload' || req.path.indexOf('/news')>-1) {
     next();
   } else {
     lusca.csrf()(req, res, next);
@@ -108,6 +111,10 @@ app.use(function(req, res, next) {
   next();
 });
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
+
+app.use( '/news', ghost({
+  config: path.join(__dirname, 'ghost-app/config.js')
+}) );
 
 /**
  * Primary app routes.
@@ -133,7 +140,17 @@ app.get('/account/unlink/:provider', passportConf.isAuthenticated, userControlle
 app.get('/about', aboutController.getAbout);
 app.get('/about/center', aboutController.getCenter);
 app.get('/about/toypf', aboutController.getTOYPF);
+app.get('/about/volunteam', aboutController.getVolunTeam);
 app.get('/about/map', aboutController.getMap);
+app.get('/about/rent', aboutController.getRent);
+app.get('/novelty', aboutController.getNovelty);
+app.get('/links', aboutController.getLinks);
+
+app.get('/youth/local', youthController.getLocal);
+app.get('/youth/bevo', youthController.getBevo);
+app.get('/youth/findvo', youthController.getFindvo);
+app.get('/youth/launchteam', youthController.getLaunchteam);
+app.get('/youth/empower', youthController.getEmpower);
 /**
  * API examples routes.
  */

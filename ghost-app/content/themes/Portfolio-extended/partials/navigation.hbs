@@ -1,0 +1,61 @@
+{{! Put your menu content here or make this file empty in order to remove the menu }}
+<!-- <nav class="menu">
+	<div class="menu__wrap">
+		{{#foreach navigation}}
+		<a href="{{url absolute="true"}}" class="menu__item{{#if current}} menu__item--active{{/if}} menu__item--{{slug}}">{{label}}</a>    
+		{{/foreach}}
+	</div>
+</nav> -->
+<nav class="demo-navbar navbar navbar-ct-warning" role='navigation-demo'>
+	<div class="container">
+		<div class="navbar-header">
+		  <button type="button" data-toggle="collapse" data-target="#navigation-example-2" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="/">
+		    <div class="logo-container">
+		      <div class="logo"><img src="/img/yvLogo.jpg" alt="北基金青年志工中心 Logo"/></div>
+		      <div class="brand">北基金  <br/>青年志工中心</div>
+		    </div></a>
+		</div>
+		<div id="navigation-example-2" class="collapse navbar-collapse">
+		  <ul class="nav navbar-nav navbar-right">
+		    <li class="dropdown"><a href="/about" data-toggle="dropdown" class="dropdown-toggle btn btn-default btn-simple">認識我們 <b class="caret"></b></a>
+		      <ul class="dropdown-menu dropdown-warning dropdown-menu-right">
+		        <li class="dropdown-header">About us</li>
+		        <li><a href="/about/center">認識本中心</a></li>
+		        <li><a href="/about/toypf">十傑基金會</a></li>
+		        <li><a href="/about/volunteam">十傑志工隊</a></li>
+		        <li class="divider"></li>
+		        <li><a href="/about/map">我們在這裡</a></li>
+		        <li><a href="/about/rent">租用資訊</a></li>
+		      </ul>
+		    </li>
+		    <li class="dropdown"><a href="/news" data-toggle="dropdown" class="dropdown-toggle btn btn-default btn-simple">訊息快報 <b class="caret"></b></a>
+				  <ul class="dropdown-menu dropdown-warning dropdown-menu-right">
+				    <li class="dropdown-header">News</li>
+				    <li><a href="/news/tag/new-info">最新訊息</a></li>
+				    <li><a href="/news/tag/info-deliver">活動轉知</a></li>
+				    <li><a href="/news/tag/news-report">新聞報導</a></li>
+				    <li><a href="/news/tag/center-activities">中心活動</a></li>
+				  </ul>
+				</li>
+		    <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-default btn-simple">青年服務 <b class="caret"></b></a>
+		      <ul class="dropdown-menu dropdown-warning dropdown-menu-right">
+		        <li class="dropdown-header">Youth Service</li>
+		        <li><a href="/youth/local">在地好資源</a></li>
+		        <li class="divider"></li>
+		        <li><a href="/youth/bevo">青年當志工</a></li>
+		        <li><a href="/youth/findvo">機構找志工</a></li>
+		        <li class="divider"></li>
+		        <li><a href="/youth/launchteam">揪團去服務</a></li>
+		      </ul>
+		    </li>
+		    <li><a href="/youth/empower" class="btn btn-default btn-simple">
+		        青年培力</a></li>
+		    <li><a href="/novelty" target="_blank" class="btn btn-default btn-simple">公益新鮮事</a></li>
+		    <li><a href="/links" class="btn btn-default btn-simple">
+		        友好連結</a></li>
+		    <li><a href="/history" class="btn btn-default btn-simple">
+		        成果紀錄</a></li>
+		  </ul>
+		</div>
+	</div>
+</nav>

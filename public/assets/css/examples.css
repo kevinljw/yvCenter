@@ -13,6 +13,11 @@
     color:#555555;
     
 }
+.motto_right{
+    margin-right: 50px;
+    float: right;
+    margin-top: -100px;
+}
 .landing-section {
   padding: 100px 0; }
 
@@ -177,6 +182,7 @@
     font-size: 60px;
     margin-right: 40px;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 .mediumIcon > .fa{
     font-size: 40px;

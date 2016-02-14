@@ -18,9 +18,32 @@ exports.getTOYPF = function(req, res) {
     title: '十傑基金會'
   });
 };
+exports.getVolunTeam = function(req, res) {
+  res.render('volunteam', {
+    title: '十傑志工隊'
+  });
+}; 
 exports.getMap = function(req, res) {
   // console.log("getMap")
   res.render('map', {
     title: '我們在這裡'
+  });
+};
+exports.getRent = function(req, res) {
+  // console.log("getMap")
+  res.render('rent', {
+    title: '租用資訊'
+  });
+};
+exports.getNovelty = function(req, res) {
+  // console.log("getMap")
+  res.render('novelty', {
+    title: '公益新鮮事'
+  });
+};
+exports.getLinks = function(req, res) {
+  // console.log("getMap")
+  res.render('links', {
+    title: '友好連結'
   });
 };
