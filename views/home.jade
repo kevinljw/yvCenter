@@ -1,6 +1,7 @@
 extends layout
 
 block content
+
   .container
     h1 北基金青年志工中心
     p.lead A boilerplate for Node.js web applications.
@@ -26,28 +27,29 @@ block content
           span.fa.fa-angle-left
         a.right.carousel-control(href='#carousel-example-generic', data-slide='next')
           span.fa.fa-angle-right
-  .container
-    .row
-      .col-sm-6
-        h2 Heading
-        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          a.btn.btn-default(href='#', role='button') View details »
-      .col-sm-6
-        h2 Heading
-        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          a.btn.btn-default(href='#', role='button') View details »
-      .col-sm-6
-        h2 Heading
-        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          a.btn.btn-default(href='#', role='button') View details »
-      .col-sm-6
-        h2 Heading
-        p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          a.btn.btn-default(href='#', role='button') View details »
-      .col-sm-6
-        br
-        br
+  .section.section-gray
+    .container
+      .row
+        .col-sm-6
+          //- h4 最新訊息
+          iframe(src='/news/new-info/', frameborder="0", scrolling="no", width='100%', height='300px', marginwidth='0', marginheight='0')
+          //- p
+          //-   a.btn.btn-default(href='/news/tag/new-info/', role='button') 前往最新訊息 »
+        .col-sm-6
+          //- h4 活動轉知
+          iframe(src='/news/info-deliver/', frameborder="0", scrolling="no", width='100%', height='300px', marginwidth='0', marginheight='0')
+          //- p
+          //-   a.btn.btn-default(href='/news/tag/info-deliver/', role='button') 前往活動轉知 »
+        .col-sm-6
+          //- h4 新聞報導
+          iframe(src='/news/news-report/', frameborder="0", scrolling="no", width='100%', height='300px', marginwidth='0', marginheight='0')
+          //- p
+          //-   a.btn.btn-default(href='/news/tag/news-report/', role='button') 前往新聞報導 »
+        .col-sm-6
+          //- h4 中心活動
+          iframe(src='/news/center-activities/', frameborder="0", scrolling="no", width='100%', height='300px', marginwidth='0', marginheight='0')
+          //- p
+          //-   a.btn.btn-default(href='/news/tag/center-activities/', role='button') 前往中心活動 »
+        .col-sm-6
+          br
+          br

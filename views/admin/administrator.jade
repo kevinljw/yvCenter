@@ -1,0 +1,88 @@
+extends layout
+
+block content
+  //- page content
+  br
+  div
+    .row
+      .col-md-12
+        .x_panel
+          .x_title
+            h2
+              | 管理員列表
+              small Administrator List
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                  i.fa.fa-wrench
+                ul.dropdown-menu(role='menu')
+                  li
+                    a(href='#') Settings 1
+                  li
+                    a(href='#') Settings 2
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            table.table.table-striped.projects
+              thead
+                tr
+                  th(style='width: 2%') #
+                  th(style='width: 10%') 名字
+                  th(style='width: 15%') Email
+                  th(style='width: 48%') 編輯
+              tbody
+                each val, index in allAdmins
+                  tr
+                    td #{index}
+                    td #{val.profile.name}
+                    td #{val.email}
+            
+                    td                     
+                      form.form-horizontal(action='/removeAdmin/#{val.id}', method='POST')
+                        input(type='hidden', name='_csrf', value=_csrf)
+                        .form-group
+                          button.btn.btn.btn-danger.btn-sm(type='submit')
+                            i.fa.fa-user-times
+                            |  移除
+      .col-md-6
+        .x_panel
+          .x_title
+            h2
+              | 新增管理員
+              small Add New Administrator
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                  i.fa.fa-wrench
+                ul.dropdown-menu(role='menu')
+                  li
+                    a(href='#') Settings 1
+                  li
+                    a(href='#') Settings 2
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            h5 新增以下之使用者為管理員:
+            form.form-horizontal(action='/beAdmin', method='POST')
+              input(type='hidden', name='_csrf', value=_csrf)
+              .form-group
+                select(name='thisAdmin')
+                  each val in allUsers
+                    option(value='#{val.id}') #{val.profile.name} #{val.email}
+              .form-group
+                button.btn.btn.btn-primary.btn-sm(type='submit')
+                  i.fa.fa-magic
+                  |  新增
+                            
+                
+  

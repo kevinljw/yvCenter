@@ -9,6 +9,16 @@
   padding-top: 8%;
   text-align: left;
   z-index: 3; }
+
+.landing-header .motto_login {
+  margin-top: 8%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  text-align: center;
+  z-index: 4; 
+  border-radius: 5px; 
+}
+
 .motto > h2, .motto > h4{
     color:#555555;
     
@@ -404,4 +414,24 @@
 
 .color-info {
     color: #68B3C8;
+}
+.logoutBtn{
+    float: right;
+    display: inline-block;
+    margin-top: -10px;
+}
+.userLogined a{
+    font-weight: 700;
+}
+.userLogined a.userInfo{
+    cursor: pointer;
+    color: #9a9a9a;
+}
+.userLogined {
+    min-height: 350px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.userLogined #userImg {
+    max-width: 60px;
 }

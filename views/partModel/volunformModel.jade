@@ -1,0 +1,396 @@
+#volunformModel.modal.fade(tabindex='-1', role='dialog', aria-labelledby='volunformLabel', aria-hidden='true')
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+        h4#volunformLabel.modal-title 服務青申請表
+      form.form-horizontal(action='/volunform', method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .modal-body
+          .form-group
+            label.col-sm-4.control-label(for='name') 姓名
+            .col-sm-7
+              input.form-control(type='text', name='name', id='name', value=user.IsVolunform?'#{vForm.name}':'#{user.profile.name}')
+          .form-group
+            label.col-sm-4.control-label(for='gender') 性別
+            .col-sm-6
+              label.radio.col-sm-4
+                input(type='radio', checked=user.IsVolunform?(vForm.gender=='male'):(user.profile.gender=='male'), name='gender', value='male', data-toggle='radio')
+                span 男性
+              label.radio.col-sm-4
+                input(type='radio', checked=user.IsVolunform?(vForm.gender=='female'):(user.profile.gender=='female'), name='gender', value='female', data-toggle='radio')
+                span 女性
+          .form-group
+            label.col-sm-4.control-label(for='idcode') 身份證字號
+            .col-sm-7
+              input.form-control(type='text', name='idcode', id='idcode', value='#{vForm.idcode}', placeholder='僅限本中心媒合使用，絕不外流。')
+          .form-group
+            label.col-sm-4.control-label(for='email') Email
+            .col-sm-7
+              input.form-control(type='email', name='email', id='email', value=user.IsVolunform?'#{vForm.email}':'#{user.email}')
+          .form-group
+            label.col-sm-4.control-label(for='birth') 出生年月日
+            .col-sm-7
+              input.form-control(type='date', name='birth', id='birth', value='#{vForm.birth}')
+          
+          .form-group
+            label.col-sm-4.control-label(for='location') 居住縣市/鄉鎮區
+            .col-sm-7
+              input.form-control(type='text', name='location', id='location', value=user.IsVolunform?'#{vForm.location}':'#{user.profile.location}', placeholder='Ex. 台北市/ Taipei')
+          .form-group
+            label.col-sm-4.control-label(for='role') 身份別
+            .col-sm-7
+              label.radio
+                input(type='radio', checked=vForm.role=='student', name='role', value='student', data-toggle='radio')
+                span 在學學生：
+              input.form-control(type='text', name='role_text', id='role_text_student', value=vForm.role=='student'?'#{vForm.role_text}':'', placeholder='請填寫校名/系所年級')
+              label.radio
+                input(type='radio', checked=vForm.role=='worker', name='role', value='worker', data-toggle='radio')
+                span 社會人士：
+              input.form-control(type='text', name='role_text', id='role_text_worker', value=vForm.role=='worker'?'#{vForm.role_text}':'', placeholder='請填寫任職單位/職稱')
+              label.radio
+                input(type='radio', checked=vForm.role=='other', name='role', value='other', data-toggle='radio')
+                span 其他：
+              input.form-control(type='text', name='role_text', id='role_text_other', value=vForm.role=='other'?'#{vForm.role_text}':'', placeholder='請填寫單位')
+          .form-group
+            label.col-sm-4.control-label(for='callnumber') 室內電話
+            .col-sm-7
+              input.form-control(type='text', name='callnumber', id='callnumber', value='#{vForm.callnumber}')
+          .form-group
+            label.col-sm-4.control-label(for='phonenumber') 手機電話
+            .col-sm-7
+              input.form-control(type='text', name='phonenumber', id='phonenumber', value='#{vForm.phonenumber}')
+          .form-group
+            label.col-sm-4.control-label(for='transportation') 自備交通工具
+            .col-sm-7
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=user.profile.gender=='male', name='transportation', value='motor', data-toggle='checkbox')
+                span 機車
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=user.profile.gender=='male', name='transportation', value='car', data-toggle='checkbox')
+                span 汽車
+          .form-group
+            label.col-sm-4.control-label(for='speak') 語言
+            .col-sm-7
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.speak.indexOf("Chinese")>-1, name='speak', value='Chinese', data-toggle='checkbox')
+                span 國語 
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.speak.indexOf("Taiwanese")>-1, name='speak', value='Taiwanese', data-toggle='checkbox')
+                span 閩南語 
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.speak.indexOf("English")>-1, name='speak', value='English', data-toggle='checkbox')
+                span 英文
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.speak.indexOf("Hakka")>-1, name='speak', value='Hakka', data-toggle='checkbox')
+                span 客家語
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.speak.indexOf("Sign")>-1, name='speak', value='Sign', data-toggle='checkbox')
+                span 手語
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.speak.indexOf("other")>-1, name='speak', value='other', data-toggle='checkbox')
+                span 其他
+              input.form-control(type='text', name='speak', id='other_text', value='#{vForm.speak[vForm.speak.length-1]}', placeholder='請填寫其他語言')
+          .form-group
+            label.col-sm-4.control-label(for='hasTrain') 已完成志工基礎訓練
+            .col-sm-6
+              label.radio.col-sm-4
+                input(type='radio', checked=vForm.hasTrain=='t', name='hasTrain', value='t', data-toggle='radio')
+                span 是
+              label.radio.col-sm-4
+                input(type='radio', checked=vForm.hasTrain=='f', name='hasTrain', value='f', data-toggle='radio')
+                span 否       
+          .form-group
+            label.col-sm-4.control-label(for='needProof') 需要服務學習證明
+            .col-sm-6
+              label.radio.col-sm-4
+                input(type='radio', checked=vForm.needProof=='t', name='needProof', value='t', data-toggle='radio')
+                span 是
+              label.radio.col-sm-4
+                input(type='radio', checked=vForm.needProof=='f', name='needProof', value='f', data-toggle='radio')
+                span 否    
+          .form-group
+            .col-sm-12.text-center
+              h4 志工專長項目
+              hr
+            label.col-sm-2.control-label(for='ability_computer') 電腦類:
+            .col-sm-10
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_computer.indexOf("typing")>-1, name='ability_computer', value='typing', data-toggle='checkbox')
+                span 文書打字
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_computer.indexOf("host_website")>-1, name='ability_computer', value='host_website', data-toggle='checkbox')
+                span 網站維護
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_computer.indexOf("host_website")>-1, name='ability_computer', value='host_website', data-toggle='checkbox')
+                span 程式撰寫
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_computer.indexOf("layout_edit")>-1, name='ability_computer', value='layout_edit', data-toggle='checkbox')
+                span 排版編輯
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_computer.indexOf("host_hardware")>-1, name='ability_computer', value='host_hardware', data-toggle='checkbox')
+                span 硬體維護
+            label.col-sm-2.control-label(for='ability_activity') 活動類:
+            .col-sm-10
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_activity.indexOf("planning")>-1, name='ability_activity', value='planning', data-toggle='checkbox')
+                span 活動策劃
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_activity.indexOf("led_group")>-1, name='ability_activity', value='led_group', data-toggle='checkbox')
+                span 團康帶領
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_activity.indexOf("perform")>-1, name='ability_activity', value='perform', data-toggle='checkbox')
+                span 才藝表演
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_activity.indexOf("story")>-1, name='ability_activity', value='story', data-toggle='checkbox')
+                span 說故事
+            label.col-sm-2.control-label(for='ability_photo') 影像類:
+            .col-sm-10
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_photo.indexOf("camera")>-1, name='ability_photo', value='camera', data-toggle='checkbox')
+                span 相機拍攝
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_photo.indexOf("video")>-1, name='ability_photo', value='video', data-toggle='checkbox')
+                span 活動錄影
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_photo.indexOf("imgprocessing")>-1, name='ability_photo', value='imgprocessing', data-toggle='checkbox')
+                span 圖像處理
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_photo.indexOf("production")>-1, name='ability_photo', value='production', data-toggle='checkbox')
+                span 影片剪輯
+            label.col-sm-2.control-label(for='ability_teach') 教學類:
+            .col-sm-10
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_teach.indexOf("course")>-1, name='ability_teach', value='course', data-toggle='checkbox')
+                span 課輔教學
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_teach.indexOf("art")>-1, name='ability_teach', value='art', data-toggle='checkbox')
+                span 美術
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_teach.indexOf("hand")>-1, name='ability_teach', value='hand', data-toggle='checkbox')
+                span 手工藝
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_teach.indexOf("music")>-1, name='ability_teach', value='music', data-toggle='checkbox')
+                span 音樂
+            label.col-sm-2.control-label(for='ability_design') 設計類:
+            .col-sm-10
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_design.indexOf("web")>-1, name='ability_design', value='web', data-toggle='checkbox')
+                span 網頁設計
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_design.indexOf("draw")>-1, name='ability_design', value='draw', data-toggle='checkbox')
+                span 美工繪圖
+            label.col-sm-2.control-label(for='ability_skill') 技藝類:
+            .col-sm-10
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_skill.indexOf("repair")>-1, name='ability_skill', value='repair', data-toggle='checkbox')
+                span 家電維修
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_skill.indexOf("hair")>-1, name='ability_skill', value='hair', data-toggle='checkbox')
+                span 美容美髮
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_skill.indexOf("farm")>-1, name='ability_skill', value='farm', data-toggle='checkbox')
+                span 農牧
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_skill.indexOf("flower")>-1, name='ability_skill', value='flower', data-toggle='checkbox')
+                span 園藝
+            label.col-sm-2.control-label(for='ability_license') 證照類:
+            .col-sm-10
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_license.indexOf("medical")>-1, name='ability_license', value='medical', data-toggle='checkbox')
+                span 醫療護理
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_license.indexOf("console")>-1, name='ability_license', value='console', data-toggle='checkbox')
+                span 心理諮詢
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_license.indexOf("drive")>-1, name='ability_license', value='drive', data-toggle='checkbox')
+                span 駕駛
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_license.indexOf("law")>-1, name='ability_license', value='law', data-toggle='checkbox')
+                span 法律
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_license.indexOf("cook")>-1, name='ability_license', value='cook', data-toggle='checkbox')
+                span 烹飪
+              label.checkbox.col-sm-3
+                input(type='checkbox', checked=vForm.ability_license.indexOf("baby")>-1, name='ability_license', value='baby', data-toggle='checkbox')
+                span 保母
+            label.col-sm-2.control-label(for='ability_other') 其他:
+            .col-sm-10
+              input.form-control(type='text', name='ability_other', id='ability_other', value='#{vForm.ability_other}', placeholder='請填寫')
+          .form-group
+            .col-sm-12.text-center
+              h4 希望提供的志願服務
+              hr
+            label.col-sm-4.control-label(for='service_type') 類型:
+            .col-sm-8
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.service_type.indexOf("all")>-1, name='service_type', value='all', data-toggle='checkbox')
+                span 不拘
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.service_type.indexOf("one_day")>-1, name='service_type', value='one_day', data-toggle='checkbox')
+                span 一日志工
+            label.col-sm-4.control-label(for='service_type') 兒童/少年:
+            .col-sm-8
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.service_type.indexOf("child")>-1, name='service_type', value='child', data-toggle='checkbox')
+                span 兒童服務
+              label.checkbox.col-sm-5
+                input(type='checkbox', checked=vForm.service_type.indexOf("teenager")>-1, name='service_type', value='teenager', data-toggle='checkbox')
+                span 青少年服務
+            label.col-sm-4.control-label(for='service_type') 銀髮照護:
+            .col-sm-8
+              label.checkbox.col-sm-5
+                input(type='checkbox', checked=vForm.service_type.indexOf("old")>-1, name='service_type', value='old', data-toggle='checkbox')
+                span 老人服務
+            label.col-sm-4.control-label(for='service_type') 行政事務:
+            .col-sm-8
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.service_type.indexOf("doc")>-1, name='service_type', value='doc', data-toggle='checkbox')
+                span 文書處理
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.service_type.indexOf("call")>-1, name='service_type', value='call', data-toggle='checkbox')
+                span 電話接線
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.service_type.indexOf("info")>-1, name='service_type', value='info', data-toggle='checkbox')
+                span 櫃檯諮詢
+            label.col-sm-4.control-label(for='service_type') 環境/動物保護:
+            .col-sm-8
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.service_type.indexOf("environment")>-1, name='service_type', value='environment', data-toggle='checkbox')
+                span 環境保護
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.service_type.indexOf("animal")>-1, name='service_type', value='animal', data-toggle='checkbox')
+                span 動物保護
+            label.col-sm-4.control-label(for='service_type') 藝術/文化:
+            .col-sm-8
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.service_type.indexOf("culture")>-1, name='service_type', value='culture', data-toggle='checkbox')
+                span 藝術文化
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.service_type.indexOf("tour")>-1, name='service_type', value='tour', data-toggle='checkbox')
+                span 導覽解說  
+            label.col-sm-4.control-label(for='service_type') 其他:
+            .col-sm-8
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.service_type.indexOf("women")>-1, name='service_type', value='women', data-toggle='checkbox')
+                span 婦女服務
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.service_type.indexOf("disability")>-1, name='service_type', value='disability', data-toggle='checkbox')
+                span 身障者服務
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.service_type.indexOf("develop")>-1, name='service_type', value='develop', data-toggle='checkbox')
+                span 社區發展
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.service_type.indexOf("tutor")>-1, name='service_type', value='tutor', data-toggle='checkbox')
+                span 教育輔導
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.service_type.indexOf("religion")>-1, name='service_type', value='religion', data-toggle='checkbox')
+                span 宗教服務
+              label.checkbox.col-sm-4
+                input(type='checkbox', checked=vForm.service_type.indexOf("activity")>-1, name='service_type', value='activity', data-toggle='checkbox')
+                span 活動志工
+          .form-group
+            .col-sm-12.text-center
+              h4 可提供服務時段
+              hr
+              
+            table#example.table.table-striped.responsive-utilities.jambo_table
+              thead
+                tr.headings
+                  th
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("all")>-1, name='alltime', data-toggle='checkbox')
+                      span 不拘
+                  th 上午 
+                  th 下午
+                  th 晚間
+              tbody
+                tr.pointer
+                  td 星期一
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("mon_morning")>-1, name='time', value='mon_morning', data-toggle='checkbox')
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("mon_afternoon")>-1, name='time', value='mon_afternoon', data-toggle='checkbox')
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("mon_night")>-1, name='time', value='mon_night', data-toggle='checkbox')
+                tr.pointer
+                  td 星期二
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("tue_morning")>-1, name='time', value='tue_morning', data-toggle='checkbox')
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("tue_afternoon")>-1, name='time', value='tue_afternoon', data-toggle='checkbox')
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("tue_night")>-1, name='time', value='tue_night', data-toggle='checkbox')
+                tr.pointer
+                  td 星期三
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("wed_morning")>-1, name='time', value='wed_morning', data-toggle='checkbox')
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("wed_afternoon")>-1, name='time', value='wed_afternoon', data-toggle='checkbox')
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("wed_night")>-1, name='time', value='wed_night', data-toggle='checkbox')
+                tr.pointer
+                  td 星期四
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("thu_morning")>-1, name='time', value='thu_morning', data-toggle='checkbox')
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("thu_afternoon")>-1, name='time', value='thu_afternoon', data-toggle='checkbox')
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("thu_night")>-1, name='time', value='thu_night', data-toggle='checkbox')
+                tr.pointer
+                  td 星期五
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("fri_morning")>-1, name='time', value='fri_morning', data-toggle='checkbox')
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("fri_afternoon")>-1, name='time', value='fri_afternoon', data-toggle='checkbox')
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("fri_night")>-1, name='time', value='fri_night', data-toggle='checkbox')
+                tr.pointer
+                  td 星期六
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("sat_morning")>-1, name='time', value='sat_morning', data-toggle='checkbox')
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("sat_afternoon")>-1, name='time', value='sat_afternoon', data-toggle='checkbox')
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("sat_night")>-1, name='time', value='sat_night', data-toggle='checkbox')
+                tr.pointer
+                  td 星期日
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("sun_morning")>-1, name='time', value='sun_morning', data-toggle='checkbox')
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("sun_afternoon")>-1, name='time', value='sun_afternoon', data-toggle='checkbox')
+                  td.a-center
+                    label.checkbox
+                      input(type='checkbox', checked=vForm.time.indexOf("sun_night")>-1, name='time', value='sun_night', data-toggle='checkbox')
+          .form-group
+            .col-sm-12.text-center
+                h5
+                  small 將提供上述資料供本平台自動媒合使用，實際服務時段依各單位需求為主
+        .modal-footer
+          .left-side
+            button.btn.btn-danger.btn-simple(type='button', data-dismiss='modal') 取消
+          .divider
+          .right-side.form-group
+            button.btn.btn-success.btn-simple(type='submit')
+              i.fa.fa-paper-plane-o
+              | 送出

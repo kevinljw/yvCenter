@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  //- page content
+  br
+  div
+    .row
+      .col-md-12
+        .x_panel
+          .x_title
+            h2
+              | 機構列表
+              small Organization List
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                  i.fa.fa-wrench
+                ul.dropdown-menu(role='menu')
+                  li
+                    a(href='#') Settings 1
+                  li
+                    a(href='#') Settings 2
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            table.table.table-striped.projects
+              thead
+                tr
+                  th(style='width: 2%') #
+                  th(style='width: 15%') 圖像
+                  th(style='width: 25%') 機構名稱
+                  th(style='width: 13%') 服務總數量
+                  th(style='width: 13%') 已媒合數量
+                  th(style='width: 10%') 志工需求
+                  th(style='width: 22%') 編輯
+              tbody
+                
+  

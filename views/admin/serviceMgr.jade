@@ -1,0 +1,70 @@
+extends layout
+
+block content
+  //- page content
+  br
+  div
+    .row
+      .col-md-12
+        .x_panel
+          .x_title
+            h2
+              | 機構服務列表
+              small Organization List
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                  i.fa.fa-wrench
+                ul.dropdown-menu(role='menu')
+                  li
+                    a(href='#') Settings 1
+                  li
+                    a(href='#') Settings 2
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            table.table.table-striped.projects
+              thead
+                tr
+                  th(style='width: 2%') #
+                  th(style='width: 15%') 機構名稱
+                  th(style='width: 13%') 發佈日期
+                  th(style='width: 15%') 活動名稱
+                  th(style='width: 15%') 服務日期
+                  th(style='width: 15%') 志工需求
+                  th(style='width: 10%') 編輯
+              tbody
+                each val, index in allServices
+                  tr
+                    td #{index}
+                    td #{val.uname}
+                    td #{val.timestamp}
+                    td
+                      if val.website
+                        a(href='#{val.activity_website}', target='_blank')
+                          | #{val.activity_name}
+                      else
+                        | #{val.activity_name}
+                    td
+                      if val.service_date_since==val.service_date_until
+                        | #{val.service_date_since}
+                      else
+                        | #{val.service_date_since} ~ #{val.service_date_until}
+                    td #{val.volunNum}
+                    td                     
+                      form.form-horizontal(action='/activation/#{val.id}', method='POST')
+                        input(type='hidden', name='_csrf', value=_csrf)
+                        .form-group
+                          button.btn.btn.btn-sm(type='submit' class='#{val.IsOrgActivation?"btn-danger":"btn-primary"}')
+                            i.fa.fa-mobile
+                            if val.IsOrgActivation
+                              |  取消授權
+                            else
+                              |  授權
+                
+  

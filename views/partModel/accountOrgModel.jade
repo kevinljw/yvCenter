@@ -1,0 +1,89 @@
+#accountModel.modal.fade(tabindex='-1', role='dialog', aria-labelledby='forgetLabel', aria-hidden='true')
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+        h4#accountLabel.modal-title 機構帳號管理
+      .modal-body
+        form.form-horizontal(action='/account/profile', method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group
+            label.col-sm-4.control-label(for='gravatar') 頭像
+            .col-sm-4
+              if user.facebook
+                img(src="#{user.profile.picture}", class='profile', width='150', height='150')
+              else
+                img(src="#{user.gravatar()}", class='profile', width='100', height='100')
+          .form-group
+            label.col-sm-4.control-label(for='email') Email
+            .col-sm-7
+              input.form-control(type='email', name='email', id='email', value='#{user.email}')
+          .form-group
+            label.col-sm-4.control-label(for='name') 機構名
+            .col-sm-7
+              input.form-control(type='text', name='name', id='name', value='#{user.profile.name}')
+          .form-group
+            label.col-sm-4.control-label(for='location') 機構地址
+            .col-sm-7
+              input.form-control(type='text', name='location', id='location', value='#{user.profile.location}')
+          .form-group
+            label.col-sm-4.control-label(for='website') 機構網站
+            .col-sm-7
+              input.form-control(type='text', name='website', id='website', value='#{user.profile.website}')
+          
+          .form-group
+            .col-sm-offset-4.col-sm-4
+              button.btn.btn.btn-primary(type='submit')
+                i.fa.fa-pencil
+                | 更新資料
+        .page-header.text-center
+          h3 連結帳號
+        .form-horizontal
+          .form-group
+            .col-sm-offset-2.col-sm-8.text-center
+              if user.facebook
+                p: a.text-danger(href='/account/unlink/facebook')
+                  i.fa.fa-facebook-square
+                  | 取消連結 Facebook 帳號
+              else
+                p: a(href='/auth/facebook')
+                  i.fa.fa-facebook-square
+                  | 連結 Facebook 帳號
+
+        .page-header.text-center
+          h3 密碼變更
+
+        form.form-horizontal(action='/account/password', method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group
+            label.col-sm-4.control-label(for='password') 新密碼
+            .col-sm-7
+              input.form-control(type='password', name='password', id='password')
+          .form-group
+            label.col-sm-4.control-label(for='confirmPassword') 確認新密碼
+            .col-sm-7
+              input.form-control(type='password', name='confirmPassword', id='confirmPassword')
+          .form-group
+            .col-sm-offset-4.col-sm-4
+              button.col-sm-12.btn.btn-primary(type='submit')
+                i.fa.fa-lock
+                | 變更
+
+        .page-header.text-center
+          h3 刪除帳號
+
+        form.form-horizontal(action='/account/delete', method='POST')
+          .form-group
+            p.col-sm-offset-2.col-sm-8 您可以刪除此帳號，但注意這是不可逆的操作
+            br
+            input(type='hidden', name='_csrf', value=_csrf)
+            .col-sm-offset-4.col-sm-4
+              button.btn.btn-danger(type='submit')
+                i.fa.fa-trash
+                | 確認刪除帳號
+
+        
+          
+      .modal-footer.form-group
+        .left-side
+          button.btn.btn-simple(type='button', data-dismiss='modal') 關閉

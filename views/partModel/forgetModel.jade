@@ -1,0 +1,22 @@
+#forgetModel.modal.fade(tabindex='-1', role='dialog', aria-labelledby='forgetLabel', aria-hidden='true')
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+        h4#forgetLabel.modal-title 忘記密碼
+      form.form-horizontal(action='/forget', method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .modal-body
+            .form-group
+              p 請在下方輸入帳號之email，我們會將重設密碼的信發送給您
+              label.control-label(for='email') Email
+              input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus=true)
+            
+          .modal-footer.form-group
+            .left-side
+              button.btn.btn-danger.btn-simple(type='button', data-dismiss='modal') 取消
+            .divider
+            .right-side
+              button.btn.btn-success.btn-simple(type='submit')
+                  i.fa.fa-user-mail
+                  | 確認

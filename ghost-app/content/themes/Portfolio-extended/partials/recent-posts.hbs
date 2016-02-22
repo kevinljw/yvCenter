@@ -1,0 +1,14 @@
+{{#get "posts" include="tags" filter="tags.name: '新聞報導'"}}
+<div>
+  <!-- <span class="menu-heading">Recent posts</span> -->
+  <ul style="text-align: left; list-style:none;">
+  {{#foreach posts limit="5"}}
+	<li>
+		<div> {{tags}} {{date published_at format="YYYY-MM-DD"}}
+		<a class="menu-item tag" href="{{url}}">{{title}}</a>
+		</div>
+	</li>
+  {{/foreach}}
+  </ul>
+</div>
+{{/get}}

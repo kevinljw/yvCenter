@@ -1,0 +1,183 @@
+extends layout
+
+block content
+  //- page content
+  br
+  div
+    .row
+      .col-md-12
+        .x_panel
+          .x_title
+            h2
+              | 機構列表
+              small Organization List
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                  i.fa.fa-wrench
+                ul.dropdown-menu(role='menu')
+                  li
+                    a(href='#') Settings 1
+                  li
+                    a(href='#') Settings 2
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            table.table.table-striped.projects
+              thead
+                tr
+                  th(style='width: 2%') #
+                  th(style='width: 15%') 圖像
+                  th(style='width: 25%') 機構名稱
+                  th(style='width: 13%') 服務總數量
+                  th(style='width: 13%') 已媒合數量
+                  th(style='width: 10%') 志工需求
+                  th(style='width: 22%') 編輯
+              tbody
+                each val, index in allOrgs
+                  tr
+                    td #{index}
+                    td 
+                    td
+                      if val.website
+                        a(href='#{val.website}', target='_blank')
+                          | #{val.profile.name}
+                      else
+                        | #{val.profile.name}
+                    td 
+                    td 
+                    td 
+                    td
+                    td
+                      
+                      form.form-horizontal(action='/activation/#{val.id}', method='POST')
+                        input(type='hidden', name='_csrf', value=_csrf)
+                        .form-group
+                          button.btn.btn.btn-sm(type='submit' class='#{val.IsOrgActivation?"btn-danger":"btn-primary"}')
+                            i.fa.fa-mobile
+                            if val.IsOrgActivation
+                              |  取消授權
+                            else
+                              |  授權
+      .col-md-4
+        .x_panel
+          .x_title
+            h2
+              | Top Profiles 
+              small Sessions
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                  i.fa.fa-wrench
+                ul.dropdown-menu(role='menu')
+                  li
+                    a(href='#') Settings 1
+                  li
+                    a(href='#') Settings 2
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item One Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Two Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Two Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Two Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Three Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      .col-md-4
+        .x_panel
+          .x_title
+            h2
+              | Top Profiles 
+              small Sessions
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                  i.fa.fa-wrench
+                ul.dropdown-menu(role='menu')
+                  li
+                    a(href='#') Settings 1
+                  li
+                    a(href='#') Settings 2
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item One Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Two Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Two Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Two Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Three Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  

@@ -4,7 +4,8 @@ var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 var passport = require('passport');
 var User = require('../models/User');
-
+var secrets = require('../config/secrets');
+var adminArr = secrets.admin.whitelist;
 /**
  * GET /login
  * Login page.
@@ -23,30 +24,64 @@ exports.getLogin = function(req, res) {
  * Sign in using email and password.
  */
 exports.postLogin = function(req, res, next) {
-  req.assert('email', 'Email is not valid').isEmail();
-  req.assert('password', 'Password cannot be blank').notEmpty();
+  req.assert('email', 'Email 錯誤').isEmail();
+  req.assert('password', '密碼不得為空').notEmpty();
 
   var errors = req.validationErrors();
 
   if (errors) {
     req.flash('errors', errors);
-    return res.redirect('/login');
+    return res.redirect('/youth/bevo#loginFormatErr');
   }
 
   passport.authenticate('local', function(err, user, info) {
     if (err) {
       return next(err);
     }
-    if (!user) {
-      req.flash('errors', { msg: info.message });
-      return res.redirect('/login');
+    if (!user || user.IsOrg) {
+      req.flash('errors', { msg: '錯誤，不存在此帳號' });
+      return res.redirect('/youth/bevo#loginErr');
     }
     req.logIn(user, function(err) {
       if (err) {
         return next(err);
       }
       req.flash('success', { msg: 'Success! You are logged in.' });
-      res.redirect(req.session.returnTo || '/');
+      res.redirect('/youth/bevo#login');
+    });
+  })(req, res, next);
+};
+/**
+ * POST /login
+ * Sign in using email and password.
+ */
+exports.postLoginOrg = function(req, res, next) {
+  req.assert('email', 'Email 錯誤').isEmail();
+  req.assert('password', '密碼不得為空').notEmpty();
+
+  var errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('errors', errors);
+    return res.redirect('/youth/findvo#loginFormatErr');
+  }
+
+  passport.authenticate('local', function(err, user, info) {
+    if (err) {
+      return next(err);
+    }
+    // console.log(user);
+    if (!user || !user.IsOrg) {
+
+      req.flash('errors', { msg: '錯誤，不存在此帳號' });
+      return res.redirect('/youth/findvo#loginErr');
+    }
+    req.logIn(user, function(err) {
+      if (err) {
+        return next(err);
+      }
+      req.flash('success', { msg: 'Success! You are logged in.' });
+      res.redirect('/youth/findvo#login');
     });
   })(req, res, next);
 };
@@ -57,9 +92,12 @@ exports.postLogin = function(req, res, next) {
  */
 exports.logout = function(req, res) {
   req.logout();
-  res.redirect('/');
+  res.redirect('/youth/bevo#login');
 };
-
+exports.logoutOrg = function(req, res) {
+  req.logout();
+  res.redirect('/youth/findvo#login');
+};
 /**
  * GET /signup
  * Signup page.
@@ -78,26 +116,29 @@ exports.getSignup = function(req, res) {
  * Create a new local account.
  */
 exports.postSignup = function(req, res, next) {
-  req.assert('email', 'Email is not valid').isEmail();
-  req.assert('password', 'Password must be at least 4 characters long').len(4);
-  req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
+  req.assert('email', 'Email 格式錯誤').isEmail();
+  req.assert('password', '密碼須至少4位').len(4);
+  req.assert('confirmPassword', '確認密碼兩者不相符').equals(req.body.password);
 
   var errors = req.validationErrors();
 
   if (errors) {
     req.flash('errors', errors);
-    return res.redirect('/signup');
+
+    return res.redirect('/youth/bevo#signup');
   }
 
   var user = new User({
     email: req.body.email,
+    profile: {name: req.body.name},
     password: req.body.password
   });
+  if(adminArr.indexOf(req.body.email)>-1) user.IsAdmin =true;
 
   User.findOne({ email: req.body.email }, function(err, existingUser) {
     if (existingUser) {
-      req.flash('errors', { msg: 'Account with that email address already exists.' });
-      return res.redirect('/signup');
+      req.flash('errors', { msg: '此 email 之使用者已存在。' });
+      return res.redirect('/youth/bevo#exists');
     }
     user.save(function(err) {
       if (err) {
@@ -107,12 +148,63 @@ exports.postSignup = function(req, res, next) {
         if (err) {
           return next(err);
         }
-        res.redirect('/');
+        res.redirect('/youth/bevo#signin');
       });
     });
   });
 };
+/**
+ * POST /signup
+ * Create a new local account.
+ */
+exports.postSignupOrg = function(req, res, next) {
+  req.assert('email', 'Email 格式錯誤').isEmail();
+  req.assert('name', '機構名不得為空').len(1);
+  req.assert('location', '地址不得為空').len(1);
+  req.assert('website', '網站不得為空').len(1);
+  req.assert('password', '密碼須至少4位').len(4);
+  req.assert('confirmPassword', '確認密碼兩者不相符').equals(req.body.password);
 
+  var errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('errors', errors);
+
+    return res.redirect('/youth/findvo#signup');
+  }
+
+  var user = new User({
+    email: req.body.email,
+    IsOrg: true,
+    profile: {
+      name: req.body.name,
+      website: req.body.website,
+      location: req.body.location,
+      abstract: req.body.abstract
+    },
+    password: req.body.password,
+    
+  });
+  if(adminArr.indexOf(req.body.email)>-1) user.IsAdmin =true;
+
+  User.findOne({ email: req.body.email }, function(err, existingUser) {
+    if (existingUser) {
+      req.flash('errors', { msg: '此 email 之使用者已存在。' });
+      return res.redirect('/youth/findvo#exists');
+    }
+    user.save(function(err) {
+      if (err) {
+        return next(err);
+      }
+      req.logIn(user, function(err) {
+        if (err) {
+          return next(err);
+        }
+        res.redirect('/youth/findvo#signin');
+      });
+    });
+  });
+};
 /**
  * GET /account
  * Profile page.
@@ -141,8 +233,8 @@ exports.postUpdateProfile = function(req, res, next) {
       if (err) {
         return next(err);
       }
-      req.flash('success', { msg: 'Profile information updated.' });
-      res.redirect('/account');
+      req.flash('success', { msg: '個人資料已更新' });
+      res.redirect('/youth/bevo');
     });
   });
 };
@@ -171,8 +263,8 @@ exports.postUpdatePassword = function(req, res, next) {
       if (err) {
         return next(err);
       }
-      req.flash('success', { msg: 'Password has been changed.' });
-      res.redirect('/account');
+      req.flash('success', { msg: '密碼已變更成功' });
+      res.redirect('/youth/bevo');
     });
   });
 };
@@ -187,8 +279,8 @@ exports.postDeleteAccount = function(req, res, next) {
       return next(err);
     }
     req.logout();
-    req.flash('info', { msg: 'Your account has been deleted.' });
-    res.redirect('/');
+    req.flash('info', { msg: '您的帳號已從此平台刪除成功' });
+    res.redirect('/youth/bevo');
   });
 };
 

@@ -41,6 +41,8 @@ var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
 var aboutController = require('./controllers/about');
 var youthController = require('./controllers/youth');
+var matchController = require('./controllers/match');
+var adminController = require('./controllers/admin');
 /**
  * API keys and Passport configuration.
  */
@@ -122,13 +124,20 @@ app.use( '/news', ghost({
 app.get('/', homeController.index);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
+app.post('/loginOrg', userController.postLoginOrg);
+app.post('/loginAdmin', adminController.postLoginAdmin);
+
 app.get('/logout', userController.logout);
+app.get('/logoutOrg', userController.logoutOrg);
+
 app.get('/forgot', userController.getForgot);
 app.post('/forgot', userController.postForgot);
 app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
+app.post('/signupOrg', userController.postSignupOrg);
+
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
@@ -151,6 +160,24 @@ app.get('/youth/bevo', youthController.getBevo);
 app.get('/youth/findvo', youthController.getFindvo);
 app.get('/youth/launchteam', youthController.getLaunchteam);
 app.get('/youth/empower', youthController.getEmpower);
+
+app.post('/volunform', matchController.postForm);
+app.post('/newServiceform', matchController.postOrgForm);
+
+app.get('/admin_login', adminController.getAdminLogin);
+app.get('/adminMgr', passportConf.isAdminAuthenticated, adminController.getAdminHome);
+app.get('/ghostAdmin', passportConf.isAdminAuthenticated, adminController.getGhostAdmin);
+app.get('/orgVerify', passportConf.isAdminAuthenticated, adminController.getOrgVerify);
+app.post('/activation/:id', passportConf.isAdminAuthenticated, adminController.postOrgActivation);
+app.get('/localMgr', passportConf.isAdminAuthenticated, adminController.getLocalMgr );
+app.get('/serviceMgr', passportConf.isAdminAuthenticated, adminController.getServiceMgr);
+app.get('/volunMgr', passportConf.isAdminAuthenticated, adminController.getVolunMgr);
+app.get('/administrator', passportConf.isAdminAuthenticated, adminController.getAdministrator);
+app.post('/beAdmin', passportConf.isAdminAuthenticated, adminController.postBeAdmin);
+app.post('/removeAdmin/:id', passportConf.isAdminAuthenticated, adminController.postRemoveAdmin);
+
+
+
 /**
  * API examples routes.
  */
@@ -194,12 +221,12 @@ app.get('/auth/instagram/callback', passport.authenticate('instagram', { failure
   res.redirect(req.session.returnTo || '/');
 });
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), function(req, res) {
-  res.redirect(req.session.returnTo || '/');
+app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/youth/bevo' }), function(req, res) {
+  res.redirect(req.session.returnTo || '/youth/bevo');
 });
 app.get('/auth/github', passport.authenticate('github'));
-app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), function(req, res) {
-  res.redirect(req.session.returnTo || '/');
+app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/youth/bevo' }), function(req, res) {
+  res.redirect(req.session.returnTo || '/youth/bevo');
 });
 app.get('/auth/google', passport.authenticate('google', { scope: 'profile email' }));
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), function(req, res) {

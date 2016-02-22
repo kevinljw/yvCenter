@@ -14,15 +14,19 @@ var userSchema = new mongoose.Schema({
   linkedin: String,
   steam: String,
   tokens: Array,
-
+  IsVolunform: { type: Boolean, default: false },
+  IsOrg: { type: Boolean, default: false },
+  IsOrgActivation: { type: Boolean, default: false },
+  IsAdmin: { type: Boolean, default: false },
   profile: {
     name: { type: String, default: '' },
     gender: { type: String, default: '' },
     location: { type: String, default: '' },
     website: { type: String, default: '' },
-    picture: { type: String, default: '' }
+    picture: { type: String, default: '' },
+    abstract: { type: String, default: '' },
   },
-
+ 
   resetPasswordToken: String,
   resetPasswordExpires: Date
 });

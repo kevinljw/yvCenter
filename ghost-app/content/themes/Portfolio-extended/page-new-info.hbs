@@ -1,0 +1,35 @@
+{{!< default_clear}}
+
+<main role="main" style="background: #EEEEEE; min-height: 600px;">
+    <div class="main__wrapper">   
+        {{! Everything inside the #post tags pulls data from the post }}
+        <article class="{{post_class}}">
+        {{#post}}
+            <div class="post__wrapper--subpage" style="min-height: 250px; padding-top: 40px;">    
+                    <h2 class="post__title text-center" style="font-weight: 800;">
+                        <a href="/news/tag/new-info" style="color: #000;">
+                        {{{title}}}
+                        </a>
+                    </h2>
+                    {{#get "posts" limit="3" include="tags" filter="tags.name: '{{title}}'" }}
+                    <div>
+                      <!-- <span class="menu-heading">Recent posts</span> -->
+                      <ul style="text-align: left; list-style: square;">
+                      {{#foreach posts}}
+                        <li>
+                            <h5 style="font-weight: 600;">
+                            <a class="menu-item tag" href="{{url}}">{{title}}</a>
+                            <small> {{date published_at format="YYYY-MM-DD hh:mm:ss"}}</small>
+                            </h5>
+
+                        </li>
+                      {{/foreach}}
+                      </ul>
+                    </div>
+                    {{/get}}
+               
+            </div>
+        {{/post}}
+        </article>
+    </div>
+</main>

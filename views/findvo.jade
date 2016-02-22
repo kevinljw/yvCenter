@@ -4,8 +4,82 @@ block content
   .wrapper
     .landing-header.section-nude
       .container
-        .motto
+        .motto.col-md-6
           h2.title-uppercase 機構找志工
           h5 服務青，我們需要你...
           br
-    .main
+        .motto_login.col-md-offset-2.col-md-4.section-gray
+          if user && user.IsOrg
+            a.logoutBtn(href='/logoutOrg')
+                | 登出
+            .userLogined
+              .col-md-3.col-xs-3.text-center
+                a(data-toggle="modal" data-target="#accountModel")
+                  if user.profile.picture
+                    img#userImg(src='#{user.profile.picture}')
+                  else
+                    img#userImg(src='#{user.gravatar(60)}')
+              .col-md-9.col-xs-7.text-left
+                a.userInfo(data-toggle="modal" data-target="#accountModel")
+                  |  #{user.profile.name || user.id}
+                  br
+                  |  #{user.email}&nbsp;
+
+              .col-md-offset-1.col-md-10.text-center
+                if user.IsOrgActivation
+                  br
+                  | 機構已認證
+                  br
+                  br
+                  br
+                  a.btn.btn-success(data-toggle="modal" data-target="#newServiceModel")
+                    h5
+                      i.fa.fa-pencil
+                      | 服務需求申請
+                else
+                  br
+                  br
+                  h5 貴機構尚未認證身份
+                  h6 您的確認申請已送出，請稍後或聯絡敝單位協助處理，造成您的不便敬請見諒
+          else
+            h3.title-uppercase 貴機構 歡迎您
+              br
+              h6 
+                small 注意！此帳號與志工帳號不同，
+                br
+                small 您無法使用志工帳號註冊或登入
+            br
+            form.form-horizontal(action='/loginOrg', method='POST')
+              input(type='hidden', name='_csrf', value=_csrf)
+              .form-group
+                label.col-sm-4.control-label(for='email') Email
+                .col-sm-7
+                  input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus=true)
+              .form-group
+                label.col-sm-4.control-label(for='password') 密碼
+                .col-sm-7
+                  input.form-control(type='password', name='password', id='password', placeholder='Password')
+              .form-group
+                .col-sm-offset-2.col-sm-3
+                  a.btn.btn-simple(data-toggle="modal" data-target="#forgetModel") 忘記密碼?
+                .col-sm-3
+                  a.btn.btn-simple(data-toggle="modal" data-target="#signupOrgModel") 還沒註冊?
+              .form-group
+                .col-md-offset-1.col-md-10.col-sm-offset-3.col-sm-6
+                  button.col-sm-12.btn.btn-primary.btn-fill(type='submit')
+                    i.fa.fa-user
+                    | 登入
+              
+      .main
+    .section.text-center.landing-section
+      .container
+        .row
+          .col-md-8.col-md-offset-2.paragrahIndent
+            h2 北基金青年志工中心
+            br
+            h5
+  include partModel/signinOrgModel
+  include partModel/forgetModel
+  if user && user.IsOrg
+    include partModel/newServiceModel
+    include partModel/accountOrgModel

@@ -4,20 +4,86 @@ block content
   .wrapper
     .landing-header.section-nude
       .container
-        .motto.col-sm-6
+        .motto.col-md-6
           h2.title-uppercase 青年當志工
           br
           h5 Yo！全台的青年伙伴照過來~
           h5 您是否曾在「看見台灣」的影片中，也隱約看到自己內心關懷台灣這片土地的悸動... 您是否也曾在「十二夜」的影片中，為弱勢生命的吶喊而眼眶泛淚...
           h5 想成為守護台灣的「服務青」嗎？
-          h5 不要再猶豫了，台灣的未來將因為您的行動而改變！快過來報名吧！
+          h5 快註冊成為會員，然後開始尋找屬於您的志工服務
+          //- h5 不要再猶豫了，台灣的未來將因為您的行動而改變！快過來報名吧！
           br
-          a.btn.btn-warning.btn-fill(href='https://www.youtube.com/watch?v=dQw4w9WgXcQ')
-            i.fa.fa-pencil
-            | 填寫服務青申請表
-          br
-          h5
-        .col-sm-6
+          
+        .motto_login.col-md-offset-2.col-md-4.section-gray
+          if !user || user.IsOrg
+            h3.title-uppercase 歡迎
+            br
+            form.form-horizontal(action='/login', method='POST')
+              input(type='hidden', name='_csrf', value=_csrf)
+              .form-group
+                label.col-sm-4.control-label(for='email') Email
+                .col-sm-7
+                  input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus=true)
+              .form-group
+                label.col-sm-4.control-label(for='password') 密碼
+                .col-sm-7
+                  input.form-control(type='password', name='password', id='password', placeholder='Password')
+              .form-group
+                .col-sm-offset-2.col-sm-3
+                  a.btn.btn-simple(data-toggle="modal" data-target="#forgetModel") 忘記密碼?
+                .col-sm-3
+                  a.btn.btn-simple(data-toggle="modal" data-target="#signupModel") 還沒註冊?
+              .form-group
+                .col-md-offset-1.col-md-10.col-sm-offset-3.col-sm-6
+                  button.col-sm-12.btn.btn-primary.btn-fill(type='submit')
+                    i.fa.fa-user
+                    | 登入
+              hr
+              .text-center
+                h6
+                  small OR
+               
+              .form-group
+                .col-md-offset-1.col-md-10.col-sm-offset-3.col-sm-6
+                  a.col-sm-12.btn.btn-info.btn-fill(href='/auth/facebook')
+                    i.fa.fa-facebook-square
+                    | 使用 Facebook 帳號
+          else
+            a.logoutBtn(href='/logout')
+                | 登出
+            .userLogined
+              .col-md-3.col-xs-3.text-center
+                a(data-toggle="modal" data-target="#accountModel")
+                  if user.profile.picture
+                    img#userImg(src='#{user.profile.picture}')
+                  else
+                    img#userImg(src='#{user.gravatar(60)}')
+              .col-md-9.col-xs-7.text-left
+                a.userInfo(data-toggle="modal" data-target="#accountModel")
+                  |  #{user.profile.name || user.id}
+                  br
+                  |  #{user.email}&nbsp;
+              .col-md-offset-1.col-md-10.text-center
+                if user.IsVolunform
+                  br
+                  br
+                  br
+                  a.btn.btn-success.btn-sm(data-toggle="modal" data-target="#volunformModel")
+                    h5
+                      i.fa.fa-pencil
+                      | 修改服務青申請表
+                else
+                  br
+                  br
+                  h6 您尚未填寫「服務青申請表」
+                  h6 不要再猶豫了，台灣的未來將因為您的行動而改變! 快過來報名吧！
+                  br
+                  a.btn.btn-danger.btn-sm(data-toggle="modal" data-target="#volunformModel")
+                    h5
+                      i.fa.fa-pencil
+                      | 填寫服務青申請表
+
+
       .main
    .section.text-center.landing-section
     .container
@@ -26,4 +92,10 @@ block content
           h2 北基金青年志工中心
           br
           h5
-           
+  
+  include partModel/signinModel
+  include partModel/forgetModel
+  
+  if user 
+    include partModel/volunformModel
+    include partModel/accountModel

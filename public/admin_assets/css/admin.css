@@ -1,0 +1,25 @@
+/*
+iframe#ghostWindow{
+  width: 100%;
+  height: 700px;
+    overflow:hidden;
+    top:0px;left:0px;right:0px;bottom:0px;
+    overflow:hidden;overflow-x:hidden;overflow-y:hidden;
+
+}
+.ghostFrame{
+    
+    margin:0px;
+    padding:0px;
+    overflow:hidden;
+}
+*/
+
+#hold_my_iframe { 
+    padding:0px; 
+    margin:0 auto; 
+    width:100%; 
+    height:100%;
+    overflow-y: auto; 
+	overflow: -moz-scrollbars-vertical;
+}

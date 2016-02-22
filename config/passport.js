@@ -14,6 +14,9 @@ var OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
 
 var User = require('../models/User');
 
+var secrets = require('./secrets');
+var adminArr = secrets.admin.whitelist;
+
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
@@ -121,7 +124,7 @@ passport.use(new FacebookStrategy({
   if (req.user) {
     User.findOne({ facebook: profile.id }, function(err, existingUser) {
       if (existingUser) {
-        req.flash('errors', { msg: 'There is already a Facebook account that belongs to you. Sign in with that account or delete it, then link it with your current account.' });
+        req.flash('errors', { msg: '已經有使用者使用此email，請以此email登入來連結Facebook帳號' });
         done(err);
       } else {
         User.findById(req.user.id, function(err, user) {
@@ -131,7 +134,7 @@ passport.use(new FacebookStrategy({
           user.profile.gender = user.profile.gender || profile._json.gender;
           user.profile.picture = user.profile.picture || 'https://graph.facebook.com/' + profile.id + '/picture?type=large';
           user.save(function(err) {
-            req.flash('info', { msg: 'Facebook account has been linked.' });
+            req.flash('info', { msg: 'Facebook帳號已連結成功' });
             done(err, user);
           });
         });
@@ -144,12 +147,13 @@ passport.use(new FacebookStrategy({
       }
       User.findOne({ email: profile._json.email }, function(err, existingEmailUser) {
         if (existingEmailUser) {
-          req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with Facebook manually from Account Settings.' });
+          req.flash('errors', { msg: '已經有使用者使用此email，請以此email登入來連結Facebook帳號' });
           done(err);
         } else {
           var user = new User();
           user.email = profile._json.email;
           user.facebook = profile.id;
+          if(adminArr.indexOf(profile._json.email)>-1) user.IsAdmin = true;
           user.tokens.push({ kind: 'facebook', accessToken: accessToken });
           user.profile.name = profile.displayName;
           user.profile.gender = profile._json.gender;
@@ -488,9 +492,18 @@ exports.isAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/login');
+  res.redirect('/youth/bevo');
 };
-
+/**
+ * Login Required middleware.
+ */
+exports.isAdminAuthenticated = function(req, res, next) {
+  // console.log(req.user);
+  if (req.isAuthenticated() && req.user.IsAdmin) {
+    return next();
+  }
+  res.redirect('/admin_login');
+};
 /**
  * Authorization Required middleware.
  */

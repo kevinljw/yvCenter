@@ -1,0 +1,225 @@
+extends layout
+
+block content
+  //- page content
+  br
+  div
+    .row.top_tiles
+      .animated.flipInY.col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .tile-stats
+          .icon
+            i.fa.fa-terminal
+          .count #{pttNum}
+          h3 PTT Boards
+          p Tracking Boards in PTT.
+      .animated.flipInY.col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .tile-stats
+          .icon
+            i.fa.fa-archive
+          .count #{pttRawNum}
+          h3 PTT 資料量
+          p Articles stored.
+      .animated.flipInY.col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .tile-stats
+          .icon
+            i.fa.fa-heartbeat
+          .count #{pttSentiNum}
+          h3 PTT 情緒聲量
+          p Articles analyzed.   
+      .animated.flipInY.col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .tile-stats
+          .icon
+            i.fa.fa-facebook
+          .count #{fbNum}
+          h3 FB Pages
+          p Tracking Pages in Facebook.
+      .animated.flipInY.col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .tile-stats
+          .icon
+            i.fa.fa-database
+          .count #{fbRawNum}
+          h3 FB 資料量
+          p Articles stored.
+      .animated.flipInY.col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .tile-stats
+          .icon
+            i.fa.fa-street-view
+          .count #{fbSentiNum}
+          h3 FB 情緒聲量
+          p Articles analyzed. 
+    .row
+      .col-md-12
+        .x_panel
+          .x_title
+            h2
+              | Top Profiles 
+              small Sessions
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                  i.fa.fa-wrench
+                ul.dropdown-menu(role='menu')
+                  li
+                    a(href='#') Settings 1
+                  li
+                    a(href='#') Settings 2
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item One Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Two Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Two Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Two Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Three Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      .col-md-4
+        .x_panel
+          .x_title
+            h2
+              | Top Profiles 
+              small Sessions
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                  i.fa.fa-wrench
+                ul.dropdown-menu(role='menu')
+                  li
+                    a(href='#') Settings 1
+                  li
+                    a(href='#') Settings 2
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item One Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Two Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Two Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Two Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Three Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      .col-md-4
+        .x_panel
+          .x_title
+            h2
+              | Top Profiles 
+              small Sessions
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                  i.fa.fa-wrench
+                ul.dropdown-menu(role='menu')
+                  li
+                    a(href='#') Settings 1
+                  li
+                    a(href='#') Settings 2
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item One Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Two Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Two Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Two Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            article.media.event
+              a.pull-left.date
+                p.month April
+                p.day 23
+              .media-body
+                a.title(href='#') Item Three Tittle
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  
