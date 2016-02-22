@@ -1,5 +1,4 @@
-var bcrypt = require('bcrypt-nodejs');
-var crypto = require('crypto');
+
 var mongoose = require('mongoose');
 
 var volunSchema = new mongoose.Schema({

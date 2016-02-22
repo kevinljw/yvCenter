@@ -2,6 +2,7 @@ var VolunForm = require('../models/VolunForm');
 var User = require('../models/User');
 var passport = require('passport');
 var OrgForm = require('../models/OrgForm');
+var LocalResources = require('../models/LocalResources');
 /**
  * GET /about
  * About page.
@@ -33,8 +34,14 @@ exports.getOrgVerify = function(req, res) {
   });
 };
 exports.getLocalMgr = function(req, res) {
-  res.render('admin/localMgr', {
-    title: '在地好資源'
+  LocalResources.find({},function(err, allResources) {
+      if (err) {
+        return next(err);
+      }
+      res.render('admin/localMgr', {
+        title: '在地好資源',
+        allResources: allResources
+      });
   });
 }; 
 exports.getServiceMgr = function(req, res, next) {
@@ -78,6 +85,35 @@ exports.getAdministrator = function(req, res, next) {
     });
   });
 }; 
+exports.postRemoveResource  = function(req, res, next) {
+  LocalResources.remove({ _id: req.params.id }, function(err) {
+    if (err) {
+      return next(err);
+    }
+   
+    res.redirect('/localMgr');
+  });
+
+}
+exports.postLocalData  = function(req, res, next) {
+  // console.log(req.body);
+  var newResource = new LocalResources({
+      org: req.body.org || '',
+      district: req.body.district || '',
+      phone: req.body.phone || '',
+      abstract: req.body.abstract || '',
+      link: req.body.link || ''
+      // timestamp: Date()
+  });
+  newResource.save(function(err) {
+      if (err) {
+        return next(err);
+      }
+     
+      // req.flash('success', { msg: '表單送出成功。' });
+      res.redirect('/localMgr');
+    });
+}
 exports.postRemoveAdmin  = function(req, res, next) {
   // console.log(req.body);
   User.findById(req.params.id, function(err, thisUser) {

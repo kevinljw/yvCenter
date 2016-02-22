@@ -156,6 +156,7 @@ app.get('/novelty', aboutController.getNovelty);
 app.get('/links', aboutController.getLinks);
 
 app.get('/youth/local', youthController.getLocal);
+app.get('/youth/local/:district', youthController.getLocalDistrict);
 app.get('/youth/bevo', youthController.getBevo);
 app.get('/youth/findvo', youthController.getFindvo);
 app.get('/youth/launchteam', youthController.getLaunchteam);
@@ -175,6 +176,8 @@ app.get('/volunMgr', passportConf.isAdminAuthenticated, adminController.getVolun
 app.get('/administrator', passportConf.isAdminAuthenticated, adminController.getAdministrator);
 app.post('/beAdmin', passportConf.isAdminAuthenticated, adminController.postBeAdmin);
 app.post('/removeAdmin/:id', passportConf.isAdminAuthenticated, adminController.postRemoveAdmin);
+app.post('/addLocalData', passportConf.isAdminAuthenticated, adminController.postLocalData);
+app.post('/removeResource/:id', passportConf.isAdminAuthenticated, adminController.postRemoveResource);
 
 
 

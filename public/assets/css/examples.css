@@ -402,6 +402,7 @@
 
 .color-success {
     color: #7AC29A;
+
 }
 
 .color-warning {
@@ -414,6 +415,9 @@
 
 .color-info {
     color: #68B3C8;
+}
+.trans-fill {
+    transition: fill .1s ease-in .1s;
 }
 .logoutBtn{
     float: right;

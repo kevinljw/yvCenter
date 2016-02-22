@@ -9,7 +9,7 @@ block content
         .x_panel
           .x_title
             h2
-              | 機構列表
+              | 資源列表
               small Organization List
             ul.nav.navbar-right.panel_toolbox
               li
@@ -32,12 +32,98 @@ block content
               thead
                 tr
                   th(style='width: 2%') #
-                  th(style='width: 15%') 圖像
-                  th(style='width: 25%') 機構名稱
-                  th(style='width: 13%') 服務總數量
-                  th(style='width: 13%') 已媒合數量
-                  th(style='width: 10%') 志工需求
-                  th(style='width: 22%') 編輯
+                  th(style='width: 15%') 區域
+                  th(style='width: 20%') 單位
+                  th(style='width: 33%') 簡述
+                  th(style='width: 10%') 聯絡電話
+                  th(style='width: 10%') 連結
+                  th(style='width: 10%') 編輯
               tbody
+                each val,index in allResources
+                  tr
+                    td #{index}
+                    td #{val.district}
+                    td #{val.org}
+                    td #{val.abstract}
+                    td #{val.phone}
+                    td
+                      a.btn.btn.btn-primary.btn-sm(href='#{val.link}', target='_blank')
+                        i.fa.fa-mobile
+                        |  瀏覽
+
+                    td
+                      form.form-horizontal(action='/removeResource/#{val.id}', method='POST')
+                        input(type='hidden', name='_csrf', value=_csrf)
+                        .form-group
+                          button.btn.btn.btn-danger.btn-sm(type='submit')
+                            i.fa.fa-trash
+                            |  移除
+
+      .col-md-6
+        .x_panel
+          .x_title
+            h2
+              | 新增資源
+              small Add New Administrator
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                  i.fa.fa-wrench
+                ul.dropdown-menu(role='menu')
+                  li
+                    a(href='#') Settings 1
+                  li
+                    a(href='#') Settings 2
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            h5 新增以下行政區內的資源:
+            br
+            form.form-horizontal(action='/addLocalData', method='POST')
+              input(type='hidden', name='_csrf', value=_csrf)
+              .form-group
+                label.col-sm-4.control-label(for='district') 區域
+                .col-sm-6
+                  select#district(name='district', style='width:80%;')
+                    option(value='keelung') 基隆
+                    option(value='kinmen') 金門
+                    option(value='taipei-Beitou') 台北-北投區
+                    option(value='taipei-Shilin') 台北-士林區
+                    option(value='taipei-Datong') 台北-大同區
+                    option(value='taipei-Zhongshan') 台北-中山區
+                    option(value='taipei-Songshan') 台北-松山區
+                    option(value='taipei-Neihu') 台北-內湖區
+                    option(value='taipei-Wanhua') 台北-萬華區
+                    option(value='taipei-Zhongzheng') 台北-中正區
+                    option(value='taipei-Daan') 台北-大安區
+                    option(value='taipei-Xinyi') 台北-信義區
+                    option(value='taipei-Nangang') 台北-南港區
+                    option(value='taipei-Wenshan') 台北-文山區
+              .form-group
+                label.col-sm-4.control-label(for='org') 單位
+                .col-sm-6
+                  input.form-control(type='text', name='org', id='org', placeholder='請輸入單位', autofocus)
+              .form-group
+                label.col-sm-4.control-label(for='phone') 聯絡電話
+                .col-sm-6
+                  input.form-control(type='text', name='phone', id='phone', placeholder='請輸入聯絡電話', autofocus)
+              .form-group
+                label.col-sm-4.control-label(for='link') 連結
+                .col-sm-6
+                  input.form-control(type='text', name='link', id='link', placeholder='請輸入網址', autofocus)
+              .form-group
+                label.col-sm-4.control-label(for='abstract') 簡述
+                .col-sm-6
+                  textarea.form-control(type='text', name='abstract', id='abstract', autofocus, rows='5')
+              .form-group
+                .col-sm-offset-4.col-sm-4
+                  button.col-sm-12.btn.btn.btn-primary.btn-sm(type='submit')
+                    i.fa.fa-plus
+                    |  新增
                 
   

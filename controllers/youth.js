@@ -1,13 +1,30 @@
 var VolunForm = require('../models/VolunForm');
 var OrgForm = require('../models/OrgForm');
 var User = require('../models/User');
+var LocalResources = require('../models/LocalResources');
 /**
  * GET /about
  * About page.
  */
 exports.getLocal = function(req, res) {
-  res.render('local', {
-    title: '在地好資源'
+
+    res.render('local', {
+      title: '在地好資源',
+      hasChosen: false,
+      activeTab: 'taipei'
+    });
+  
+};
+exports.getLocalDistrict = function(req, res) {
+  // console.log(req.params.district);
+  LocalResources.find({district: req.params.district}, function(err, allResources) {
+    // console.log(allResources);
+    res.render('local', {
+      title: '在地好資源',
+      hasChosen: true,
+      allResources: allResources,
+      activeTab: (req.params.district=='keelung'?'keelung':(req.params.district=='kinmen'?'kinmen':'taipei'))
+    });
   });
 };
 exports.getBevo = function(req, res) {
