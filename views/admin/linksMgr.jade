@@ -1,0 +1,243 @@
+extends layout
+
+block content
+  //- page content
+  br
+  div
+    .row
+      .col-md-6
+        .x_panel
+          .x_title
+            h2
+              | 新增連結
+              small Add New link
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            h5 新增以下新連結:
+            br
+            form.form-horizontal(action='/addNewLink', enctype='multipart/form-data', method='POST')
+              input(type='hidden', name='_csrf', value=_csrf)
+              .form-group
+                label.col-sm-4.control-label(for='area') 區塊
+                .col-sm-6
+                  select#area(name='area', style='width:80%;')
+                    option(value='gov') 政府部門
+                    option(value='vcenter') 志工中心
+                    option(value='servicePoint') 服務據點
+                    option(value='goodLink') 好讚連結
+                    
+              .form-group
+                label.col-sm-4.control-label(for='name') 名稱
+                .col-sm-6
+                  input.form-control(type='text', name='name', id='name', placeholder='請輸入名稱', autofocus)
+              .form-group
+                label.col-sm-4.control-label(for='link') 連結
+                .col-sm-6
+                  input.form-control(type='text', name='link', id='link', placeholder='請輸入連結', autofocus)
+              .form-group
+                label.col-sm-4.control-label 圖示
+                .col-sm-6
+                  input(type='file', name='icon')
+              .form-group
+                .col-sm-offset-4.col-sm-4
+                  button.col-sm-12.btn.btn.btn-primary.btn-sm(type='submit')
+                    i.fa.fa-plus
+                    |  新增
+      .col-md-12
+        .x_panel
+          .x_title
+            h2
+              | 政府部門
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            table.table.table-striped.projects
+              thead
+                tr
+                  th(style='width: 2%') 排序
+                  th(style='width: 20%') 名稱
+                  th(style='width: 15%') 圖示
+                  th(style='width: 43%') 連結
+                  th(style='width: 10%') 移除
+              tbody
+                each val in allLinks
+                  if val.area == 'gov'
+                    tr
+                      td
+                        form.form-horizontal(action='/updateLinkOrder/#{val.id}', method='POST')
+                          input(type='hidden', name='_csrf', value=_csrf)
+                          .form-group
+                            input(type='text', name='newOrder', value='#{val.order}',size="6") 
+                          .form-group
+                            button.btn.btn.btn-primary.btn-xs(type='submit')
+                              i.fa.fa-retweet
+                              |  更新
+                      td #{val.name}
+                      td
+                        img(src='/uploads/#{val.picture}', height='100px')
+                      td 
+                        a(href='#{val.link}', target='_blank') #{val.link}
+                      td
+                        form.form-horizontal(action='/removeLink/#{val.id}', method='POST')
+                          input(type='hidden', name='_csrf', value=_csrf)
+                          .form-group
+                            button.btn.btn.btn-danger.btn-sm(type='submit')
+                              i.fa.fa-trash
+                              |  移除
+      .col-md-12
+        .x_panel
+          .x_title
+            h2
+              | 志工中心
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            table.table.table-striped.projects
+              thead
+                tr
+                  th(style='width: 2%') 排序
+                  th(style='width: 20%') 名稱
+                  th(style='width: 15%') 圖示
+                  th(style='width: 43%') 連結
+                  th(style='width: 10%') 移除
+              tbody
+                each val in allLinks
+                  if val.area == 'vcenter'
+                    tr
+                      td
+                        form.form-horizontal(action='/updateLinkOrder/#{val.id}', method='POST')
+                          input(type='hidden', name='_csrf', value=_csrf)
+                          .form-group
+                            input(type='text', name='newOrder', value='#{val.order}',size="6") 
+                          .form-group
+                            button.btn.btn.btn-primary.btn-xs(type='submit')
+                              i.fa.fa-retweet
+                              |  更新
+                      td #{val.name}
+                      td
+                        img(src='/uploads/#{val.picture}', height='100px')
+                      td 
+                        a(href='#{val.link}', target='_blank') #{val.link}
+                      td
+                        form.form-horizontal(action='/removeLink/#{val.id}', method='POST')
+                          input(type='hidden', name='_csrf', value=_csrf)
+                          .form-group
+                            button.btn.btn.btn-danger.btn-sm(type='submit')
+                              i.fa.fa-trash
+                              |  移除
+      .col-md-12
+        .x_panel
+          .x_title
+            h2
+              | 服務據點
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            table.table.table-striped.projects
+              thead
+                tr
+                  th(style='width: 2%') 排序
+                  th(style='width: 20%') 名稱
+                  th(style='width: 15%') 圖示
+                  th(style='width: 43%') 連結
+                  th(style='width: 10%') 移除
+              tbody
+                each val in allLinks
+                  if val.area == 'servicePoint'
+                    tr
+                      td
+                        form.form-horizontal(action='/updateLinkOrder/#{val.id}', method='POST')
+                          input(type='hidden', name='_csrf', value=_csrf)
+                          .form-group
+                            input(type='text', name='newOrder', value='#{val.order}',size="6") 
+                          .form-group
+                            button.btn.btn.btn-primary.btn-xs(type='submit')
+                              i.fa.fa-retweet
+                              |  更新
+                      td #{val.name}
+                      td
+                        img(src='/uploads/#{val.picture}', height='100px')
+                      td 
+                        a(href='#{val.link}', target='_blank') #{val.link}
+                      td
+                        form.form-horizontal(action='/removeLink/#{val.id}', method='POST')
+                          input(type='hidden', name='_csrf', value=_csrf)
+                          .form-group
+                            button.btn.btn.btn-danger.btn-sm(type='submit')
+                              i.fa.fa-trash
+                              |  移除     
+      .col-md-12
+        .x_panel
+          .x_title
+            h2
+              | 好讚連結
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            table.table.table-striped.projects
+              thead
+                tr
+                  th(style='width: 2%') 排序
+                  th(style='width: 20%') 名稱
+                  th(style='width: 15%') 圖示
+                  th(style='width: 43%') 連結
+                  th(style='width: 10%') 移除
+              tbody
+                each val in allLinks
+                  if val.area == 'goodLink'
+                    tr
+                      td
+                        form.form-horizontal(action='/updateLinkOrder/#{val.id}', method='POST')
+                          input(type='hidden', name='_csrf', value=_csrf)
+                          .form-group
+                            input(type='text', name='newOrder', value='#{val.order}',size="6") 
+                          .form-group
+                            button.btn.btn.btn-primary.btn-xs(type='submit')
+                              i.fa.fa-retweet
+                              |  更新
+                      td #{val.name}
+                      td
+                        img(src='/uploads/#{val.picture}', height='100px')
+                      td 
+                        a(href='#{val.link}', target='_blank') #{val.link}
+                      td
+                        form.form-horizontal(action='/removeLink/#{val.id}', method='POST')
+                          input(type='hidden', name='_csrf', value=_csrf)
+                          .form-group
+                            button.btn.btn.btn-danger.btn-sm(type='submit')
+                              i.fa.fa-trash
+                              |  移除                   
+      
+                
+  

@@ -36,9 +36,14 @@ html
     script(src='/assets/js/bootstrap-select.js')
     script(src='/assets/js/bootstrap-datepicker.js')
     script(src='/assets/js/ct-paper.js')
-      
+    if title=='友好連結'
+      script(src='/js/links.js')
+    if title=='首頁'
+      script(src='/js/homeCover.js')
+    //- if title=='青年培力'
+    //-   script(src='/js/empower.js')
     script(src='/js/main.js')
-    
+
     //- Google Analytics: change UA-XXXXX-X to be your site's ID
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

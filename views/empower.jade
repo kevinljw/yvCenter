@@ -19,27 +19,76 @@ block content
             | 為鼓勵青年參與志願服務，發揮成己達人的精神，我們特邀請具輔導青年志工服務相關專長之諮詢業師，以其專長及經驗，協助輔導青年參與服務，解決推動青年志工業務相關問題，增進青年志工及社區志工組織之服務知能。
           br
           br
-  .section.section-dark.text-center.landing-section
+        each val,index in allMentors
+          .col-sm-4
+            //- img(src='/uploads/'+val.picture)
+            a.profilePointer(data-toggle="modal" data-target="#mentorModel_#{index}")
+              .img-circle.img-no-padding.profile_pic(style='background-image: url("/uploads/'+val.picture+'");')
+              h5.text-center #{val.name}
+                br
+                small #{val.job}
+          
+          
+
+
+  .section.section-white.text-center.landing-section
     .container
       .row
         .col-md-8.col-md-offset-2.paragrahIndent
           h2 志工訓練
           br
+        .col-md-12
           h5
-            
+            | 志工訓練活動資訊
           br
-  .section.section-brown.text-center.landing-section
+          br
+          br
+          table.table.table-striped.projects
+            thead
+              tr
+                th(style='width: 40%') 志工訓練
+                th(style='width: 16%') 日期
+                th(style='width: 20%') 主辦單位
+                th(style='width: 12%') 活動資訊
+                th(style='width: 12%') 連結
+            tbody
+              each val,index in allVolunTrains
+                tr
+                  td #{val.title}
+                  td #{val.date}
+                  td #{val.org}
+                  td
+                    button.col-sm-12.btn.btn-info.btn-xs(type='button', data-toggle='popover', data-placement='top', title='#{val.abstract}', data-content='地點:#{val.location}') 查看
+                  td
+                    a.col-sm-12.btn.btn.btn-success.btn-xs(href='#{val.link}', target='_blank', style='font-weight:900;') 瀏覽          
+          br
+  .section.section-gray.text-center.landing-section
     .container
       .row
         .col-md-10.col-md-offset-1.paragrahIndent
           h2 專長訓練
           br
-          .col-md-10.col-md-offset-1
-            h5
-              
-            br
-            br
-            br
+        .col-md-12
+         
+          br
+          table.table.table-striped.projects
+            thead
+              tr
+                th(style='width: 40%') 專長訓練 
+                th(style='width: 16%') 日期
+                th(style='width: 20%') 主辦單位
+                th(style='width: 12%') 活動資訊
+                th(style='width: 12%') 連結
+            tbody
+              each val,index in allTalentTrains
+                tr
+                  td #{val.title}
+                  td #{val.date}
+                  td #{val.org}
+                  td
+                    button.col-sm-12.btn.btn-info.btn-xs(type='button', data-toggle='popover', data-placement='top', title='#{val.abstract}', data-content='地點:#{val.location}') 查看
+                  td
+                    a.col-sm-12.btn.btn.btn-success.btn-xs(href='#{val.link}', target='_blank', style='font-weight:900;') 瀏覽
           
   .section.section-nude.text-center.landing-section
     .container
@@ -48,4 +97,51 @@ block content
           h2 研習講座
           br
           br
+        .col-md-12
+          h5
+            | 講座活動資訊
+          br
+          br
+          br
+          table.table.table-striped.projects
+            thead
+              tr
+                th(style='width: 40%') 講座 
+                th(style='width: 16%') 日期
+                th(style='width: 20%') 主辦單位
+                th(style='width: 12%') 活動資訊
+                th(style='width: 12%') 連結
+            tbody
+              each val,index in allSpeechs
+                tr
+                  td #{val.title}
+                  td #{val.date}
+                  td #{val.org}
+                  td
+                    button.col-sm-12.btn.btn-info.btn-xs(type='button', data-toggle='popover', data-placement='top', title='#{val.abstract}', data-content='地點:#{val.location}') 查看
+                  td
+                    a.col-sm-12.btn.btn.btn-success.btn-xs(href='#{val.link}', target='_blank', style='font-weight:900;') 瀏覽
+  each val,index in allMentors
+    .modal.fade(tabindex='-1', role='dialog', aria-labelledby='mentorLabel', aria-hidden='true', id='mentorModel_#{index}')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4#mentorLabel.modal-title #{val.name}
+          .modal-body(style='height: 330px;')
+            .col-sm-5
+              .img-circle.img-no-padding.profile_pic_inModel(style='background-image: url("/uploads/'+val.picture+'");')
+              h5.text-center #{val.name}
+                br
+                small #{val.job}
+            .col-sm-offset-1.col-sm-5
+              h5.text-center 簡述
+              h6.paragrahIndent #{val.abstract}
+          .modal-footer
+            .left-side
+              a.btn.btn-success.btn-simple(href='#{val.link}', target='_blank')
+                | 前往連結
+            .divider
+            .right-side
+              button.btn.btn-danger.btn-simple(type='button', data-dismiss='modal') 關閉
           

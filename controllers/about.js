@@ -1,4 +1,6 @@
-
+var Link = require('../models/Link');
+var iconEachLink = require('../config/secrets').link.iconEachLink;
+var OpenHouse = require('../models/OpenHouse');
 /**
  * GET /about
  * About page.
@@ -37,13 +39,53 @@ exports.getRent = function(req, res) {
 };
 exports.getNovelty = function(req, res) {
   // console.log("getMap")
-  res.render('novelty', {
-    title: '公益新鮮事'
+  OpenHouse.find({},{},{sort:{_id: -1}}, function(err, allOpenHouses) {
+      if (err) {
+        return next(err);
+      }
+    
+        res.render('novelty', {
+          title: '公益新鮮事',
+          allOpenHouses: allOpenHouses,
+        });
+    
   });
+  
 };
 exports.getLinks = function(req, res) {
-  // console.log("getMap")
-  res.render('links', {
-    title: '友好連結'
+  Link.find({},null, {sort:{order: 1}},function(err, allLinks){
+    if (err) {
+      return next(err);
+    }
+    Link.count({area: 'gov'},function(err, govNum){
+      if (err) {
+        return next(err);
+      }
+      Link.count({area: 'vcenter'},function(err, vcenterNum){
+        if (err) {
+          return next(err);
+        }
+        Link.count({area: 'servicePoint'},function(err, servicePointNum){
+          if (err) {
+            return next(err);
+          }
+          Link.count({area: 'goodLink'},function(err, goodLinkNum){
+            if (err) {
+              return next(err);
+            }
+            // console.log(goodLinkNum, servicePointNum, vcenterNum, govNum)
+            res.render('links', {
+              title: '友好連結',
+              allLinks: JSON.stringify(allLinks),
+              goodLinkNum: Math.ceil(goodLinkNum/iconEachLink),
+              servicePointNum: Math.ceil(servicePointNum/iconEachLink),
+              vcenterNum: Math.ceil(vcenterNum/iconEachLink),
+              govNum: Math.ceil(govNum/iconEachLink)
+
+            });
+          });
+        });
+      });
+    });
   });
 };

@@ -1004,3 +1004,28 @@ pre.prettyprint{
 .example-pages{
     margin-top: 50px;
 }
+.profile_pic{
+    margin-left: auto;
+    margin-right: auto;
+    height:160px; 
+    width:160px; 
+    background-repeat: no-repeat;
+    background-position: center 1%;
+}
+.profile_pic_inModel{
+    margin-left: -16px;
+    
+    height:200px; 
+    width:200px; 
+    background-repeat: no-repeat;
+    background-position: center 1%;
+}
+.profilePointer{
+    cursor: pointer;
+}
+.popover-content, .popover-title{
+/*    background: #fff;*/
+    color: #fff;
+/*    font-size: 16px;*/
+    font-weight: 700;
+}

@@ -1,55 +1,81 @@
 extends layout
 
 block content
-
-  .container
-    h1 北基金青年志工中心
-    p.lead A boilerplate for Node.js web applications.
-    hr
-  #carousel
-    #carousel-example-generic.carousel.slide(data-ride='carousel')
+  //- img(src='/img/old_banner.png', width='100%')
+  include svg/banner
+  //- .container
+  //-   h1 北基金青年志工中心
+  //-   p.lead A boilerplate for Node.js web applications.
+  //-   hr
+  #carousel_home
+    #carousel_home-generic.carousel.slide(data-ride='carousel')
       .carousel.slide(data-ride='carousel')
         //- Indicators
         ol.carousel-indicators
-          li.active(data-target='#carousel-example-generic', data-slide-to='0')
-          li(data-target='#carousel-example-generic', data-slide-to='1')
-          li(data-target='#carousel-example-generic', data-slide-to='2')
         //- Wrapper for slides
-        .carousel-inner
-          .item.active
-            img(src='/assets/paper_img/pencils.jpg', alt='Awesome Image')
-          .item
-            img(src='/assets/paper_img/shoes.jpg', alt='Awesome Image')
-          .item
-            img(src='/assets/paper_img/types.jpg', alt='Awesome Image')
+        .carousel-inner.homeCovers.text-center
         //- Controls
-        a.left.carousel-control(href='#carousel-example-generic', data-slide='prev')
-          span.fa.fa-angle-left
-        a.right.carousel-control(href='#carousel-example-generic', data-slide='next')
-          span.fa.fa-angle-right
+        if homeCoverNum>1
+          a.left.carousel-control(href='#carousel_home-generic', data-slide='prev')
+            span.fa.fa-angle-left
+          a.right.carousel-control(href='#carousel_home-generic', data-slide='next')
+            span.fa.fa-angle-right
   .section.section-gray
     .container
       .row
-        .col-sm-6
+        .col-sm-6.col-xs-12
           //- h4 最新訊息
           iframe(src='/news/new-info/', frameborder="0", scrolling="no", width='100%', height='300px', marginwidth='0', marginheight='0')
           //- p
           //-   a.btn.btn-default(href='/news/tag/new-info/', role='button') 前往最新訊息 »
-        .col-sm-6
+        .col-sm-6.col-xs-12
           //- h4 活動轉知
           iframe(src='/news/info-deliver/', frameborder="0", scrolling="no", width='100%', height='300px', marginwidth='0', marginheight='0')
           //- p
           //-   a.btn.btn-default(href='/news/tag/info-deliver/', role='button') 前往活動轉知 »
-        .col-sm-6
+        .col-sm-6.col-xs-12
           //- h4 新聞報導
           iframe(src='/news/news-report/', frameborder="0", scrolling="no", width='100%', height='300px', marginwidth='0', marginheight='0')
           //- p
           //-   a.btn.btn-default(href='/news/tag/news-report/', role='button') 前往新聞報導 »
-        .col-sm-6
+        .col-sm-6.col-xs-12
           //- h4 中心活動
           iframe(src='/news/center-activities/', frameborder="0", scrolling="no", width='100%', height='300px', marginwidth='0', marginheight='0')
           //- p
           //-   a.btn.btn-default(href='/news/tag/center-activities/', role='button') 前往中心活動 »
-        .col-sm-6
+        .col-sm-6.col-xs-12
           br
           br
+  .section.section-gray.text-center.landing-section
+    .container
+      .row
+        .col-md-10.col-md-offset-1.paragrahIndent
+          h3 好站連結
+          br
+    br
+    if goodLinkNum==0
+      h4 
+        small 連結陸續新增中
+    else
+      #carousel_goodLink
+        #carousel_goodLink-generic.carousel.slide(data-ride='carousel')
+          .carousel.slide(data-ride='carousel')
+            //- Indicators
+            ol.carousel-indicators
+            //- Wrapper for slides
+            .carousel-inner.weblinks
+            //- Controls
+            if goodLinkNum>1
+              a.left.carousel-control(href='#carousel_goodLink-generic', data-slide='prev')
+                span.fa.fa-angle-left
+              a.right.carousel-control(href='#carousel_goodLink-generic', data-slide='next')
+                span.fa.fa-angle-right
+
+  include partModel/homeCoverModel
+  script.
+    var homeCoverPageNum = !{homeCoverNum};
+    var allHomeCoverArr = JSON.parse('!{allCovers}');
+    var goodLinkPageNum = !{goodLinkNum};
+    var allLinksArr = JSON.parse('!{allLinks}');
+    var isAllLink = false;
+    //- console.log(allLinksArr)

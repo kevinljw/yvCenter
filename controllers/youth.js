@@ -2,6 +2,10 @@ var VolunForm = require('../models/VolunForm');
 var OrgForm = require('../models/OrgForm');
 var User = require('../models/User');
 var LocalResources = require('../models/LocalResources');
+var Mentor = require('../models/Mentor');
+var Speech = require('../models/Speech');
+var TalentTrain  = require('../models/TalentTrain');
+var VolunTrain  = require('../models/VolunTrain');
 /**
  * GET /about
  * About page.
@@ -26,6 +30,7 @@ exports.getLocalDistrict = function(req, res) {
       activeTab: (req.params.district=='keelung'?'keelung':(req.params.district=='kinmen'?'kinmen':'taipei'))
     });
   });
+
 };
 exports.getBevo = function(req, res) {
   if(req.hasOwnProperty("user")){
@@ -60,7 +65,34 @@ exports.getLaunchteam = function(req, res) {
   });
 };
 exports.getEmpower = function(req, res) {
-  res.render('empower', {
-    title: '青年培力'
+  VolunTrain.find({},{},{sort:{_id: -1}}, function(err, allVolunTrains) {
+      if (err) {
+        return next(err);
+      }
+  TalentTrain.find({},{},{sort:{_id: -1}}, function(err, allTalentTrains) {
+      if (err) {
+        return next(err);
+      }
+    Speech.find({},{},{sort:{_id: -1}}, function(err, allSpeechs) {
+        if (err) {
+          return next(err);
+        }
+      
+        Mentor.find({},{},{sort:{order: 1}}, function(err, allMentors) {
+            if (err) {
+              return next(err);
+            }
+          
+              res.render('empower', {
+                title: '青年培力',
+                allMentors: allMentors,
+                allSpeechs: allSpeechs,
+                allTalentTrains: allTalentTrains,
+                allVolunTrains: allVolunTrains
+              });
+          
+        });
+    });
   });
+});
 };

@@ -21,7 +21,11 @@ var passport = require('passport');
 var expressValidator = require('express-validator');
 var sass = require('node-sass-middleware');
 var multer = require('multer');
-var upload = multer({ dest: path.join(__dirname, 'uploads') });
+var upload = multer({ dest: path.join(__dirname, 'public/uploads') });
+var upload_icon = multer({ dest: path.join(__dirname, 'public/uploads/linkIcon') });
+var upload_homeCover = multer({ dest: path.join(__dirname, 'public/uploads/homeCover') });
+var upload_profile = multer({ dest: path.join(__dirname, 'public/uploads/profile') });
+
 var ghost = require('./ghost-app/ghost-in-the-middle');
 
 // console.log(pat÷h.join(__dirname, 'uploads'));
@@ -94,7 +98,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(function(req, res, next) {
-  if (req.path === '/api/upload' || req.path.indexOf('/news')>-1) {
+  if (req.path === '/api/upload' || req.path ==='/addNewLink' || req.path ==='/addNewHomeCover' || req.path === '/addNewMentor' || req.path.indexOf('/news')>-1) {
     next();
   } else {
     lusca.csrf()(req, res, next);
@@ -180,6 +184,32 @@ app.post('/addLocalData', passportConf.isAdminAuthenticated, adminController.pos
 app.post('/removeResource/:id', passportConf.isAdminAuthenticated, adminController.postRemoveResource);
 
 
+app.get('/empowerMgr', passportConf.isAdminAuthenticated, adminController.getEmpowerMgr );
+app.post('/addNewMentor', passportConf.isAdminAuthenticated, upload_profile.single('profile_pic'), adminController.postNewMentor ); 
+app.post('/updateMentorOrder/:id', passportConf.isAdminAuthenticated, adminController.postUpdateMentorOrder);
+app.post('/removeMentor/:id', passportConf.isAdminAuthenticated, adminController.postRemoveMentor);
+app.post('/addNewSpeech', passportConf.isAdminAuthenticated, adminController.postNewSpeech ); 
+app.post('/removeSpeech/:id', passportConf.isAdminAuthenticated, adminController.postRemoveSpeech);
+app.post('/addNewTalentTrain', passportConf.isAdminAuthenticated, adminController.postNewTalentTrain ); 
+app.post('/removeTalentTrain/:id', passportConf.isAdminAuthenticated, adminController.postRemoveTalentTrain);
+app.post('/addNewVolunTrain', passportConf.isAdminAuthenticated, adminController.postNewVolunTrain ); 
+app.post('/removeVolunTrain/:id', passportConf.isAdminAuthenticated, adminController.postRemoveVolunTrain);
+
+
+
+app.get('/noveltyMgr', passportConf.isAdminAuthenticated, adminController.getNoveltyMgr );
+app.post('/addNewOpenHouse', passportConf.isAdminAuthenticated, adminController.postAddNewOpenHouse );
+app.post('/removeOpenHouse/:id', passportConf.isAdminAuthenticated, adminController.postRemoveOpenHouse );
+
+
+app.get('/linksMgr', passportConf.isAdminAuthenticated, adminController.getLinksMgr );
+app.post('/addNewLink', passportConf.isAdminAuthenticated, upload_icon.single('icon'), adminController.postNewLink ); 
+app.post('/removeLink/:id', passportConf.isAdminAuthenticated, adminController.postRemoveLink);
+app.post('/updateLinkOrder/:id', passportConf.isAdminAuthenticated, adminController.postUpdateLinkOrder);
+
+app.post('/addNewHomeCover', passportConf.isAdminAuthenticated, upload_homeCover.single('cover_pic'), adminController.postNewHomeCover ); 
+app.post('/removeHomeCover/:id', passportConf.isAdminAuthenticated, adminController.postRemoveHomeCover);
+app.post('/updateHomeCoverOrder/:id', passportConf.isAdminAuthenticated, adminController.postUpdateHomeCoverOrder);
 
 /**
  * API examples routes.

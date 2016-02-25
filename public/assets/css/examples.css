@@ -439,3 +439,30 @@
 .userLogined #userImg {
     max-width: 60px;
 }
+.carousel.slide > .carousel-inner.weblinks a > h3,
+.carousel.slide > .carousel-inner.homeCovers a > h3{
+    color: #66615b;
+    transition: color .2s ease-in .1s;
+    
+}
+.carousel.slide > .carousel-inner.homeCovers a{
+    cursor: pointer;
+}
+.carousel.slide > .carousel-inner.weblinks a:hover > h3,
+.carousel.slide > .carousel-inner.homeCovers a:hover > h3{
+    color: #8d867e;
+}
+.section-brown h4 small{
+    
+    color: #e8e7e7;
+}
+.carousel-inner.weblinks{
+    background: rgba(214, 210, 204, 0.25);
+}
+.carousel-inner > .item > div > a > img {
+  border-radius: 8px;
+  box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);
+    
+/*  margin-left: 25%;*/
+/*  max-width: 50%; }*/
+}

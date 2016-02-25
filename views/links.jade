@@ -14,20 +14,53 @@ block content
       .row
         .col-md-8.col-md-offset-2.paragrahIndent
           h2 政府部門
-
           br
+    br
+    if govNum==0
+      h4 
+        small 連結陸續新增中
+    else
+      #carousel_gov
+        #carousel_gov-generic.carousel.slide(data-ride='carousel')
+          .carousel.slide(data-ride='carousel')
+            //- Indicators
+            ol.carousel-indicators
+            //- Wrapper for slides
+            .carousel-inner.weblinks
+            //- Controls
+            if govNum>1
+              a.left.carousel-control(href='#carousel_gov-generic', data-slide='prev')
+                span.fa.fa-angle-left
+              a.right.carousel-control(href='#carousel_gov-generic', data-slide='next')
+                span.fa.fa-angle-right
          
-          br
-  .section.section-dark.text-center.landing-section
+          
+  .section.section-white.text-center.landing-section
     .container
       .row
         .col-md-8.col-md-offset-2.paragrahIndent
           h2 志工中心
           
           br
-          
-          br
-  .section.section-brown.text-center.landing-section
+    if vcenterNum==0
+      h4 
+        small 連結陸續新增中
+    else
+      #carousel_vcenter
+        #carousel_vcenter-generic.carousel.slide(data-ride='carousel')
+          .carousel.slide(data-ride='carousel')
+            //- Indicators
+            ol.carousel-indicators
+            //- Wrapper for slides
+            .carousel-inner.weblinks.section-black
+            //- Controls
+            if vcenterNum>1
+              a.left.carousel-control(href='#carousel_vcenter-generic', data-slide='prev')
+                span.fa.fa-angle-left
+              a.right.carousel-control(href='#carousel_vcenter-generic', data-slide='next')
+                span.fa.fa-angle-right
+
+  .section.section-nude.text-center.landing-section
     .container
       .row
         .col-md-10.col-md-offset-1.paragrahIndent
@@ -39,13 +72,53 @@ block content
               | 為建立青年志工服務策略聯盟、強化訊息推廣效率、以及便利青年志工取得訊息，本中心特邀請下列單位擔任服務據點，希望透過他們在志願服務領域的專業涵養和實務經驗，讓北基金的青年志工有機會拓展服務的思維視野，可以更精進的將公民社會精神落實在志願服務的每個場域。
             br
             br
-            br
-
-  .section.section-nude.text-center.landing-section
+    br
+    if servicePointNum==0
+      h4 
+        small 連結陸續新增中
+    else
+      #carousel_servicePoint
+        #carousel_servicePoint-generic.carousel.slide(data-ride='carousel')
+          .carousel.slide(data-ride='carousel')
+            //- Indicators
+            ol.carousel-indicators
+            //- Wrapper for slides
+            .carousel-inner.weblinks
+            //- Controls
+            if servicePointNum>1
+              a.left.carousel-control(href='#carousel_servicePoint-generic', data-slide='prev')
+                span.fa.fa-angle-left
+              a.right.carousel-control(href='#carousel_servicePoint-generic', data-slide='next')
+                span.fa.fa-angle-right    
+  .section.section-gray.text-center.landing-section
     .container
       .row
         .col-md-10.col-md-offset-1.paragrahIndent
-          h2 好讚連結
+          h2 好站連結
           br
-          br
-          
+    br
+    if goodLinkNum==0
+      h4 
+        small 連結陸續新增中
+    else
+      #carousel_goodLink
+        #carousel_goodLink-generic.carousel.slide(data-ride='carousel')
+          .carousel.slide(data-ride='carousel')
+            //- Indicators
+            ol.carousel-indicators
+            //- Wrapper for slides
+            .carousel-inner.weblinks
+            //- Controls
+            if goodLinkNum>1
+              a.left.carousel-control(href='#carousel_goodLink-generic', data-slide='prev')
+                span.fa.fa-angle-left
+              a.right.carousel-control(href='#carousel_goodLink-generic', data-slide='next')
+                span.fa.fa-angle-right
+  
+  script.
+    var govPageNum = !{govNum};
+    var vcenterPageNum = !{vcenterNum};
+    var servicePointPageNum =!{servicePointNum};
+    var goodLinkPageNum = !{goodLinkNum};
+    var allLinksArr = JSON.parse('!{allLinks}');
+    var isAllLink = true;

@@ -78,8 +78,21 @@ nav#demo-navbar.navbar.navbar-ct-warning(role='navigation-demo')
         li
           a.btn.btn-default.btn-simple(href='/links') 
             | 友好連結
-        li
-          a.btn.btn-default.btn-simple(href='/history') 
+        li.dropdown
+          a.dropdown-toggle.btn.btn-default.btn-simple(href='/history', data-toggle='dropdown')
             | 成果紀錄
+            b.caret
+          ul.dropdown-menu.dropdown-warning.dropdown-menu-right
+            li.dropdown-header Hibition
+            li
+              a(href='/history/review') 服務反思
+            li.divider
+            li
+              a(href='/history/album') 照片集錦
+            li
+              a(href='/history/video') 影音紀錄
+            li.divider
+            li
+              a(href='/history/performance') 服務績效
 
 

@@ -1,0 +1,106 @@
+extends layout
+
+block content
+  //- page content
+  br
+  div
+    .row
+      .col-md-8
+        .x_panel
+          .x_title
+            h2
+              | 新增分享會
+              small Add New Mentor
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            h5 新增以下分享會資訊:
+            br
+            form.form-horizontal(action='/addNewOpenHouse', method='POST')
+              input(type='hidden', name='_csrf', value=_csrf)
+              .form-group
+                label.col-sm-4.control-label(for='title') 分享會名
+                .col-sm-6
+                  input.form-control(type='text', name='title', id='title', placeholder='請輸入分享會名稱', autofocus)
+              .form-group
+                label.col-sm-4.control-label(for='org') 主辦單位
+                .col-sm-6
+                  input.form-control(type='text', name='org', id='org', placeholder='請輸入機構/主辦單位名稱', autofocus)
+              .form-group
+                label.col-sm-4.control-label(for='location') 位置
+                .col-sm-6
+                  input.form-control(type='text', name='location', id='location', placeholder='請輸入活動位置', autofocus)
+              .form-group
+                label.col-sm-4.control-label(for='abstract') 簡述
+                .col-sm-6
+                  textarea.form-control(type='text', name='abstract', id='abstract', autofocus, rows='3')
+              
+              .form-group
+                label.col-sm-4.control-label(for='link') 連結
+                .col-sm-6
+                  input.form-control(type='text', name='link', id='link', placeholder='請輸入連結', autofocus)
+              .form-group
+                label.col-sm-4.control-label(for='date') 活動日期
+                .col-sm-6
+                  input.form-control(type='text', name='date', id='date', placeholder='Ex. 2016-05-01 09:10~16:00', autofocus)
+              
+              .form-group
+                .col-sm-offset-4.col-sm-4
+                  button.col-sm-12.btn.btn.btn-primary.btn-sm(type='submit')
+                    i.fa.fa-plus
+                    |  新增        
+      .col-md-12
+        .x_panel
+          .x_title
+            h2
+              | 公益分享會 列表
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            table.table.table-striped.projects
+              thead
+                tr
+                  th(style='width: 2%') 排序
+                  th(style='width: 10%') 分享會名稱
+                  th(style='width: 10%') 主辦單位
+                  th(style='width: 10%') 位置
+                  th(style='width: 10%') 日期
+                  th(style='width: 38%') 簡介
+                  th(style='width: 10%') 連結
+                  th(style='width: 10%') 移除
+              tbody
+                each val,index in allOpenHouses
+                  tr
+                    td #{index}
+                  
+                    td #{val.title}
+                    td #{val.org}
+                    td #{val.location}
+                    td #{val.date}
+                    td #{val.abstract}
+                    td 
+                      a.btn.btn-sm.btn-info(href='#{val.link}', target='_blank') 查看
+                    td
+                      form.form-horizontal(action='/removeOpenHouse/#{val.id}', method='POST')
+                        input(type='hidden', name='_csrf', value=_csrf)
+                        .form-group
+                          button.btn.btn-danger.btn-sm(type='submit')
+                            i.fa.fa-trash
+                            |  移除
+
+         
+      
+                
+  
