@@ -16,6 +16,10 @@ exports.index = function(req, res, next) {
 		    }
 		 // console.log(allCovers)
 	  //    console.log(allLinks)
+	      // allCovers.forEach(function(eachCover){
+	      // 		eachCover.abstract = eachCover.abstract.replace('//g','<br>')
+
+	      // });
 		  res.render('home', {
 		    title: '首頁',
 		    allLinks: JSON.stringify(allLinks),

@@ -309,6 +309,32 @@ exports.postNewLink  = function(req, res, next) {
     });
 
 }
+exports.postUpdateHomeCoverAbstract  = function(req, res, next) {
+  // console.log(req.body);
+  HomeCover.findById(req.params.id, function(err, thisCover) {
+      if (err) {
+        return next(err);
+      }
+
+      if(thisCover){
+         thisCover.abstract = req.body.newAbstract || 0;
+         thisCover.save(function(err) {
+            if (err) {
+              return next(err);
+            }
+            // req.flash('success', { msg: thisUser.profile.name+' 授權修改成功' });
+            res.redirect('/adminMgr');
+          });
+
+      }
+      else{
+        res.redirect('/adminMgr');
+
+      }   
+  
+  });
+
+};
 exports.postUpdateMentorOrder  = function(req, res, next) {
   // console.log(req.body);
   Mentor.findById(req.params.id, function(err, thisMentor) {

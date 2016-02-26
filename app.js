@@ -210,6 +210,9 @@ app.post('/updateLinkOrder/:id', passportConf.isAdminAuthenticated, adminControl
 app.post('/addNewHomeCover', passportConf.isAdminAuthenticated, upload_homeCover.single('cover_pic'), adminController.postNewHomeCover ); 
 app.post('/removeHomeCover/:id', passportConf.isAdminAuthenticated, adminController.postRemoveHomeCover);
 app.post('/updateHomeCoverOrder/:id', passportConf.isAdminAuthenticated, adminController.postUpdateHomeCoverOrder);
+app.post('/updateHomeCoverAbstract/:id', passportConf.isAdminAuthenticated, adminController.postUpdateHomeCoverAbstract);
+
+
 
 /**
  * API examples routes.
