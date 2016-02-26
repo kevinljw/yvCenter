@@ -203,7 +203,7 @@ exports.postOrgForm = function(req, res) {
                 }
                
                 req.flash('success', { msg: '表單送出成功。' });
-                res.redirect('/youth/bevo#formDone');
+                res.redirect('/youth/findvo#formDone');
               });
 
           }

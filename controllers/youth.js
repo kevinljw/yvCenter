@@ -33,30 +33,43 @@ exports.getLocalDistrict = function(req, res) {
 
 };
 exports.getBevo = function(req, res) {
-  if(req.hasOwnProperty("user")){
-    VolunForm.findOne(req.user.id, function(err, thisForm) {
+  OrgForm.find({},{},{sort:{_id: -1}}, function(err, allOrgForms) {
       if (err) {
         return next(err);
       }
-      
-      res.render('bevo', {
-        title: '青年當志工',
-        vForm: thisForm?thisForm:new VolunForm,
-      });
-    });
-  }
-  else{
-    res.render('bevo', {
-      title: '青年當志工',
-      vForm: new VolunForm
-    });
-  }
-  
+
+      if(req.hasOwnProperty("user")){
+        VolunForm.findOne(req.user.id, function(err, thisForm) {
+          if (err) {
+            return next(err);
+          }
+          
+          res.render('bevo', {
+            title: '青年當志工',
+            vForm: thisForm?thisForm:new VolunForm,
+            allOrgForms: allOrgForms
+          });
+        });
+      }
+      else{
+        res.render('bevo', {
+          title: '青年當志工',
+          vForm: new VolunForm,
+          allOrgForms: allOrgForms
+        });
+      }
+  });
 };
 exports.getFindvo = function(req, res) {
-  res.render('findvo', {
-    title: '機構找志工',
-    oForm: new OrgForm,
+  OrgForm.find({uid: req.user.id},{},{sort:{_id: -1}}, function(err, allOrgForms) {
+      if (err) {
+        return next(err);
+      }
+      res.render('findvo', {
+        title: '機構找志工',
+        oForm: new OrgForm,
+        allOrgForms: allOrgForms
+      });
   });
 };
 exports.getLaunchteam = function(req, res) {
