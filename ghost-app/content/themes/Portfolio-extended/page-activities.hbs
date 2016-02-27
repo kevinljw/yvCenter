@@ -7,11 +7,11 @@
         {{#post}}
             <div class="post__wrapper--subpage" style="min-height: 360px; padding-top: 40px;">    
                     <h2 class="post__title text-center" style="font-weight: 800;">
-                        <a href="/news/tag/center-activities" style="color: #000;">
+                        <a href="/news/tag/info-deliver" style="color: #000;">
                         {{{title}}}
                         </a>
                     </h2>
-                    {{#get "posts" limit="5" include="tags" filter="tags.name: '{{title}}'" }}
+                    {{#get "posts" limit="5" include="tags" filter="tags.name: ['中心活動','活動轉知']" }}
                     <div>
                       <!-- <span class="menu-heading">Recent posts</span> -->
                       <ul style="text-align: left; list-style: square;">
@@ -19,7 +19,7 @@
                         <li>
                             <h5 style="font-weight: 600;">
                             <a class="menu-item tag" href="{{url}}">{{title}}</a>
-                            <small> {{date published_at format="YYYY-MM-DD hh:mm:ss"}}</small>
+                            <small> {{date published_at format="YYYY-MM-DD hh:mm:ss"}} [{{tags}}]</small>
                             </h5>
 
                         </li>

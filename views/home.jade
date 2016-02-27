@@ -25,22 +25,22 @@ block content
       .row
         .col-sm-6.col-xs-12
           //- h4 最新訊息
-          iframe(src='/news/new-info/', frameborder="0", scrolling="no", width='100%', height='300px', marginwidth='0', marginheight='0')
+          iframe(src='/news/new-info/', frameborder="0", scrolling="no", width='100%', height='420px', marginwidth='0', marginheight='0')
           //- p
           //-   a.btn.btn-default(href='/news/tag/new-info/', role='button') 前往最新訊息 »
         .col-sm-6.col-xs-12
-          //- h4 活動轉知
-          iframe(src='/news/info-deliver/', frameborder="0", scrolling="no", width='100%', height='300px', marginwidth='0', marginheight='0')
+          //- h4 活動訊息
+          iframe(src='/news/activities/', frameborder="0", scrolling="no", width='100%', height='420px', marginwidth='0', marginheight='0')
           //- p
           //-   a.btn.btn-default(href='/news/tag/info-deliver/', role='button') 前往活動轉知 »
         .col-sm-6.col-xs-12
           //- h4 新聞報導
-          iframe(src='/news/news-report/', frameborder="0", scrolling="no", width='100%', height='300px', marginwidth='0', marginheight='0')
+          iframe(src='/news/news-report/', frameborder="0", scrolling="no", width='100%', height='420px', marginwidth='0', marginheight='0')
           //- p
           //-   a.btn.btn-default(href='/news/tag/news-report/', role='button') 前往新聞報導 »
         .col-sm-6.col-xs-12
           //- h4 中心活動
-          iframe(src='/news/center-activities/', frameborder="0", scrolling="no", width='100%', height='300px', marginwidth='0', marginheight='0')
+          //- iframe(src='/news/center-activities/', frameborder="0", scrolling="no", width='100%', height='500px', marginwidth='0', marginheight='0')
           //- p
           //-   a.btn.btn-default(href='/news/tag/center-activities/', role='button') 前往中心活動 »
         .col-sm-6.col-xs-12
@@ -71,11 +71,12 @@ block content
               a.right.carousel-control(href='#carousel_goodLink-generic', data-slide='next')
                 span.fa.fa-angle-right
 
-  include partModel/homeCoverModel
+  
   script.
     var homeCoverPageNum = !{homeCoverNum};
-    var allHomeCoverArr = JSON.parse('!{allCovers}');
+    var allHomeCoverArr = !{allCovers};
     var goodLinkPageNum = !{goodLinkNum};
     var allLinksArr = JSON.parse('!{allLinks}');
     var isAllLink = false;
-    //- console.log(allLinksArr)
+    //- console.log(allHomeCoverArr)
+  include partModel/homeCoverModel

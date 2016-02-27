@@ -11,7 +11,7 @@ config = {
     // When running Ghost in the wild, use the production environment.
     // Configure your URL and mail settings here
     production: {
-        url: 'http://tkkyvc.tk/news',
+        url: 'http://tkkyvc.org.tk/news',
         mail: {
              transport: 'SMTP',
              options: {

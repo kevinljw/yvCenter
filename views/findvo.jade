@@ -87,16 +87,17 @@ block content
                   th(style='width: 10%') 資訊
                   th(style='width: 10%') 連結
               tbody
-                each val,index in allOrgForms
-                  tr
-                    td #{val.activity_name}
-                    td #{val.service_date_since} ~ #{val.service_date_until}
-                    td #{val.volunNum}
-                    td #{val.recruit_deadline}
-                    td
-                      button.col-sm-12.btn.btn-info.btn-xs(type='button', data-toggle='popover', data-placement='top', title='#{val.activity_abstract}', data-content='地點:#{val.service_location}') 查看
-                    td
-                      a.col-sm-12.btn.btn.btn-success.btn-xs(href='#{val.activity_website}', target='_blank', style='font-weight:900;') 瀏覽 
+                if allOrgForms
+                  each val,index in allOrgForms
+                    tr
+                      td #{val.activity_name}
+                      td #{val.service_date_since} ~ #{val.service_date_until}
+                      td #{val.volunNum}
+                      td #{val.recruit_deadline}
+                      td
+                        button.col-sm-12.btn.btn-info.btn-xs(type='button', data-toggle='popover', data-placement='top', title='#{val.activity_abstract}', data-content='地點:#{val.service_location}') 查看
+                      td
+                        a.col-sm-12.btn.btn.btn-success.btn-xs(href='#{val.activity_website}', target='_blank', style='font-weight:900;') 瀏覽 
   include partModel/signinOrgModel
   include partModel/forgetModel
   if user && user.IsOrg

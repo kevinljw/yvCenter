@@ -24,7 +24,7 @@ exports.getAdminHome = function(req, res) {
       if (err) {
         return next(err);
       }
-    
+      
         res.render('admin/home', {
           title: '管理中心',
           allCovers: allCovers,
@@ -63,14 +63,26 @@ exports.getNoveltyMgr  = function(req, res, next) {
   });
 };  
 exports.getLocalMgr = function(req, res) {
-  LocalResources.find({},function(err, allResources) {
+  LocalResources.find({district: /taipei/i},function(err, taipeiRes) {
+      if (err) {
+        return next(err);
+      }
+  LocalResources.find({district: /keelung/i},function(err, keelungRes) {
+      if (err) {
+        return next(err);
+      }
+  LocalResources.find({district: /kinmen/i},function(err, kinmenRes) {
       if (err) {
         return next(err);
       }
       res.render('admin/localMgr', {
         title: '在地好資源',
-        allResources: allResources
+        taipeiRes: taipeiRes,
+        keelungRes: keelungRes,
+        kinmenRes: kinmenRes
       });
+  });
+  });
   });
 }; 
 exports.getServiceMgr = function(req, res, next) {
@@ -317,7 +329,7 @@ exports.postUpdateHomeCoverAbstract  = function(req, res, next) {
       }
 
       if(thisCover){
-         thisCover.abstract = req.body.newAbstract || 0;
+         thisCover.abstract = req.body.newAbstract || thisCover.abstract;
          thisCover.save(function(err) {
             if (err) {
               return next(err);
@@ -504,9 +516,10 @@ exports.postLocalData  = function(req, res, next) {
   var newResource = new LocalResources({
       org: req.body.org || '',
       district: req.body.district || '',
-      phone: req.body.phone || '',
-      abstract: req.body.abstract || '',
-      link: req.body.link || ''
+      contact: req.body.contact || '',
+      abstract: req.body.abstract.replace(/(?:\r\n|\r|\n)/g, ' <br /> ') || '',
+      people: req.body.people || 1,
+      // link: req.body.link || ''
       // timestamp: Date()
   });
   newResource.save(function(err) {

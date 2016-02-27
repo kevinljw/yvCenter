@@ -6,7 +6,7 @@ block content
     .landing-header.section-nude
       .container
         .motto.col-sm-6
-          h2.title-uppercase 在地好資源
+          h2.title-uppercase 在地好青年
           h5 游標移至行政區以查閱
           br
           if hasChosen
@@ -17,9 +17,10 @@ block content
                     tr
                       th(style='width: 2%') #
                       th(style='width: 25%') 單位
-                      th(style='width: 37%') 簡述
-                      th(style='width: 18%') 聯絡電話
-                      th(style='width: 18%') 網站
+                      th(style='width: 45%') 簡述
+                      th(style='width: 10%') 人數
+                      th(style='width: 18%') 聯絡方式
+                      
                   tbody
                     each val,index in allResources
                       tr
@@ -27,14 +28,15 @@ block content
                           h6
                             small #{index}
                         td #{val.org}
-                        td #{val.abstract}
+                        td
+                          h6
+                            small !{val.abstract}
                         td 
                           h6
-                            small #{val.phone}
+                            small #{val.people}
                         td
-                          a.btn.btn.btn-danger.btn-xs(href='#{val.link}', target='_blank', style='font-weight:900;')
-                            i.fa.fa-mobile
-                            |  瀏覽
+                          button.col-sm-12.btn.btn-danger.btn-xs(type='button', data-toggle='popover', data-placement='left', title='#{val.org} 聯絡方式', data-content='#{val.contact}') 查看
+                           
             else
               h3 這個地區暫時沒有資料
 
@@ -46,28 +48,28 @@ block content
               .nav-tabs-wrapper
                 ul.nav.nav-tabs#tabs(data-tabs="tabs")
                   
-                  li(class='#{(activeTab=="taipei")?"active":""}')
+                  li(class='#{(activeTab.indexOf("taipei")>-1)?"active":""}')
                     a(href="#taipeiTab" data-toggle="tab")
                       h5
                         i.fa.fa-map-marker
                         | 台北
-                  li(class='#{(activeTab=="keelung")?"active":""}')
+                  li(class='#{(activeTab.indexOf("keelung")>-1)?"active":""}')
                     a(href="#keelungTab" data-toggle="tab")
                       h5
                         i.fa.fa-map-marker
                         | 基隆
                   //- li(class='#{(activeTab=="kinmen")?"active":""}')
-                  li(class='#{(activeTab=="kinmen")?"active":""}')
+                  li(class='#{(activeTab.indexOf("kinmen")>-1)?"active":""}')
                     a(href="#kinmenTab" data-toggle="tab")
                       h5
                         i.fa.fa-map-marker
                         | 金門
             #my-tab-content.tab-content
-              #taipeiTab.tab-pane(class='#{(activeTab=="taipei")?"active":""}')
+              #taipeiTab.tab-pane(class='#{(activeTab.indexOf("taipei")>-1)?"active":""}')
                 include svg/taipei
-              #keelungTab.tab-pane(class='#{(activeTab=="keelung")?"active":""}')
+              #keelungTab.tab-pane(class='#{(activeTab.indexOf("keelung")>-1)?"active":""}')
                 include svg/keelung
-              #kinmenTab.tab-pane(class='#{(activeTab=="kinmen")?"active":""}')
+              #kinmenTab.tab-pane(class='#{(activeTab.indexOf("kinmen")>-1)?"active":""}')
                 include svg/kinmen
 
           //- img(src="/img/taipei-01.svg", height="550")
@@ -85,7 +87,7 @@ block content
       districtVal = districtVal[districtVal.length-1];
       console.log(districtVal);
       if(districtVal!=''){
-        d3.selectAll("#"+districtVal).style("fill", "#F3BB45");
+        d3.selectAll("#"+districtVal+' path').style("fill", "#F3BB45");
         
         d3.selectAll("#"+districtVal).classed("clicked", true);
       }
@@ -94,14 +96,14 @@ block content
       keelungSVGs
         .on("mouseover", function(){
           if(!d3.select(this).classed("clicked")){
-            d3.selectAll(this.childNodes).style("fill", "#7A9E9F");
+            d3.select(this).selectAll('path').style("fill", "#7A9E9F");
           }  
           
           return tooltip.style("visibility", "visible");})
         .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
         .on("mouseout", function(){
           if(!d3.select(this).classed("clicked")){
-            d3.selectAll(this.childNodes).style("fill", "#7AC29A");
+            d3.select(this).selectAll('path').style("fill", "#7AC29A");
           }       
           return tooltip.style("visibility", "hidden");})
         .on("click", function(){
@@ -114,14 +116,14 @@ block content
       kinmenSVGs
         .on("mouseover", function(){
           if(!d3.select(this).classed("clicked")){
-            d3.selectAll(this.childNodes).style("fill", "#7A9E9F");
+            d3.select(this).selectAll('path').style("fill", "#7A9E9F");
           }  
           
           return tooltip.style("visibility", "visible");})
         .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
         .on("mouseout", function(){
           if(!d3.select(this).classed("clicked")){
-            d3.selectAll(this.childNodes).style("fill", "#7AC29A");
+            d3.select(this).selectAll('path').style("fill", "#7AC29A");
           }       
           return tooltip.style("visibility", "hidden");})
         .on("click", function(){
@@ -129,33 +131,24 @@ block content
           return true;
         });
 
-      var taipeiSVGs = d3.selectAll("#taipeiSVG .oneDistrict")
+      var taipeiSVGs = d3.selectAll("#taipeiSVG g")
       //- console.log(districtVal[districtVal.length-1])
 
       taipeiSVGs
         .on("mouseover", function(){
           if(!d3.select(this).classed("clicked")){
-            d3.select(this).style("fill", "#7A9E9F");
-
+            d3.select(this).selectAll('path').style("fill", "#7A9E9F");
           }  
           
           return tooltip.style("visibility", "visible");})
         .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
         .on("mouseout", function(){
           if(!d3.select(this).classed("clicked")){
-            d3.select(this).style("fill", "#7AC29A");
+            d3.select(this).selectAll('path').style("fill", "#7AC29A");
           }       
           return tooltip.style("visibility", "hidden");})
         .on("click", function(){
-
           window.location = '/youth/local/'+d3.select(this).attr('id');
-          //- if(!d3.select(this).classed("clicked")){
-          //-   d3.selectAll(".oneDistrict.clicked").style("fill", "#7AC29A").classed("clicked", false);
-          //-   d3.select(this).style("fill", "#F3BB45");
-          //-   d3.select(this).classed("clicked", true);
-          //- }      
           return true;
         });
-    //- taipeiSVG.select("#d1").attr("fill","#000")
-    //- console.log(taipeiSVG);
 

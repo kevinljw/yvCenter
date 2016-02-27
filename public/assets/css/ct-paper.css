@@ -1114,7 +1114,8 @@ textarea.form-control {
 
 .popover-content {
   padding: 10px 15px 20px 15px;
-  text-align: center; }
+  text-align: center; 
+}
 
 .popover .arrow {
   border: 0; }

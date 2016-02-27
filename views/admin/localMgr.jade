@@ -5,60 +5,6 @@ block content
   br
   div
     .row
-      .col-md-12
-        .x_panel
-          .x_title
-            h2
-              | 資源列表
-              small Organization List
-            ul.nav.navbar-right.panel_toolbox
-              li
-                a.collapse-link
-                  i.fa.fa-chevron-up
-              li.dropdown
-                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
-                  i.fa.fa-wrench
-                ul.dropdown-menu(role='menu')
-                  li
-                    a(href='#') Settings 1
-                  li
-                    a(href='#') Settings 2
-              li
-                a.close-link
-                  i.fa.fa-close
-            .clearfix
-          .x_content
-            table.table.table-striped.projects
-              thead
-                tr
-                  th(style='width: 2%') #
-                  th(style='width: 15%') 區域
-                  th(style='width: 20%') 單位
-                  th(style='width: 33%') 簡述
-                  th(style='width: 10%') 聯絡電話
-                  th(style='width: 10%') 連結
-                  th(style='width: 10%') 編輯
-              tbody
-                each val,index in allResources
-                  tr
-                    td #{index}
-                    td #{val.district}
-                    td #{val.org}
-                    td #{val.abstract}
-                    td #{val.phone}
-                    td
-                      a.btn.btn.btn-primary.btn-sm(href='#{val.link}', target='_blank')
-                        i.fa.fa-mobile
-                        |  瀏覽
-
-                    td
-                      form.form-horizontal(action='/removeResource/#{val.id}', method='POST')
-                        input(type='hidden', name='_csrf', value=_csrf)
-                        .form-group
-                          button.btn.btn.btn-danger.btn-sm(type='submit')
-                            i.fa.fa-trash
-                            |  移除
-
       .col-md-6
         .x_panel
           .x_title
@@ -90,8 +36,19 @@ block content
                 label.col-sm-4.control-label(for='district') 區域
                 .col-sm-6
                   select#district(name='district', style='width:80%;')
-                    option(value='keelung') 基隆
-                    option(value='kinmen') 金門
+                    option(value='keelung-Sinyi') 基隆-信義區
+                    option(value='keelung-Ren-ai') 基隆-仁愛區
+                    option(value='keelung-Anle') 基隆-安樂區
+                    option(value='keelung-Jhongshan') 基隆-中山區
+                    option(value='keelung-Cidu') 基隆-七堵區
+                    option(value='keelung-Nuannuan') 基隆-暖暖區
+                    option(value='keelung-Jhongjheng') 基隆-中正區
+                    option(value='kinmen-Jinhu') 金門-金湖鎮
+                    option(value='kinmen-Jinsha') 金門-金沙鎮
+                    option(value='kinmen-Jinning') 金門-金寧鄉
+                    option(value='kinmen-Jincheng') 金門-金城鎮
+                    option(value='kinmen-Lieyu') 金門-烈嶼鄉
+                    option(value='kinmen-Wuchiou') 金門-烏坵鄉  
                     option(value='taipei-Beitou') 台北-北投區
                     option(value='taipei-Shilin') 台北-士林區
                     option(value='taipei-Datong') 台北-大同區
@@ -109,13 +66,14 @@ block content
                 .col-sm-6
                   input.form-control(type='text', name='org', id='org', placeholder='請輸入單位', autofocus)
               .form-group
-                label.col-sm-4.control-label(for='phone') 聯絡電話
+                label.col-sm-4.control-label(for='people') 人數
                 .col-sm-6
-                  input.form-control(type='text', name='phone', id='phone', placeholder='請輸入聯絡電話', autofocus)
+                  input.form-control(type='text', name='people', id='people', placeholder='請輸入團體人數(數字)', autofocus)
               .form-group
-                label.col-sm-4.control-label(for='link') 連結
+                label.col-sm-4.control-label(for='contact') 聯絡方式
                 .col-sm-6
-                  input.form-control(type='text', name='link', id='link', placeholder='請輸入網址', autofocus)
+                  textarea.form-control(type='text', name='contact', id='contact')
+              
               .form-group
                 label.col-sm-4.control-label(for='abstract') 簡述
                 .col-sm-6
@@ -125,5 +83,160 @@ block content
                   button.col-sm-12.btn.btn.btn-primary.btn-sm(type='submit')
                     i.fa.fa-plus
                     |  新增
+      .col-md-12
+        .x_panel
+          .x_title
+            h2
+              | 資源列表 - 台北
+              small Organization List
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                  i.fa.fa-wrench
+                ul.dropdown-menu(role='menu')
+                  li
+                    a(href='#') Settings 1
+                  li
+                    a(href='#') Settings 2
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            table.table.table-striped.projects
+              thead
+                tr
+                  th(style='width: 2%') #
+                  th(style='width: 15%') 區域
+                  th(style='width: 20%') 單位
+                  th(style='width: 10%') 人數
+                  th(style='width: 23%') 簡述
+                  th(style='width: 20%') 聯絡方式
+                  th(style='width: 10%') 編輯
+              tbody
+                each val,index in taipeiRes
+                  tr
+                    td #{index}
+                    td #{val.district}
+                    td #{val.org}
+                    td #{val.people}
+                    td !{val.abstract}
+                    
+                    td !{val.contact}
+
+                    td
+                      form.form-horizontal(action='/removeResource/#{val.id}', method='POST')
+                        input(type='hidden', name='_csrf', value=_csrf)
+                        .form-group
+                          button.btn.btn.btn-danger.btn-sm(type='submit')
+                            i.fa.fa-trash
+                            |  移除
+      .col-md-12
+        .x_panel
+          .x_title
+            h2
+              | 資源列表 - 基隆
+              small Organization List
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                  i.fa.fa-wrench
+                ul.dropdown-menu(role='menu')
+                  li
+                    a(href='#') Settings 1
+                  li
+                    a(href='#') Settings 2
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            table.table.table-striped.projects
+              thead
+                tr
+                  th(style='width: 2%') #
+                  th(style='width: 15%') 區域
+                  th(style='width: 20%') 單位
+                  th(style='width: 10%') 人數
+                  th(style='width: 23%') 簡述
+                  th(style='width: 20%') 聯絡方式
+                  th(style='width: 10%') 編輯
+              tbody
+                each val,index in keelungRes
+                  tr
+                    td #{index}
+                    td #{val.district}
+                    td #{val.org}
+                    td #{val.people}
+                    td !{val.abstract}
+                    
+                    td !{val.contact}
+
+                    td
+                      form.form-horizontal(action='/removeResource/#{val.id}', method='POST')
+                        input(type='hidden', name='_csrf', value=_csrf)
+                        .form-group
+                          button.btn.btn.btn-danger.btn-sm(type='submit')
+                            i.fa.fa-trash
+                            |  移除
+      .col-md-12
+        .x_panel
+          .x_title
+            h2
+              | 資源列表 - 金門
+              small Organization List
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                  i.fa.fa-wrench
+                ul.dropdown-menu(role='menu')
+                  li
+                    a(href='#') Settings 1
+                  li
+                    a(href='#') Settings 2
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            table.table.table-striped.projects
+              thead
+                tr
+                  th(style='width: 2%') #
+                  th(style='width: 15%') 區域
+                  th(style='width: 20%') 單位
+                  th(style='width: 10%') 人數
+                  th(style='width: 23%') 簡述
+                  th(style='width: 20%') 聯絡方式
+                  th(style='width: 10%') 編輯
+              tbody
+                each val,index in kinmenRes
+                  tr
+                    td #{index}
+                    td #{val.district}
+                    td #{val.org}
+                    td #{val.people}
+                    td !{val.abstract}
+                    
+                    td !{val.contact}
+
+                    td
+                      form.form-horizontal(action='/removeResource/#{val.id}', method='POST')
+                        input(type='hidden', name='_csrf', value=_csrf)
+                        .form-group
+                          button.btn.btn.btn-danger.btn-sm(type='submit')
+                            i.fa.fa-trash
+                            |  移除
+
+      
                 
   

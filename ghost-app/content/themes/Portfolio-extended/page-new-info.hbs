@@ -5,13 +5,13 @@
         {{! Everything inside the #post tags pulls data from the post }}
         <article class="{{post_class}}">
         {{#post}}
-            <div class="post__wrapper--subpage" style="min-height: 250px; padding-top: 40px;">    
+            <div class="post__wrapper--subpage" style="min-height: 360px; padding-top: 40px;">    
                     <h2 class="post__title text-center" style="font-weight: 800;">
                         <a href="/news/tag/new-info" style="color: #000;">
                         {{{title}}}
                         </a>
                     </h2>
-                    {{#get "posts" limit="3" include="tags" filter="tags.name: '{{title}}'" }}
+                    {{#get "posts" limit="5" include="tags" filter="tags.name: '{{title}}'" }}
                     <div>
                       <!-- <span class="menu-heading">Recent posts</span> -->
                       <ul style="text-align: left; list-style: square;">

@@ -1,5 +1,6 @@
 $(document).ready(function() {
  // var nowHomeCarouselIndex = 0;
+ // console.log(allHomeCoverArr)
  for(var i=0; i<goodLinkPageNum; i++){
     $('#carousel_goodLink ol.carousel-indicators').append( '<li'+((i==0)?' class="active"':'')+' data-target="#carousel_goodLink-generic" data-slide-to="'+i+'"></li>' );
     $('#carousel_goodLink .carousel-inner.weblinks').append('<div class="item'+((i==0)?' active':'')+' col-md-offset-1 col-md-10"></div>');
@@ -47,7 +48,7 @@ function setHomeCoverModel(index){
 
   $('#homeCoverModel .modal-dialog .modal-header .modal-title').text(allHomeCoverArr[index].title);
   $('#homeCoverModel .modal-dialog .modal-body')
-    .html('<img src="/uploads/'+allHomeCoverArr[index].picture+'" width="98%" /><p><p>'+allHomeCoverArr[index].abstract+'</p>');
+    .html('<img src="/uploads/'+allHomeCoverArr[index].picture+'" width="98%" /><br><br><p>'+allHomeCoverArr[index].abstract.replace(/(?:\r\n|\r|\n)/g,'<p>')+'</p>');
   $('#homeCoverModel .modal-dialog .modal-footer .left-side a').attr('href', allHomeCoverArr[index].link)
 }
 

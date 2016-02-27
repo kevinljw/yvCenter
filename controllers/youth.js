@@ -27,7 +27,7 @@ exports.getLocalDistrict = function(req, res) {
       title: '在地好資源',
       hasChosen: true,
       allResources: allResources,
-      activeTab: (req.params.district=='keelung'?'keelung':(req.params.district=='kinmen'?'kinmen':'taipei'))
+      activeTab: req.params.district
     });
   });
 
@@ -61,16 +61,25 @@ exports.getBevo = function(req, res) {
   });
 };
 exports.getFindvo = function(req, res) {
-  OrgForm.find({uid: req.user.id},{},{sort:{_id: -1}}, function(err, allOrgForms) {
-      if (err) {
-        return next(err);
-      }
-      res.render('findvo', {
+  if(req.user){
+    OrgForm.find({uid: req.user.id},{},{sort:{_id: -1}}, function(err, allOrgForms) {
+        if (err) {
+          return next(err);
+        }
+        res.render('findvo', {
+          title: '機構找志工',
+          oForm: new OrgForm,
+          allOrgForms: allOrgForms
+        });
+    });
+  }
+  else{
+    res.render('findvo', {
         title: '機構找志工',
         oForm: new OrgForm,
-        allOrgForms: allOrgForms
+        // allOrgForms: allOrgForms
       });
-  });
+  }
 };
 exports.getLaunchteam = function(req, res) {
   res.render('launchteam', {
