@@ -65,7 +65,7 @@ exports.getLinks = function(req, res) {
         if (err) {
           return next(err);
         }
-        Link.count({area: 'servicePoint'},function(err, servicePointNum){
+        Link.find({area: 'servicePoint'},null, {sort:{order: 1}},function(err, servicePoint){
           if (err) {
             return next(err);
           }
@@ -76,9 +76,11 @@ exports.getLinks = function(req, res) {
             // console.log(goodLinkNum, servicePointNum, vcenterNum, govNum)
             res.render('links', {
               title: '友好連結',
+              // allLinks: JSON.stringify(allLinks),
+              servicePointAll: servicePoint,
               allLinks: JSON.stringify(allLinks),
               goodLinkNum: Math.ceil(goodLinkNum/iconEachLink),
-              servicePointNum: Math.ceil(servicePointNum/iconEachLink),
+              servicePointNum: Math.ceil(servicePoint.length/iconEachLink),
               vcenterNum: Math.ceil(vcenterNum/iconEachLink),
               govNum: Math.ceil(govNum/iconEachLink)
 

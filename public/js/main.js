@@ -18,4 +18,22 @@ $(document).ready(function() {
       });
       
     }
+
+    $("select#area").on('change', function() {
+    console.log('#area')
+      if ($("#area option[value='2']").attr('selected')) {
+          console.log('option[value="2"]')
+        $('#inserForm_here.form-group').html('<label for="abstract" class="col-sm-4 control-label">簡介\
+              <div class="col-sm-6">\
+                <textarea type="text" name="abstract" id="abstract" class="form-control"></textarea>\
+              </div>\
+        </label>')
+      }
+      else{
+        $('#inserForm_here.form-group').empty();
+      }
+    });
+    
 });
+
+

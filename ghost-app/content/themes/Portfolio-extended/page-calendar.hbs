@@ -1,0 +1,20 @@
+{{!< default_clear}}
+
+<main role="main" style="background: #EEEEEE; min-height: 600px;">
+    <div class="main__wrapper">   
+        {{! Everything inside the #post tags pulls data from the post }}
+        <article class="{{post_class}}">
+        {{#post}}
+            <div class="post__wrapper--subpage" style="min-height: 360px; padding-top: 40px;">    
+                    <h2 class="post__title text-center" style="font-weight: 800;">
+                        <a href="/news/tag/info-deliver" style="color: #000;">
+                        {{{title}}}
+                        </a>
+                    </h2>
+                    <iframe src="https://calendar.google.com/calendar/embed?src=tkkyvc%40gmail.com&showTitle=0&showPrint=0&showNav=0&wkst=1&showTz=0&ctz=Asia/Taipei" style="border: 0" width="100%" height="260" frameborder="0" scrolling="no"></iframe>
+               
+            </div>
+        {{/post}}
+        </article>
+    </div>
+</main>

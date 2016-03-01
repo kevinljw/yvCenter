@@ -31,6 +31,9 @@
               label.radio.col-sm-4
                 input(type='radio', checked=user.profile.gender=='female', name='gender', value='female', data-toggle='radio')
                 span 女性
+              label.radio.col-sm-4
+                input(type='radio', checked=user.profile.gender=='other', name='gender', value='other', data-toggle='radio')
+                span 其他
           .form-group
             label.col-sm-4.control-label(for='location') 居住縣市/鄉鎮區
             .col-sm-7

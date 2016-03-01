@@ -20,10 +20,13 @@
               label.radio.col-sm-4
                 input(type='radio', checked=user.IsVolunform?(vForm.gender=='female'):(user.profile.gender=='female'), name='gender', value='female', data-toggle='radio')
                 span 女性
+              label.radio.col-sm-4
+                input(type='radio', checked=user.IsVolunform?(vForm.gender=='other'):(user.profile.gender=='other'), name='gender', value='other', data-toggle='radio')
+                span 其他
           .form-group
             label.col-sm-4.control-label(for='idcode') 身份證字號
             .col-sm-7
-              input.form-control(type='text', name='idcode', id='idcode', value='#{vForm.idcode}', placeholder='僅限本中心媒合使用，絕不外流。')
+              input.form-control(type='text', name='idcode', id='idcode', value='#{vForm.idcode}', placeholder='(非必填)僅供保險使用')
           .form-group
             label.col-sm-4.control-label(for='email') Email
             .col-sm-7

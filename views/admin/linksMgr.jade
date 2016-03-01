@@ -27,10 +27,11 @@ block content
               .form-group
                 label.col-sm-4.control-label(for='area') 區塊
                 .col-sm-6
-                  select#area(name='area', style='width:80%;')
-                    option(value='gov') 政府部門
+                  select#area(name='area', style='width:150px;')
+                    
                     option(value='vcenter') 志工中心
-                    option(value='servicePoint') 服務據點
+                    //- option(value='servicePoint') 服務據點
+                    option(value='gov') 政府部門
                     option(value='goodLink') 好讚連結
                     
               .form-group
@@ -41,10 +42,53 @@ block content
                 label.col-sm-4.control-label(for='link') 連結
                 .col-sm-6
                   input.form-control(type='text', name='link', id='link', placeholder='請輸入連結', autofocus)
+              
               .form-group
                 label.col-sm-4.control-label 圖示
                 .col-sm-6
                   input(type='file', name='icon')
+
+              .form-group
+                .col-sm-offset-4.col-sm-4
+                  button.col-sm-12.btn.btn.btn-primary.btn-sm(type='submit')
+                    i.fa.fa-plus
+                    |  新增
+      .col-md-6
+        .x_panel
+          .x_title
+            h2
+              | 新增服務據點
+              small Add New link
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            h5 新增以下新服務據點:
+            br
+            form.form-horizontal(action='/addNewServicePoint', enctype='multipart/form-data', method='POST')
+              input(type='hidden', name='_csrf', value=_csrf)
+              .form-group
+                label.col-sm-4.control-label(for='name') 名稱
+                .col-sm-6
+                  input.form-control(type='text', name='name', id='name', placeholder='請輸入名稱', autofocus)
+              .form-group
+                label.col-sm-4.control-label(for='link') 連結
+                .col-sm-6
+                  input.form-control(type='text', name='link', id='link', placeholder='請輸入連結', autofocus)
+              #inserForm_here.form-group
+                label.col-sm-4.control-label(for='abstract') 簡述
+                .col-sm-6
+                  textarea.form-control(type='text', name='abstract', id='abstract')
+              .form-group
+                label.col-sm-4.control-label 圖示
+                .col-sm-6
+                  input(type='file', name='icon')
+
               .form-group
                 .col-sm-offset-4.col-sm-4
                   button.col-sm-12.btn.btn.btn-primary.btn-sm(type='submit')
@@ -164,7 +208,8 @@ block content
                   th(style='width: 2%') 排序
                   th(style='width: 20%') 名稱
                   th(style='width: 15%') 圖示
-                  th(style='width: 43%') 連結
+                  th(style='width: 30%') 簡介
+                  th(style='width: 13%') 連結
                   th(style='width: 10%') 移除
               tbody
                 each val in allLinks
@@ -182,6 +227,7 @@ block content
                       td #{val.name}
                       td
                         img(src='/uploads/#{val.picture}', height='100px')
+                      td !{val.abstract}
                       td 
                         a(href='#{val.link}', target='_blank') #{val.link}
                       td

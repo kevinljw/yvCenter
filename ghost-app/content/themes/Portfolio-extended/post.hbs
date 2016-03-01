@@ -10,7 +10,6 @@
 
 <main role="main">
     <div class="main__wrapper">
-
         {{! Everything inside the #post tags pulls data from the post }}
         <article class="{{post_class}}">
         {{#post}}
@@ -59,6 +58,34 @@
                     {{/if}}
                 </footer>
             </div>
+            {{#if tags}}
+                <aside class="author">   
+                    <h5>繼續閱讀</h5> 
+                    {{#foreach tags}}
+                        {{#if @first}}
+                            {{#get "posts" limit="5" include="tags" filter="tags.name: '{{name}}'" }}
+                            <div>
+                              <!-- <span class="menu-heading">Recent posts</span> -->
+                              <ul style="text-align: left; list-style: square;">
+                              {{#foreach posts}}  
+                                    <li>
+                                        <h5 style="font-weight: 600;">
+                                        <a class="menu-item tag" href="{{url}}">{{title}}</a>
+                                        <small> {{date published_at format="YYYY-MM-DD hh:mm:ss"}}</small>
+                                        </h5>
+                                    </li>                         
+                              {{/foreach}}
+                              </ul>
+                              <!-- {{pagination}} -->
+                            </div>
+                            {{/get}}
+                            <a class="menu-item tag text-right" href="{{url}}">
+                            <h4><small>返回:{{name}}</small></h4></a>
+                        {{/if}}
+                    {{/foreach}}
+
+                </aside>
+            {{/if}}
             <!-- <aside class="author">
                 {{#if author.image}}
                 <a href="{{author.website}}" class="author__avatar">
@@ -75,20 +102,20 @@
                 <div class="fb-comments" data-href="http://localhost{{url}}" data-width="100%" data-numposts="5"></div>
                 <!-- <p>"{{url}}"</p> -->
             </div>           
-            {{#prev_post}}
+            <!-- {{#prev_post}}
             <div class="post__navigation post__navigation--prev">
             	<a class="post__navigation_link post__navigation_link--prev" href="{{url}}" title="{{title}}">
             		<i class="post__navigation_icon post__navigation_icon--prev">&lsaquo;</i>
             	</a>
             </div>
-            {{/prev_post}}      
-            {{#next_post}}
+            {{/prev_post}}  -->     
+            <!-- {{#next_post}}
             <div class="post__navigation post__navigation--next">
             	<a class="post__navigation_link post__navigation_link--next" href="{{url}}" title="{{title}}">
             		<i class="post__navigation_icon post__navigation_icon--next">&rsaquo;</i>
             	</a>
             </div>
-            {{/next_post}}
+            {{/next_post}} -->
         {{/post}}
         </article>
     </div>

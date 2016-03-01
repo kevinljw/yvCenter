@@ -25,6 +25,8 @@ var userSchema = new mongoose.Schema({
     website: { type: String, default: '' },
     picture: { type: String, default: '' },
     abstract: { type: String, default: '' },
+    contact: { type: String, default: '' },
+    phone: { type: String, default: '' },
   },
  
   resetPasswordToken: String,

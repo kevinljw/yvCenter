@@ -30,7 +30,14 @@
             label.col-sm-4.control-label(for='website') 機構網站
             .col-sm-7
               input.form-control(type='text', name='website', id='website', value='#{user.profile.website}')
-          
+          .form-group
+            label.col-sm-4.control-label(for='contact') 聯絡人
+            .col-sm-7
+              input.form-control(type='text', name='contact', id='contact', value='#{user.profile.contact}')
+          .form-group
+            label.col-sm-4.control-label(for='phone') 聯絡電話
+            .col-sm-7
+              input.form-control(type='text', name='phone', id='phone', value='#{user.profile.phone}')
           .form-group
             .col-sm-offset-4.col-sm-4
               button.btn.btn.btn-primary(type='submit')

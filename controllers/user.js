@@ -162,6 +162,8 @@ exports.postSignupOrg = function(req, res, next) {
   req.assert('name', '機構名不得為空').len(1);
   req.assert('location', '地址不得為空').len(1);
   req.assert('website', '網站不得為空').len(1);
+  req.assert('contact', '聯絡人不得為空').len(1);
+  req.assert('phone', '電話不得為空').len(1);  
   req.assert('password', '密碼須至少4位').len(4);
   req.assert('confirmPassword', '確認密碼兩者不相符').equals(req.body.password);
 
@@ -180,7 +182,9 @@ exports.postSignupOrg = function(req, res, next) {
       name: req.body.name,
       website: req.body.website,
       location: req.body.location,
-      abstract: req.body.abstract
+      abstract: req.body.abstract,
+      phone: req.body.phone,
+      contact: req.body.contact
     },
     password: req.body.password,
     
@@ -229,12 +233,19 @@ exports.postUpdateProfile = function(req, res, next) {
     user.profile.gender = req.body.gender || '';
     user.profile.location = req.body.location || '';
     user.profile.website = req.body.website || '';
+    user.profile.contact = req.body.contact || '';
+    user.profile.phone = req.body.phone || '';
     user.save(function(err) {
       if (err) {
         return next(err);
       }
       req.flash('success', { msg: '個人資料已更新' });
-      res.redirect('/youth/bevo');
+      if(user.IsOrg){
+        res.redirect('/youth/findvo');
+      }
+      else{
+        res.redirect('/youth/bevo');
+      }
     });
   });
 };

@@ -9,31 +9,32 @@ block content
           br
           h5
             | 本會每年協助十大傑出青年選拔，為台灣豎立各領域的傑出青年標竿，在他們身上除了能感受到其對於社會的影響力，也看見他們帶領社會向前邁進的實踐力。
+        
+
   .section.section-nude.text-center.landing-section
     .container
       .row
-        .col-md-8.col-md-offset-2.paragrahIndent
-          h2 政府部門
+        .col-md-10.col-md-offset-1.paragrahIndent
+          h2 服務據點
+
           br
+          .col-md-10.col-md-offset-1
+            h5
+              | 為建立青年志工服務策略聯盟、強化訊息推廣效率、以及便利青年志工取得訊息，本中心特邀請下列單位擔任服務據點，希望透過他們在志願服務領域的專業涵養和實務經驗，讓北基金的青年志工有機會拓展服務的思維視野，可以更精進的將公民社會精神落實在志願服務的每個場域。
+            br
+            br
+          each val,index in servicePointAll
+            .col-sm-4
+              //- img(src='/uploads/'+val.picture)
+              a.profilePointer(data-toggle="modal" data-target="#servicePointModel_#{index}")
+                .img-circle.img-no-padding.profile_pic(style='background-image: url("/uploads/'+val.picture+'");')
+                h5.text-center #{val.name}
+                    
     br
-    if govNum==0
+    if servicePointNum==0
       h4 
         small 連結陸續新增中
     else
-      #carousel_gov
-        #carousel_gov-generic.carousel.slide(data-ride='carousel')
-          .carousel.slide(data-ride='carousel')
-            //- Indicators
-            ol.carousel-indicators
-            //- Wrapper for slides
-            .carousel-inner.weblinks
-            //- Controls
-            if govNum>1
-              a.left.carousel-control(href='#carousel_gov-generic', data-slide='prev')
-                span.fa.fa-angle-left
-              a.right.carousel-control(href='#carousel_gov-generic', data-slide='next')
-                span.fa.fa-angle-right
-         
           
   .section.section-white.text-center.landing-section
     .container
@@ -63,33 +64,28 @@ block content
   .section.section-nude.text-center.landing-section
     .container
       .row
-        .col-md-10.col-md-offset-1.paragrahIndent
-          h2 服務據點
-
+        .col-md-8.col-md-offset-2.paragrahIndent
+          h2 政府部門
           br
-          .col-md-10.col-md-offset-1
-            h5
-              | 為建立青年志工服務策略聯盟、強化訊息推廣效率、以及便利青年志工取得訊息，本中心特邀請下列單位擔任服務據點，希望透過他們在志願服務領域的專業涵養和實務經驗，讓北基金的青年志工有機會拓展服務的思維視野，可以更精進的將公民社會精神落實在志願服務的每個場域。
-            br
-            br
     br
-    if servicePointNum==0
+    if govNum==0
       h4 
         small 連結陸續新增中
     else
-      #carousel_servicePoint
-        #carousel_servicePoint-generic.carousel.slide(data-ride='carousel')
+      #carousel_gov
+        #carousel_gov-generic.carousel.slide(data-ride='carousel')
           .carousel.slide(data-ride='carousel')
             //- Indicators
             ol.carousel-indicators
             //- Wrapper for slides
             .carousel-inner.weblinks
             //- Controls
-            if servicePointNum>1
-              a.left.carousel-control(href='#carousel_servicePoint-generic', data-slide='prev')
+            if govNum>1
+              a.left.carousel-control(href='#carousel_gov-generic', data-slide='prev')
                 span.fa.fa-angle-left
-              a.right.carousel-control(href='#carousel_servicePoint-generic', data-slide='next')
-                span.fa.fa-angle-right    
+              a.right.carousel-control(href='#carousel_gov-generic', data-slide='next')
+                span.fa.fa-angle-right
+   
   .section.section-gray.text-center.landing-section
     .container
       .row
@@ -118,7 +114,30 @@ block content
   script.
     var govPageNum = !{govNum};
     var vcenterPageNum = !{vcenterNum};
-    var servicePointPageNum =!{servicePointNum};
+    //- var servicePointPageNum =!{servicePointNum};
     var goodLinkPageNum = !{goodLinkNum};
-    var allLinksArr = JSON.parse('!{allLinks}');
+    var allLinksArr = !{allLinks};
     var isAllLink = true;
+
+  each val,index in servicePointAll
+    .modal.fade(tabindex='-1', role='dialog', aria-labelledby='servicePointLabel', aria-hidden='true', id='servicePointModel_#{index}')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4#servicePointLabel.modal-title #{val.name}
+          .modal-body(style='height: 330px;')
+            .col-sm-5
+              .img-circle.img-no-padding.profile_pic_inModel(style='background-image: url("/uploads/'+val.picture+'");')
+              h5.text-center #{val.name}
+                
+            .col-sm-offset-1.col-sm-5
+              h5.text-center 說明
+              h6.paragrahIndent !{val.abstract}
+          .modal-footer
+            .left-side
+              a.btn.btn-success.btn-simple(href='#{val.link}', target='_blank')
+                | 前往連結
+            .divider
+            .right-side
+              button.btn.btn-danger.btn-simple(type='button', data-dismiss='modal') 關閉

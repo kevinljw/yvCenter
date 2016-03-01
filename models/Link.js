@@ -6,6 +6,7 @@ var linkSchema = new mongoose.Schema({
   picture: { type: String, default: ''},
   order: { type: Number, default: 0},
   area: { type: String, default: ''},
+  abstract: { type: String, default: ''},
   // timestamp: { type: String, default: ''},
   
 });

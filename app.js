@@ -98,7 +98,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(function(req, res, next) {
-  if (req.path === '/api/upload' || req.path ==='/addNewLink' || req.path ==='/addNewHomeCover' || req.path === '/addNewMentor' || req.path.indexOf('/news')>-1) {
+  if (req.path === '/api/upload' || req.path ==='/addNewLink' || req.path ==='/addNewHomeCover' || req.path ==='/addNewServicePoint' || req.path === '/addNewMentor' || req.path.indexOf('/news')>-1) {
     next();
   } else {
     lusca.csrf()(req, res, next);
@@ -182,7 +182,7 @@ app.post('/beAdmin', passportConf.isAdminAuthenticated, adminController.postBeAd
 app.post('/removeAdmin/:id', passportConf.isAdminAuthenticated, adminController.postRemoveAdmin);
 app.post('/addLocalData', passportConf.isAdminAuthenticated, adminController.postLocalData);
 app.post('/removeResource/:id', passportConf.isAdminAuthenticated, adminController.postRemoveResource);
-
+// app.get('/calendarMgr',passportConf.isAdminAuthenticated, adminController.getCalendar);
 
 app.get('/empowerMgr', passportConf.isAdminAuthenticated, adminController.getEmpowerMgr );
 app.post('/addNewMentor', passportConf.isAdminAuthenticated, upload_profile.single('profile_pic'), adminController.postNewMentor ); 
@@ -204,8 +204,11 @@ app.post('/removeOpenHouse/:id', passportConf.isAdminAuthenticated, adminControl
 
 app.get('/linksMgr', passportConf.isAdminAuthenticated, adminController.getLinksMgr );
 app.post('/addNewLink', passportConf.isAdminAuthenticated, upload_icon.single('icon'), adminController.postNewLink ); 
+app.post('/addNewServicePoint', passportConf.isAdminAuthenticated, upload_icon.single('icon'), adminController.postNewServicePoint ); 
 app.post('/removeLink/:id', passportConf.isAdminAuthenticated, adminController.postRemoveLink);
 app.post('/updateLinkOrder/:id', passportConf.isAdminAuthenticated, adminController.postUpdateLinkOrder);
+
+
 
 app.post('/addNewHomeCover', passportConf.isAdminAuthenticated, upload_homeCover.single('cover_pic'), adminController.postNewHomeCover ); 
 app.post('/removeHomeCover/:id', passportConf.isAdminAuthenticated, adminController.postRemoveHomeCover);

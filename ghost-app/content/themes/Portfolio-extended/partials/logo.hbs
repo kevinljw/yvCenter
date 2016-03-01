@@ -1,20 +1,58 @@
 <header class="logo-ghost">
-    {{#if @blog.logo}}
-    	<a class="logo__image" href="{{@blog.url}}">
-    		<img src="{{@blog.logo}}" alt="{{@blog.title}} - {{@blog.description}}" />
-    	</a>
-    {{else}}
-	    <h1 class="logo__title">
-	    	<a href="{{#if tag}}{{tag.url}}{{else}}{{@blog.url}}{{/if}}" class="logo__link">
-	    		{{#if tag.name}}
-		    		{{tag.name}}
-		    	{{else}}
-		    		{{@blog.title}}
-		    	{{/if}}
-		   	</a>
-	    </h1>
-	    {{#if @blog.description}}
-	    <h2 class="logo__desc">{{@blog.description}}</h2>
-	    {{/if}}
+	{{#if tag}}
+		{{#if @blog.logo}}
+		    	<a class="logo__image" href="{{@blog.url}}">
+		    		<img src="{{@blog.logo}}" alt="{{@blog.title}} - {{@blog.description}}" />
+		    	</a>
+		    {{else}}
+			    <h1 class="logo__title">
+			    	<a href="{{#if tag}}
+			    				{{tag.url}}
+				    		{{else}}
+				    			{{@blog.url}}			   	
+				    		{{/if}}" class="logo__link">
+			    		{{#if tag.name}}
+				    		{{tag.name}}
+				    	{{else}}
+			    			{{@blog.title}}
+				    	{{/if}}
+				   	</a>
+			    </h1>
+			    {{#if @blog.description}}
+			    <h2 class="logo__desc">{{@blog.description}}</h2>
+			    {{/if}}
+		    {{/if}}
+	{{else}}
+		{{#post}}
+		    {{#if @blog.logo}}
+		    	<a class="logo__image" href="{{@blog.url}}">
+		    		<img src="{{@blog.logo}}" alt="{{@blog.title}} - {{@blog.description}}" />
+		    	</a>
+		    {{else}}
+			    <h1 class="logo__title">
+			    	<a href="{{#if tags}}
+				    				{{#foreach tags}}
+				    					{{#if @first}}
+				    						{{url}}
+				    					{{/if}}
+				    				{{/foreach}}
+				    			{{else}}
+				    				{{@blog.url}}
+				    		{{/if}}" class="logo__link">
+				    		{{#if tags}}
+			    				{{#foreach tags}}
+			    					{{name}}
+			    				{{/foreach}}
+			    			{{else}}
+			    				{{@blog.title}}
+				    	{{/if}}
+				   	</a>
+				   	{{tag.name}} {{tag.url}}
+			    </h1>
+			    {{#if @blog.description}}
+			    <h2 class="logo__desc">{{@blog.description}}</h2>
+			    {{/if}}
+		    {{/if}}
+	    {{/post}}
     {{/if}}
 </header>

@@ -1,4 +1,5 @@
-$(document).ready(function() {
+$(document).ready(function()
+ {
  // var nowHomeCarouselIndex = 0;
  
   $('.eachMentor').click(function(){

@@ -38,6 +38,11 @@ exports.getGhostAdmin = function(req, res) {
     title: '文章管理'
   });
 };
+// exports.getCalendar = function(req, res) {
+//   res.render('admin/calendar', {
+//     title: '行事曆管理'
+//   });
+// };
 exports.getOrgVerify = function(req, res) {
   User.find({IsOrg: true}, function(err, allOrgs) {
     if (err) {
@@ -300,6 +305,28 @@ exports.postNewHomeCover  = function(req, res, next) {
     });
 
 }
+exports.postNewServicePoint  = function(req, res, next) {
+    Link.count({area: req.body.area}, function(err, numOfArea) {
+      var newLink = new Link({
+        name: req.body.name || '',
+        area: 'servicePoint',
+        link: req.body.link || '',
+        picture: 'linkIcon/'+req.file.filename || '',
+        order: numOfArea+1,
+        abstract: req.body.abstract || '',
+      });
+      newLink.save(function(err) {
+          if (err) {
+            return next(err);
+          }
+         
+          // req.flash('success', { msg: '表單送出成功。' });
+          res.redirect('/linksMgr');
+      });
+
+    });
+
+} 
 exports.postNewLink  = function(req, res, next) {
     Link.count({area: req.body.area}, function(err, numOfArea) {
       var newLink = new Link({
