@@ -72,6 +72,12 @@ block content
                     h5
                       i.fa.fa-pencil
                       | 修改服務青申請表
+                  br
+                  
+                  hr
+                  br
+                  h5 申請瀏覽量: #{vForm.timesOfView} 人次
+
                 else
                   br
                   br
@@ -88,30 +94,46 @@ block content
    .section.text-center.landing-section
     .container
       .row
-        .col-md-10.col-md-offset-1.paragrahIndent
+        .col-md-10.col-md-offset-1
           h3 志工需求列表
+          h3
+            small 快來申請加入志工的行列
           br
-          h5
-          table.table.table-striped.projects
-            thead
-              tr
-                th(style='width: 30%') 服務名稱
-                th(style='width: 10%') 服務日期
-                th(style='width: 5%') 需求人數
-                th(style='width: 10%') 截止日期
-                th(style='width: 10%') 資訊
-                th(style='width: 10%') 連結
-            tbody
-              each val,index in allOrgForms
+          form.form-horizontal(action='/applyJob', method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            table.table.table-striped.projects
+              thead
                 tr
-                  td #{val.activity_name}
-                  td #{val.service_date_since} ~ #{val.service_date_until}
-                  td #{val.volunNum}
-                  td #{val.recruit_deadline}
-                  td
-                    button.col-sm-12.btn.btn-info.btn-xs(type='button', data-toggle='popover', data-placement='top', title='#{val.activity_abstract}', data-content='地點:#{val.service_location}') 查看
-                  td
-                    a.col-sm-12.btn.btn.btn-success.btn-xs(href='#{val.activity_website}', target='_blank', style='font-weight:900;') 瀏覽    
+                  if user
+                    th(style='width: 5%') 申請
+                    th(style='width: 25%') 服務名稱
+                  else
+                    th(style='width: 30%') 服務名稱
+                  th(style='width: 10%') 服務日期
+                  th(style='width: 5%') 需求人數
+                  th(style='width: 10%') 截止日期
+                  th(style='width: 10%') 資訊
+                  th(style='width: 10%') 連結
+              tbody
+                each val,index in allOrgForms
+                  if val.hasCompleted!='stop'
+                    tr
+                      if user
+                        td
+                          label.checkbox.checkbox-orange
+                            input(type='checkbox', checked=user.applyArr.indexOf("#{val.id}")>-1, name='applyJob', value='#{val.id}', data-toggle='checkbox')
+                      td #{val.activity_name}
+                      td #{val.service_date_since} ~ #{val.service_date_until}
+                      td #{val.volunNum}
+                      td #{val.recruit_deadline}
+                      td
+                        button.col-sm-12.btn.btn-info.btn-xs(type='button', data-toggle='popover', data-placement='top', title='#{val.activity_abstract}', data-content='地點:#{val.service_location}') 查看
+                      td
+                        a.col-sm-12.btn.btn.btn-success.btn-xs(href='#{val.activity_website}', target='_blank', style='font-weight:900;') 瀏覽
+            if user
+              button.btn.btn-warning.btn-fill(type='submit')
+                i.fa.fa-paper-plane-o
+                | 送出申請/修改   
   
   include partModel/signinModel
   include partModel/forgetModel

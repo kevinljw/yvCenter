@@ -1,10 +1,53 @@
 var VolunForm = require('../models/VolunForm');
 var OrgForm = require('../models/OrgForm');
 var User = require('../models/User');
+var moment = require('moment');
 /**
  * GET /about
  * About page.
  */
+exports.getLookupVolunInfo = function(req, res, next) {
+  console.log(req.params.id);
+  OrgForm.findOne({uid:req.params.id}, function(err, existForm) {
+    if (err) {
+      return next(err);
+    }
+    if(existForm){
+      existForm.timesOfView += 1;
+      existForm.save(function(err) {
+        if (err) {
+          return next(err);
+        }
+      });
+    }
+  });
+  VolunForm.findOne({uid:req.params.id}, function(err, existingUser) {
+    if (err) {
+      return next(err);
+    }
+
+    if(existingUser){
+      existingUser.timesOfView+=1;
+      existingUser.save(function(err) {
+        if (err) {
+          return next(err);
+        }
+        res.render('voluninfo', {
+          title: '志工資訊',
+          userInfo: existingUser
+        });
+      });
+      
+    }
+    else{
+      res.render('voluninfo', {
+        title: '志工資訊',
+        
+      });
+    }
+
+  });
+};
 exports.postForm = function(req, res) {
   // console.log(req.params.id);
   console.log(req.body);
@@ -101,9 +144,126 @@ exports.postForm = function(req, res) {
   
 };
 
+exports.postApplyJob = function(req, res, next) {
+ 
+  var applyJobArr = (typeof req.body.applyJob === 'string')?[req.body.applyJob]:req.body.applyJob;
+  
+  User.findById(req.user.id, function(err, thisUser) {
+      if (err) {
+        return next(err);
+      }
+      thisUser.applyArr = applyJobArr;
+      thisUser.save(function(err) {
+        if (err) {
+          return next(err);
+        }
+
+      });
+  });
+  // console.log(applyJobArr);
+
+  VolunForm.findOne({uid:req.user.id}, function(err, thisForm) {
+    if (err) {
+      return next(err);
+    }
+    if(thisForm){
+      applyJobArr.forEach(function(eachOrgId){
+          OrgForm.findById(eachOrgId, function(err, thisOrg) {
+            if (err) {
+              return next(err);
+            }
+
+            if(thisOrg.applyIdArr.indexOf(req.user.id)<0){
+              var eachItem = {
+                "uid": req.user.id,
+                "uname": req.user.profile.name,
+                "location": thisForm.location,
+                "role": thisForm.role,
+                "hasTrain": thisForm.hasTrain,
+                "timestamp": moment().format("YYYY-MM-DD HH:mm:ss")
+              };
+              
+
+              thisOrg.applyArr.push(eachItem);
+              thisOrg.applyIdArr.push(req.user.id);
+              
+              thisOrg.save(function(err) {
+                if (err) {
+                  return next(err);
+                }
+
+              });
+            }
+            
+          });
+      })
+      req.flash('success', { msg: ' 志工申請送出成功。' });
+    }
+    else{
+      req.flash('errors', { msg: ' 尚未填寫服務青表單' });
+    }
+    res.redirect('/youth/bevo#applyDone');
+  });
+};
+exports.postEditOrgForm = function(req, res) {
+  // console.log(req.params.id);
+  // console.log(req.body);
+  OrgForm.findById(req.params.id, function(err, existingUser) {
+    if (err) {
+      return next(err);
+    }
+    if(existingUser){
+      existingUser.uname= req.body.uname || existingUser.uname;
+      existingUser.activity_name= req.body.activity_name || existingUser.activity_name;
+      existingUser.activity_abstract= req.body.activity_abstract || existingUser.activity_abstract;
+      existingUser.activity_website= req.body.location || existingUser.location;
+      existingUser.service_date_since = req.body.service_date_since || existingUser.service_date_since ;
+      existingUser.service_date_until = req.body.service_date_until || existingUser.service_date_until ;
+      existingUser.service_time_since = req.body.service_time_since || existingUser.service_time_since ;
+      existingUser.service_time_until = req.body.service_time_until || existingUser.service_time_until ;
+      existingUser.service_location = req.body.service_location || existingUser.service_location ;
+      existingUser.service_hours = req.body.service_hours || existingUser.service_hours ;
+      existingUser.service_content = req.body.service_content || existingUser.service_content ;
+      existingUser.service_type = req.body.service_type || existingUser.service_type ;
+      existingUser.volunNum = req.body.volunNum || existingUser.volunNum;
+      existingUser.volunConditions = req.body.volunConditions || existingUser.volunConditions ;
+      existingUser.hasFood = req.body.hasFood || existingUser.hasFood ;
+      existingUser.volunInsurance = req.body.volunInsurance || existingUser.volunInsurance ;
+      existingUser.volunLisence = req.body.volunLisence || existingUser.volunLisence ;
+      existingUser.volunSubsidy = req.body.volunSubsidy || existingUser.volunSubsidy ;
+      existingUser.pre_train = req.body.pre_train || existingUser.pre_train ;
+      existingUser.pre_train_date_since = req.body.pre_train_date_since || existingUser.pre_train_date_since ;
+      existingUser.pre_train_date_until = req.body.pre_train_date_until || existingUser.pre_train_date_until ;
+      existingUser.pre_train_time_since = req.body.pre_train_time_since || existingUser.pre_train_time_since ;
+      existingUser.pre_train_time_until = req.body.pre_train_time_until || existingUser.pre_train_time_until ;
+      existingUser.pre_train_location = req.body.pre_train_location || existingUser.pre_train_location ;
+      existingUser.recruit_deadline = req.body.recruit_deadline || existingUser.recruit_deadline ;
+      existingUser.howToInform = req.body.howToInform || existingUser.howToInform ;
+      existingUser.otherInfo = req.body.otherInfo || existingUser.otherInfo ;
+      existingUser.contact_person = req.body.contact_person || existingUser.contact_person ;
+      existingUser.contact_job_title = req.body.contact_job_title || existingUser.contact_job_title ;
+      existingUser.contact_phone = req.body.contact_phone || existingUser.contact_phone ;
+      existingUser.contact_email = req.body.contact_email || existingUser.contact_email ;
+      existingUser.hasCompleted = req.body.hasCompleted || existingUser.hasCompleted ;
+
+      existingUser.save(function(err) {
+        if (err) {
+          return next(err);
+        }
+      
+        req.flash('success', { msg: '表單修改成功。' });
+        res.redirect('/youth/findvo#formDone');
+      });
+    }
+    else{
+      req.flash('errors', { msg: '表單資料錯誤。' });
+        res.redirect('/youth/findvo#errorForm');
+    }
+  });
+};
 exports.postOrgForm = function(req, res) {
   // console.log(req.params.id);
-  console.log(req.body);
+  // console.log(req.body);
   // OrgForm.findOne({uid:req.user.id}, function(err, existingUser) {
   //   if (err) {
   //     return next(err);

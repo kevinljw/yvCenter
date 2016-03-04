@@ -1,12 +1,21 @@
-#editServiceModel.modal.fade(tabindex='-1', role='dialog', aria-labelledby='volunformLabel', aria-hidden='true')
+.modal.fade(tabindex='-1', role='dialog', aria-labelledby='editServiceLabel', aria-hidden='true', id='editServiceModel_#{index}')
   .modal-dialog
     .modal-content
       .modal-header
         button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
         h4#editServiceLabel.modal-title 服務需求申請表單
-      form.form-horizontal(action='/newServiceform', method='POST')
+      form.form-horizontal(action='/editServiceform/#{oForm.id}', method='POST')
         input(type='hidden', name='_csrf', value=_csrf)
         .modal-body
+          .form-group
+            label.col-sm-4.control-label(for='hasCompleted') 狀態:
+            .col-sm-7
+              label.radio.col-sm-6
+                input(type='radio', name='hasCompleted', value='run', data-toggle='radio', checked=oForm.hasCompleted=='run')
+                span 招募中
+              label.radio.col-sm-6
+                input(type='radio', name='hasCompleted', value='stop', data-toggle='radio', checked=oForm.hasCompleted=='stop')
+                span 已結案
           .form-group
             label.col-sm-4.control-label(for='activity_name') 活動名稱:
             .col-sm-7

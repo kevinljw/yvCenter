@@ -34,7 +34,11 @@ var orgSchema = new mongoose.Schema({
   contact_person: { type: String, default: '' },
   contact_job_title: { type: String, default: '' },
   contact_phone: { type: String, default: '' },
-  contact_email: { type: String, default: '' }
+  contact_email: { type: String, default: '' },
+  hasCompleted: { type: String, default: 'run' },
+  applyArr: { type: Array, default: [] },
+  applyIdArr: { type: Array, default: [] },
+  timesOfView: { type: Number, default: 0 },
 });
 
 module.exports = mongoose.model('OrgForm', orgSchema);

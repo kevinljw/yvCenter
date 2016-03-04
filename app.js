@@ -168,6 +168,10 @@ app.get('/youth/empower', youthController.getEmpower);
 
 app.post('/volunform', matchController.postForm);
 app.post('/newServiceform', matchController.postOrgForm);
+app.post('/editServiceform/:id', matchController.postEditOrgForm);
+
+app.post('/applyJob', matchController.postApplyJob);
+app.get('/volunInfo/:id', matchController.getLookupVolunInfo);
 
 app.get('/admin_login', adminController.getAdminLogin);
 app.get('/adminMgr', passportConf.isAdminAuthenticated, adminController.getAdminHome);

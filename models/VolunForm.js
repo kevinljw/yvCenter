@@ -26,6 +26,7 @@ var volunSchema = new mongoose.Schema({
   ability_other: { type: String, default: '' },
   service_type: { type: Array, default: [] },
   time: { type: Array, default: [] },
+  timesOfView: { type: Number, default: 0 },
 });
 
 module.exports = mongoose.model('VolunForm', volunSchema);

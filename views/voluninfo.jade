@@ -1,0 +1,12 @@
+extends layoutClear
+
+block content
+  .wrapper
+    .landing-header.section-nude
+      .container
+        .motto.col-md-6
+          if userInfo
+            h4 志工姓名: #{userInfo.name}
+          else
+            h4 查無資料
+        
