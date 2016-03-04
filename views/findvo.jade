@@ -155,8 +155,9 @@ block content
             .col-md-10.col-md-offset-1.paragrahIndent
               h3 機構請登入，以查看志工媒合資訊
               br
-  each oForm,index in allOrgForms
-    include partModel/editServiceModel
+  if allOrgForms
+    each oForm,index in allOrgForms
+      include partModel/editServiceModel
   include partModel/signinOrgModel
   include partModel/forgetModel
   if user && user.IsOrg
