@@ -23,3 +23,52 @@ iframe#ghostWindow{
     overflow-y: auto; 
 	overflow: -moz-scrollbars-vertical;
 }
+.color-primary {
+    color: #7A9E9F;
+}
+
+.color-success {
+    color: #7AC29A;
+
+}
+
+.color-warning {
+    color: #F3BB45;
+}
+
+.color-danger {
+    color: #EB5E28;
+}
+
+.color-info {
+    color: #68B3C8;
+}
+
+/*
+.modal-footer {
+  border-top: 1px solid #DDDDDD;
+  padding: 0px; }
+*/
+
+.modal-footer .left-side, .modal-footer .right-side {
+  display: inline-block;
+  text-align: center;
+  width: 49%; }
+
+.modal-footer .btn-simple {
+  padding: 20px;
+  width: 100%; 
+  
+}
+
+.modal-footer .divider {
+  background-color: #DDDDDD;
+  display: inline-block;
+  float: inherit;
+  height: 63px;
+  margin: 0px -3px;
+  position: absolute;
+  width: 1px; }
+.modal-footer .btn-simple {
+    padding: 15px; } }
+

@@ -14,6 +14,7 @@ exports.getLookupVolunInfo = function(req, res, next) {
     }
     if(existForm){
       existForm.timesOfView += 1;
+      console.log(existForm.timesOfView);
       existForm.save(function(err) {
         if (err) {
           return next(err);
@@ -28,6 +29,7 @@ exports.getLookupVolunInfo = function(req, res, next) {
 
     if(existingUser){
       existingUser.timesOfView+=1;
+      // console.log(existingUser.timesOfView);
       existingUser.save(function(err) {
         if (err) {
           return next(err);
@@ -148,18 +150,18 @@ exports.postApplyJob = function(req, res, next) {
  
   var applyJobArr = (typeof req.body.applyJob === 'string')?[req.body.applyJob]:req.body.applyJob;
   
-  User.findById(req.user.id, function(err, thisUser) {
-      if (err) {
-        return next(err);
-      }
-      thisUser.applyArr = applyJobArr;
-      thisUser.save(function(err) {
-        if (err) {
-          return next(err);
-        }
+  // User.findById(req.user.id, function(err, thisUser) {
+  //     if (err) {
+  //       return next(err);
+  //     }
+  //     thisUser.applyArr = applyJobArr;
+  //     thisUser.save(function(err) {
+  //       if (err) {
+  //         return next(err);
+  //       }
 
-      });
-  });
+  //     });
+  // });
   // console.log(applyJobArr);
 
   VolunForm.findOne({uid:req.user.id}, function(err, thisForm) {
@@ -167,6 +169,12 @@ exports.postApplyJob = function(req, res, next) {
       return next(err);
     }
     if(thisForm){
+      thisForm.applyIdArr = applyJobArr;
+      thisForm.save(function(err) {
+        if (err) {
+          return next(err);
+        }
+      });
       applyJobArr.forEach(function(eachOrgId){
           OrgForm.findById(eachOrgId, function(err, thisOrg) {
             if (err) {
@@ -216,7 +224,7 @@ exports.postEditOrgForm = function(req, res) {
       existingUser.uname= req.body.uname || existingUser.uname;
       existingUser.activity_name= req.body.activity_name || existingUser.activity_name;
       existingUser.activity_abstract= req.body.activity_abstract || existingUser.activity_abstract;
-      existingUser.activity_website= req.body.location || existingUser.location;
+      existingUser.activity_website= req.body.activity_website || existingUser.activity_website;
       existingUser.service_date_since = req.body.service_date_since || existingUser.service_date_since ;
       existingUser.service_date_until = req.body.service_date_until || existingUser.service_date_until ;
       existingUser.service_time_since = req.body.service_time_since || existingUser.service_time_since ;
@@ -250,9 +258,15 @@ exports.postEditOrgForm = function(req, res) {
         if (err) {
           return next(err);
         }
-      
+        // console.log(existingUser)
         req.flash('success', { msg: '表單修改成功。' });
-        res.redirect('/youth/findvo#formDone');
+        if(req.body.returnWhere=='服務管理'){
+          res.redirect('/serviceMgr');
+        }
+        else{
+          res.redirect('/youth/findvo#formDone');
+        }
+        
       });
     }
     else{
@@ -262,62 +276,12 @@ exports.postEditOrgForm = function(req, res) {
   });
 };
 exports.postOrgForm = function(req, res) {
-  // console.log(req.params.id);
-  // console.log(req.body);
-  // OrgForm.findOne({uid:req.user.id}, function(err, existingUser) {
-  //   if (err) {
-  //     return next(err);
-  //   }
-  //   if(existingUser){
-  //     existingUser.uname= req.body.uname || existingUser.uname;
-  //     existingUser.activity_name= req.body.activity_name || existingUser.activity_name;
-  //     existingUser.activity_abstract= req.body.activity_abstract || existingUser.activity_abstract;
-  //     existingUser.activity_website= req.body.location || existingUser.location;
-  //     existingUser.service_date_since = req.body.service_date_since || existingUser.service_date_since ;
-  //     existingUser.service_date_until = req.body.service_date_until || existingUser.service_date_until ;
-  //     existingUser.service_time_since = req.body.service_time_since || existingUser.service_time_since ;
-  //     existingUser.service_time_until = req.body.service_time_until || existingUser.service_time_until ;
-  //     existingUser.service_location = req.body.service_location || existingUser.service_location ;
-  //     existingUser.service_hours = req.body.service_hours || existingUser.service_hours ;
-  //     existingUser.service_content = req.body.service_content || existingUser.service_content ;
-  //     existingUser.service_type = req.body.service_type || existingUser.service_type ;
-  //     existingUser. = req.body. || existingUser. ;
-  //     existingUser. = req.body. || existingUser. ;
-  //     existingUser. = req.body. || existingUser. ;
-  //     existingUser. = req.body. || existingUser. ;
-  //     existingUser. = req.body. || existingUser. ;
-  //     existingUser. = req.body. || existingUser. ;
-  //     existingUser. = req.body. || existingUser. ;
-  //     existingUser. = req.body. || existingUser. ;
-  //     existingUser. = req.body. || existingUser. ;
-  //     existingUser. = req.body. || existingUser. ;
-  //     existingUser. = req.body. || existingUser. ;
-  //     existingUser. = req.body. || existingUser. ;
-  //     existingUser. = req.body. || existingUser. ;
-  //     existingUser. = req.body. || existingUser. ;
-  //     existingUser. = req.body. || existingUser. ;
-  //     existingUser. = req.body. || existingUser. ;
-  //     existingUser. = req.body. || existingUser. ;
-  //     existingUser. = req.body. || existingUser. ;
 
-
-      
-
-  //     existingUser.save(function(err) {
-  //       if (err) {
-  //         return next(err);
-  //       }
-      
-  //       req.flash('success', { msg: '表單修改成功。' });
-  //       res.redirect('/youth/bevo#formDone');
-  //     });
-  //   }
-  //   else{
 
       var oForm = new OrgForm({
         uid: req.user.id || '',
         uname: req.user.profile.name || '',
-        timestamp: Date() || '',
+        timestamp: moment().format("YYYY-MM-DD HH:mm:ss") || '',
         activity_name: req.body.activity_name || '',
         activity_abstract: req.body.activity_abstract || '',
         activity_website: req.body.activity_website || '',
@@ -373,8 +337,6 @@ exports.postOrgForm = function(req, res) {
           }
           
       });
-    // }
     
-  // });
   
 };

@@ -451,6 +451,17 @@ exports.postUpdateHomeCoverOrder  = function(req, res, next) {
   });
 
 };
+exports.postRemoveSevice  = function(req, res, next) {
+
+  OrgForm.remove({ _id: req.params.id }, function(err) {
+    if (err) {
+      return next(err);
+    }
+   
+    res.redirect('/serviceMgr');
+  });
+
+}
 exports.postRemoveVolunTrain  = function(req, res, next) {
 
   VolunTrain.remove({ _id: req.params.id }, function(err) {

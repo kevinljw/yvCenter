@@ -1,0 +1,109 @@
+.modal.fade(tabindex='-1', role='dialog', aria-labelledby='viewServiceLabel', aria-hidden='true', id='viewServiceModel_#{index}')
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+        h4#viewServiceLabel.modal-title #{oForm.activity_name}
+      .modal-body(style='min-height:2000px;')
+        //- h6.col-xs-9.text-center 
+        //-     if oForm.hasCompleted=='run'
+        //-       | 現正招募中
+        //-     else
+        //-       | 已結案
+        if oForm.service_date_since
+          h5.col-xs-4.text-right 服務日期:
+          h5.col-xs-7 #{oForm.service_date_since} ~ #{oForm.service_date_until}
+        if oForm.service_time_since
+          h5.col-xs-4.text-right 服務時間:
+          h5.col-xs-7 #{oForm.service_time_since} ~ #{oForm.service_time_until}
+        if oForm.service_hours
+          h5.col-xs-4.text-right 服務時數:
+          h5.col-xs-7 #{oForm.service_hours} 小時
+        if oForm.service_location
+          h5.col-xs-4.text-right 服務地點:
+          h5.col-xs-7 #{oForm.service_location}
+        if oForm.service_type
+          h5.col-xs-4.text-right 服務類型:
+          h5.col-xs-7 #{(oForm.service_type[oForm.service_type.length-1]!='')?oForm.service_type:oForm.service_type.slice(0,oForm.service_type.length-1)}
+        .col-xs-12
+          hr
+        if oForm.volunNum
+          h5.col-xs-4.text-right 志工需求:
+          h5.col-xs-7 #{oForm.volunNum} 人
+        if oForm.volunConditions
+          h5.col-xs-4.text-right 志工條件:
+          h5.col-xs-7 #{(oForm.volunConditions[oForm.volunConditions.length-1]!='')?oForm.volunConditions:oForm.volunConditions.slice(0,oForm.volunConditions.length-1)}
+        .col-xs-12
+          br
+          
+        if oForm.activity_abstract
+          h4.col-xs-12.page-header.text-center
+            small 活動簡介
+          h5.col-xs-12   
+            | !{oForm.activity_abstract} 
+          br
+        if oForm.service_content
+          h4.col-xs-12.page-header.text-center
+            small 服務內容
+          h5.col-xs-12   
+            | !{oForm.service_content} 
+          br
+        .col-xs-12 
+          hr
+        if oForm.hasFood
+          h5.col-xs-4.text-right 供餐:
+          if oForm.hasFood=='y'
+            h5.col-xs-7 本服務活動將提供餐點
+          else
+            h5.col-xs-7 本服務活動將不會供餐
+        if oForm.volunInsurance
+          h5.col-xs-4.text-right 服務保險:
+          h5.col-xs-7 #{(oForm.volunInsurance[oForm.volunInsurance.length-1]!='')?oForm.volunInsurance:oForm.volunInsurance.slice(0,oForm.volunInsurance.length-1)}
+        if oForm.volunLisence
+          h5.col-xs-4.text-right 服務證明:
+          if oForm.volunLisence=='y'
+            h5.col-xs-7 本服務活動可以提供服務證明
+          else
+            h5.col-xs-7 本服務活動將不會提供服務證明
+        if oForm.volunSubsidy
+          h5.col-xs-4.text-right 志工補貼:
+          h5.col-xs-7 !{oForm.volunSubsidy}
+        if oForm.recruit_deadline
+          h5.col-xs-4.text-right 招募期限:
+          h5.col-xs-7 #{oForm.recruit_deadline} 截止
+        if oForm.howToInform
+          h5.col-xs-4.text-right 錄取通知方式:
+          h5.col-xs-7 #{oForm.howToInform}
+        if oForm.otherInfo
+          h5.col-xs-4.text-right 補充說明:
+          h5.col-xs-7 !{oForm.otherInfo}
+        if oForm.pre_train
+          h5.col-xs-4.text-right 行前培訓:
+          if oForm.pre_train=='y'
+            h5.col-xs-7 參與志工須參加行前培訓
+              small (請參見以下資訊)
+            h4.col-xs-12.page-header.text-center
+              small 行前培訓資訊
+            if oForm.pre_train_date_since
+              h5.col-xs-4.text-right 培訓日期:
+              h5.col-xs-7 #{oForm.pre_train_date_since} ~ #{oForm.pre_train_date_until}
+            if oForm.pre_train_time_since
+              h5.col-xs-4.text-right 培訓時間:
+              h5.col-xs-7 #{oForm.pre_train_time_since} ~ #{oForm.pre_train_time_until}
+            if oForm.pre_train_location
+              h5.col-xs-4.text-right 培訓地點:
+              h5.col-xs-7 #{oForm.pre_train_location}           
+          else
+            h5.col-xs-7 參與志工不須參加行前培訓
+        .col-xs-12
+          br
+          hr
+      .modal-footer
+        .left-side
+          a.btn.btn-success.btn-simple(href='#{oForm.activity_website?oForm.activity_website:""}', target='_blank')
+            i.fa.fa-paper-plane-o
+            | 前往連結
+        .divider
+        .right-side.form-group
+          button.btn.btn-danger.btn-simple(type='button', data-dismiss='modal') 關閉
+          

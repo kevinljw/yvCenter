@@ -89,7 +89,7 @@ block content
                       th(style='width: 10%') 投遞
                       th(style='width: 10%') 截止日期
                       th(style='width: 10%') 詳細資訊
-                      th(style='width: 10%') 連結
+                      
                       th(style='width: 10%') 編輯
                       
                   tbody
@@ -104,13 +104,16 @@ block content
                         td #{val.service_date_since} ~ #{val.service_date_until}
                         td #{val.volunNum}人
                         td
-                          button.seeVolun.col-sm-10.btn.btn-warning.btn-fill.btn-xs(data-toggle='collapse',data-target='#eachJob#{index}') 查看 (#{val.applyIdArr.length})
+                          if val.applyIdArr.length>0
+                            button.seeVolun.col-sm-10.btn.btn-warning.btn-fill.btn-xs(data-toggle='collapse',data-target='#eachJob#{index}') 查看 (#{val.applyIdArr.length})
+                          else
+                            a.col-sm-10.btn.btn-warning.btn-xs 查看 (#{val.applyIdArr.length})
 
                         td #{val.recruit_deadline}
                         td
-                          button.col-sm-12.btn.btn-info.btn-xs(type='button', data-toggle='popover', data-placement='top', title='#{val.activity_abstract}', data-content='地點:#{val.service_location}') 查看
-                        td
-                          a.col-sm-12.btn.btn.btn-success.btn-xs(href='#{val.activity_website}', target='_blank', style='font-weight:900;') 瀏覽 
+                          a.col-sm-12.btn.btn-info.btn-xs(data-toggle="modal" data-target="#viewServiceModel_#{index}") 查看
+                          
+                        
                         td
                           a.col-sm-12.btn.btn-primary.btn-fill.btn-xs(data-toggle="modal" data-target="#editServiceModel_#{index}") 修改
                           
@@ -157,6 +160,7 @@ block content
               br
   if allOrgForms
     each oForm,index in allOrgForms
+      include partModel/viewServiceModel
       include partModel/editServiceModel
   include partModel/signinOrgModel
   include partModel/forgetModel

@@ -186,6 +186,8 @@ app.post('/beAdmin', passportConf.isAdminAuthenticated, adminController.postBeAd
 app.post('/removeAdmin/:id', passportConf.isAdminAuthenticated, adminController.postRemoveAdmin);
 app.post('/addLocalData', passportConf.isAdminAuthenticated, adminController.postLocalData);
 app.post('/removeResource/:id', passportConf.isAdminAuthenticated, adminController.postRemoveResource);
+app.post('/removeService/:id', passportConf.isAdminAuthenticated, adminController.postRemoveSevice);
+
 // app.get('/calendarMgr',passportConf.isAdminAuthenticated, adminController.getCalendar);
 
 app.get('/empowerMgr', passportConf.isAdminAuthenticated, adminController.getEmpowerMgr );

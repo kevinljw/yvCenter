@@ -32,39 +32,54 @@ block content
               thead
                 tr
                   th(style='width: 2%') #
-                  th(style='width: 15%') 機構名稱
-                  th(style='width: 13%') 發佈日期
+                  th(style='width: 3%') 狀態
                   th(style='width: 15%') 活動名稱
+                  th(style='width: 10%') 發佈日期
+                  th(style='width: 15%') 機構名稱
                   th(style='width: 15%') 服務日期
-                  th(style='width: 15%') 志工需求
+                  th(style='width: 6%') 志工需求
+                  th(style='width: 6%') 申請人數
+                  th(style='width: 8%') 查看次數
+                  th(style='width: 10%') 查看
                   th(style='width: 10%') 編輯
               tbody
                 each val, index in allServices
                   tr
                     td #{index}
-                    td #{val.uname}
-                    td #{val.timestamp}
+                    td
+                      if val.hasCompleted=='stop'
+                        i.color-danger.fa.fa-circle
+                      else
+                        i.color-success.fa.fa-circle
                     td
                       if val.website
                         a(href='#{val.activity_website}', target='_blank')
                           | #{val.activity_name}
                       else
-                        | #{val.activity_name}
+                        | #{val.activity_name}                
+                    td #{val.timestamp}
+                    td #{val.uname}
                     td
                       if val.service_date_since==val.service_date_until
                         | #{val.service_date_since}
                       else
                         | #{val.service_date_since} ~ #{val.service_date_until}
                     td #{val.volunNum}
-                    td                     
-                      form.form-horizontal(action='/activation/#{val.id}', method='POST')
+                    td #{val.applyIdArr.length}
+                    td #{val.timesOfView}
+                    td
+                      a.col-sm-12.btn.btn-info.btn-xs(data-toggle="modal" data-target="#viewServiceModel_#{index}") 查看
+                    td
+                      a.btn.btn-primary.btn-sm(data-toggle="modal" data-target="#editServiceModel_#{index}")
+                        i.fa.fa-pencil-square-o
+                          |  修改
+                      form.form-horizontal(action='/removeService/#{val.id}', method='POST')
                         input(type='hidden', name='_csrf', value=_csrf)
                         .form-group
-                          button.btn.btn.btn-sm(type='submit' class='#{val.IsOrgActivation?"btn-danger":"btn-primary"}')
-                            i.fa.fa-mobile
-                            if val.IsOrgActivation
-                              |  取消授權
-                            else
-                              |  授權
-                
-  
+                          button.btn.btn.btn-danger.btn-sm(type='submit')
+                            i.fa.fa-trash
+                            |  移除
+  if allServices
+    each oForm,index in allServices
+      include ../partModel/viewServiceModel
+      include ../partModel/editServiceModel

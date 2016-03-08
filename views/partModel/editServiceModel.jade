@@ -23,7 +23,7 @@
           .form-group
             label.col-sm-4.control-label(for='idcode') 活動簡介(500字內):
             .col-sm-7
-              textarea.form-control(type='text', name='activity_abstract', id='activity_abstract', value='#{oForm.activity_abstract}', rows='7')
+              textarea.form-control(type='text', name='activity_abstract', id='activity_abstract', rows='7') !{oForm.activity_abstract}
           .form-group
             label.col-sm-4.control-label(for='activity_website') 活動網址:
             .col-sm-7
@@ -48,7 +48,7 @@
           .form-group
             label.col-sm-4.control-label(for='service_hours') 服務時數(小時):
             .col-sm-7
-              input.form-control(type='text', name='service_hours', id='service_hours', placeholder='Ex. 8.5')
+              input.form-control(type='text', name='service_hours', id='service_hours', value='#{oForm.service_hours}', placeholder='Ex. 8.5')
           .form-group
             label.col-sm-4.control-label(for='service_location') 服務地點:
             .col-sm-7
@@ -56,30 +56,30 @@
           .form-group
             label.col-sm-4.control-label(for='service_content') 服務內容(500字內):
             .col-sm-7
-              textarea.form-control(type='text', name='service_content', id='service_content', value='#{oForm.service_content}', rows='7')
+              textarea.form-control(type='text', name='service_content', id='service_content', rows='7') !{oForm.service_content}
           .form-group
             label.col-sm-4.control-label(for='service_type') 服務類型(可複選):
             .col-sm-7
               label.checkbox.col-sm-4
-                input(type='checkbox', checked=oForm.service_type.indexOf("education")>-1, name='service_type', value='education', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.service_type.indexOf("教育")>-1, name='service_type', value='教育', data-toggle='checkbox')
                 span 教育
               label.checkbox.col-sm-4
-                input(type='checkbox', checked=oForm.service_type.indexOf("community")>-1, name='service_type', value='community', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.service_type.indexOf("社區")>-1, name='service_type', value='社區', data-toggle='checkbox')
                 span 社區
               label.checkbox.col-sm-4
-                input(type='checkbox', checked=oForm.service_type.indexOf("environment")>-1, name='service_type', value='environment', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.service_type.indexOf("環境")>-1, name='service_type', value='環境', data-toggle='checkbox')
                 span 環境
               label.checkbox.col-sm-4
-                input(type='checkbox', checked=oForm.service_type.indexOf(" culture")>-1, name='service_type', value='culture', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.service_type.indexOf("文化")>-1, name='service_type', value='文化', data-toggle='checkbox')
                 span 文化
               label.checkbox.col-sm-4
-                input(type='checkbox', checked=oForm.service_type.indexOf("health")>-1, name='service_type', value='health', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.service_type.indexOf("健康")>-1, name='service_type', value='健康', data-toggle='checkbox')
                 span 健康
               label.checkbox.col-sm-4
-                input(type='checkbox', checked=oForm.service_type.indexOf("technology")>-1, name='service_type', value='technology', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.service_type.indexOf("科技")>-1, name='service_type', value='科技', data-toggle='checkbox')
                 span 科技
               label.checkbox.col-sm-4
-                input(type='checkbox', checked=oForm.service_type.indexOf("other")>-1, name='service_type', value='other', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.service_type[oForm.service_type.length-1]!='', data-toggle='checkbox')
                 span 其他
               input.form-control(type='text', name='service_type', id='other_text', value='#{oForm.service_type[oForm.service_type.length-1]}', placeholder='請於欄位中說明其他服務類型')
           hr
@@ -94,29 +94,29 @@
               | (可複選)
             .col-sm-7
               label.checkbox.col-sm-4
-                input(type='checkbox', checked=oForm.volunConditions.indexOf("worker")>-1, name='volunConditions', value='worker', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.volunConditions.indexOf("社會人士")>-1, name='volunConditions', value='社會人士', data-toggle='checkbox')
                 span 社會人士
               label.checkbox.col-sm-4
-                input(type='checkbox', checked=oForm.volunConditions.indexOf("college")>-1, name='volunConditions', value='college', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.volunConditions.indexOf("大學生")>-1, name='volunConditions', value='大學生', data-toggle='checkbox')
                 span 大學生
               label.checkbox.col-sm-4
-                input(type='checkbox', checked=oForm.volunConditions.indexOf("seniorHigh")>-1, name='volunConditions', value='seniorHigh', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.volunConditions.indexOf("高中職生")>-1, name='volunConditions', value='高中職生', data-toggle='checkbox')
                 span 高中職生
               label.checkbox.col-sm-4
-                input(type='checkbox', checked=oForm.volunConditions.indexOf("juniorHigh")>-1, name='volunConditions', value='juniorHigh', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.volunConditions.indexOf("國中生")>-1, name='volunConditions', value='國中生', data-toggle='checkbox')
                 span 國中生
               label.checkbox.col-sm-4
-                input(type='checkbox', checked=oForm.volunConditions.indexOf("other")>-1, name='volunConditions', value='other', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.volunConditions[oForm.volunConditions.length-1]!='', data-toggle='checkbox')
                 span 其他
               input.form-control(type='text', name='volunConditions', id='other_text', value='#{oForm.volunConditions[oForm.volunConditions.length-1]}', placeholder='請於欄位中補充說明其他條件')
           .form-group
             label.col-sm-4.control-label(for='hasFood') 供參與否:
             .col-sm-6
               label.radio.col-sm-6
-                input(type='radio', name='hasFood', value='y', data-toggle='radio')
+                input(type='radio', name='hasFood', checked=oForm.hasFood=='y', value='y', data-toggle='radio')
                 span 供餐
               label.radio.col-sm-6
-                input(type='radio', name='hasFood', value='n', data-toggle='radio')
+                input(type='radio', name='hasFood', checked=oForm.hasFood=='n', value='n', data-toggle='radio')
                 span 不供餐
           .form-group
             label.col-sm-4.control-label(for='volunInsurance') 
@@ -125,26 +125,26 @@
               | (可複選)
             .col-sm-7
               label.checkbox.col-sm-4
-                input(type='checkbox', checked=oForm.volunInsurance.indexOf("worker")>-1, name='volunInsurance', value='worker', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.volunInsurance.indexOf("個人險")>-1, name='volunInsurance', value='個人險', data-toggle='checkbox')
                 span 個人險
               label.checkbox.col-sm-4
-                input(type='checkbox', checked=oForm.volunInsurance.indexOf("college")>-1, name='volunInsurance', value='college', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.volunInsurance.indexOf("場地險")>-1, name='volunInsurance', value='場地險', data-toggle='checkbox')
                 span 場地險
               label.checkbox.col-sm-4
-                input(type='checkbox', checked=oForm.volunInsurance.indexOf("seniorHigh")>-1, name='volunInsurance', value='seniorHigh', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.volunInsurance.indexOf("活動險")>-1, name='volunInsurance', value='活動險', data-toggle='checkbox')
                 span 活動險
               label.checkbox.col-sm-4
-                input(type='checkbox', checked=oForm.volunInsurance.indexOf("other")>-1, name='volunInsurance', value='other', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.volunInsurance[oForm.volunInsurance.length-1]!='', data-toggle='checkbox')
                 span 其他
               input.form-control(type='text', name='volunInsurance', id='other_text', value='#{oForm.volunInsurance[oForm.volunInsurance.length-1]}', placeholder='請於欄位中補充說明')
           .form-group
             label.col-sm-4.control-label(for='volunLisence') 服務證明:
             .col-sm-6
               label.radio.col-sm-6
-                input(type='radio', name='volunLisence', value='y', data-toggle='radio')
+                input(type='radio', name='volunLisence', checked=oForm.volunLisence=='y', value='y', data-toggle='radio')
                 span 有提供服務證明
               label.radio.col-sm-6
-                input(type='radio', name='volunLisence', value='n', data-toggle='radio')
+                input(type='radio', name='volunLisence', checked=oForm.volunLisence=='n', value='n', data-toggle='radio')
                 span 沒有提供服務證明
           hr
           .form-group
@@ -152,17 +152,17 @@
               br
               | 參與志工是否有車馬費或其他補貼費用，沒有請填「無」
             .col-sm-7
-              textarea.form-control(type='text', name='volunSubsidy', id='volunSubsidy', rows='3')
+              textarea.form-control(type='text', name='volunSubsidy', id='volunSubsidy', rows='3') !{oForm.volunSubsidy}
           .form-group
             label.col-sm-4.control-label(for='pre_train') 行前培訓:
               br
               | 參與志工是否須參加行前培訓
             .col-sm-6
               label.radio.col-sm-6
-                input(type='radio', name='pre_train', value='y', data-toggle='radio')
+                input(type='radio', name='pre_train', checked=oForm.pre_train=='y', value='y', data-toggle='radio')
                 span 須參加培訓
               label.radio.col-sm-6
-                input(type='radio', name='pre_train', value='n', data-toggle='radio')
+                input(type='radio', name='pre_train', checked=oForm.pre_train=='n', value='n', data-toggle='radio')
                 span 不用參加培訓
           .form-group
             .col-sm-12.text-center
@@ -186,7 +186,7 @@
           .form-group
             label.col-sm-4.control-label(for='pre_train_location') 行前培訓地點:
             .col-sm-7
-              input.form-control(type='text', name='pre_train_location', id='pre_train_location')
+              input.form-control(type='text', name='pre_train_location', value='#{oForm.pre_train_location}', id='pre_train_location')
           hr
           .form-group
             label.col-sm-4.control-label(for='recruit_deadline') 招募期限:
@@ -197,40 +197,42 @@
               | 錄取通知方式:
             .col-sm-7
               label.checkbox.col-sm-5
-                input(type='checkbox', checked=oForm.howToInform.indexOf("call")>-1, name='howToInform', value='call', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.howToInform.indexOf("電話通知")>-1, name='howToInform', value='電話通知', data-toggle='checkbox')
                 span 電話通知
               label.checkbox.col-sm-6
-                input(type='checkbox', checked=oForm.howToInform.indexOf("email")>-1, name='howToInform', value='email', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.howToInform.indexOf("Email通知")>-1, name='howToInform', value='Email通知', data-toggle='checkbox')
                 span Email通知
               label.checkbox.col-sm-12
-                input(type='checkbox', checked=oForm.howToInform.indexOf("website")>-1, name='howToInform', value='website', data-toggle='checkbox')
+                input(type='checkbox', checked=oForm.howToInform.indexOf("公告於活動(或主辦單位)網站")>-1, name='howToInform', value='公告於活動(或主辦單位)網站', data-toggle='checkbox')
                 span 公告於活動(或主辦單位)網站
           .form-group
             label.col-sm-4.control-label(for='otherInfo') 其他補充說明:
             .col-sm-7
-              input.form-control(type='text', name='otherInfo', id='otherInfo')
+              input.form-control(type='text', value='#{oForm.otherInfo}', name='otherInfo', id='otherInfo')
           hr
           .form-group
             label.col-sm-4.control-label(for='contact_person') 聯絡人姓名:
             .col-sm-7
-              input.form-control(type='text', name='contact_person', id='contact_person')
+              input.form-control(type='text', name='contact_person', value='#{oForm.contact_person}', id='contact_person')
           .form-group
             label.col-sm-4.control-label(for='contact_job_title') 聯絡人職稱:
             .col-sm-7
-              input.form-control(type='text', name='contact_job_title', id='contact_job_title')
+              input.form-control(type='text', name='contact_job_title', value='#{oForm.contact_job_title}', id='contact_job_title')
           .form-group
             label.col-sm-4.control-label(for='contact_phone') 聯絡電話:
             .col-sm-7
-              input.form-control(type='text', name='contact_phone', id='contact_phone')
+              input.form-control(type='text', name='contact_phone', value='#{oForm.contact_phone}', id='contact_phone')
           .form-group
             label.col-sm-4.control-label(for='contact_email') 聯絡Email:
             .col-sm-7
-              input.form-control(type='text', name='contact_email', id='contact_email')
-
+              input.form-control(type='text', name='contact_email', value='#{oForm.contact_email}', id='contact_email')
+          .form-group
+            .col-sm-7
+              input.form-control(type='hidden', name='returnWhere', id='returnWhere', value='#{title}')
           .form-group
             .col-sm-12.text-center
-                h5
-                  small 將提供上述資料供本平台自動媒合使用
+              h5
+                small 將提供上述資料供本平台自動媒合使用
         .modal-footer
           .left-side
             button.btn.btn-danger.btn-simple(type='button', data-dismiss='modal') 取消

@@ -18,7 +18,7 @@ var userSchema = new mongoose.Schema({
   IsOrg: { type: Boolean, default: false },
   IsOrgActivation: { type: Boolean, default: false },
   IsAdmin: { type: Boolean, default: false },
-  applyArr: { type: Array, default: [] },
+  
 
   profile: {
     name: { type: String, default: '' },

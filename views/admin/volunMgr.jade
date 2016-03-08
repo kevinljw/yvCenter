@@ -35,7 +35,8 @@ block content
                   th(style='width: 10%') 名字
                   th(style='width: 15%') Email
                   th(style='width: 10%') 身份別
-                  th(style='width: 15%') 服務投遞數
+                  th(style='width: 15%') 被瀏覽數
+                  th(style='width: 15%') 申請數
                   th(style='width: 48%') 編輯
               tbody
                 each val, index in allVoluns
@@ -44,16 +45,9 @@ block content
                     td #{val.name}
                     td #{val.email}
                     td #{val.role}   
-                    td 
-                    td                     
-                      form.form-horizontal(action='/activation/#{val.id}', method='POST')
-                        input(type='hidden', name='_csrf', value=_csrf)
-                        .form-group
-                          button.btn.btn.btn-sm(type='submit' class='#{val.IsOrgActivation?"btn-danger":"btn-primary"}')
-                            i.fa.fa-mobile
-                            if val.IsOrgActivation
-                              |  取消授權
-                            else
-                              |  授權
+                    td #{val.timesOfView}
+                    td #{val.applyIdArr.length} 
+                    td                   
+                      
                 
   

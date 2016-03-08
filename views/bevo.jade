@@ -106,14 +106,14 @@ block content
                 tr
                   if user
                     th(style='width: 5%') 申請
-                    th(style='width: 25%') 服務名稱
+                    th(style='width: 20%') 服務名稱
                   else
                     th(style='width: 30%') 服務名稱
                   th(style='width: 10%') 服務日期
-                  th(style='width: 5%') 需求人數
+                  th(style='width: 10%') 需求人數
                   th(style='width: 10%') 截止日期
                   th(style='width: 10%') 資訊
-                  th(style='width: 10%') 連結
+                  
               tbody
                 each val,index in allOrgForms
                   if val.hasCompleted!='stop'
@@ -121,15 +121,15 @@ block content
                       if user
                         td
                           label.checkbox.checkbox-orange
-                            input(type='checkbox', checked=user.applyArr.indexOf("#{val.id}")>-1, name='applyJob', value='#{val.id}', data-toggle='checkbox')
+                            input(type='checkbox', checked=vForm.applyIdArr.indexOf("#{val.id}")>-1, name='applyJob', value='#{val.id}', data-toggle='checkbox')
                       td #{val.activity_name}
                       td #{val.service_date_since} ~ #{val.service_date_until}
                       td #{val.volunNum}
                       td #{val.recruit_deadline}
                       td
-                        button.col-sm-12.btn.btn-info.btn-xs(type='button', data-toggle='popover', data-placement='top', title='#{val.activity_abstract}', data-content='地點:#{val.service_location}') 查看
-                      td
-                        a.col-sm-12.btn.btn.btn-success.btn-xs(href='#{val.activity_website}', target='_blank', style='font-weight:900;') 瀏覽
+                        a.col-sm-12.btn.btn-info.btn-xs(data-toggle="modal" data-target="#viewServiceModel_#{index}") 查看
+
+                      
             if user
               button.btn.btn-warning.btn-fill(type='submit')
                 i.fa.fa-paper-plane-o
@@ -137,7 +137,9 @@ block content
   
   include partModel/signinModel
   include partModel/forgetModel
-  
+  if allOrgForms
+    each oForm,index in allOrgForms
+      include partModel/viewServiceModel
   if user 
     include partModel/volunformModel
     include partModel/accountModel
