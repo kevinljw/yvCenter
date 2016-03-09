@@ -5,15 +5,19 @@
         button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
         h4#accountLabel.modal-title 帳號管理
       .modal-body
-        form.form-horizontal(action='/account/profile', method='POST')
+        form.form-horizontal(action='/account/profile', enctype='multipart/form-data', method='POST')
           input(type='hidden', name='_csrf', value=_csrf)
           .form-group
             label.col-sm-4.control-label(for='gravatar') 頭像
             .col-sm-4
-              if user.facebook
+              if user.profile.picture
                 img(src="#{user.profile.picture}", class='profile', width='150', height='150')
               else
                 img(src="#{user.gravatar()}", class='profile', width='100', height='100')
+          .form-group
+            label.col-sm-4.control-label 上傳頭像(方正為佳)
+            .col-sm-7
+              input(type='file', name='profile_pic')
           .form-group
             label.col-sm-4.control-label(for='email') Email
             .col-sm-7

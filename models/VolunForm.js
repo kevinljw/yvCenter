@@ -1,4 +1,3 @@
-
 var mongoose = require('mongoose');
 
 var volunSchema = new mongoose.Schema({
@@ -13,6 +12,7 @@ var volunSchema = new mongoose.Schema({
   role_text: { type: String, default: '' },
   callnumber: { type: String, default: '' },
   phonenumber: { type: String, default: '' },
+  transportation:  { type: String, default: '' },
   speak: { type: Array, default: [] },
   hasTrain: { type: String, default: 'f' },
   needProof: { type: String, default: 'f' },
@@ -28,6 +28,7 @@ var volunSchema = new mongoose.Schema({
   time: { type: Array, default: [] },
   timesOfView: { type: Number, default: 0 },
   applyIdArr: { type: Array, default: [] },
+  applyNameArr: { type: Array, default: [] },
 });
 
 module.exports = mongoose.model('VolunForm', volunSchema);

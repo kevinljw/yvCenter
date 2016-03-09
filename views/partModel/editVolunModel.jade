@@ -1,10 +1,10 @@
-#volunformModel.modal.fade(tabindex='-1', role='dialog', aria-labelledby='volunformLabel', aria-hidden='true')
+.modal.fade(tabindex='-1', role='dialog', aria-labelledby='VolunLabel', id='editVolunModel_#{index}', aria-hidden='true')
   .modal-dialog
     .modal-content
       .modal-header
         button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
-        h4#volunformLabel.modal-title 服務青申請表
-      form.form-horizontal(action='/volunform', method='POST')
+        h4#VolunLabel.modal-title 服務青表單
+      form.form-horizontal(action='/editVolunform/#{vForm.id}', method='POST')
         input(type='hidden', name='_csrf', value=_csrf)
         .modal-body
           .form-group

@@ -97,8 +97,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
 app.use(function(req, res, next) {
-  if (req.path === '/api/upload' || req.path ==='/addNewLink' || req.path ==='/addNewHomeCover' || req.path ==='/addNewServicePoint' || req.path === '/addNewMentor' || req.path.indexOf('/news')>-1) {
+  if (req.path === '/account/profile' || req.path === '/api/upload' || req.path ==='/addNewLink' || req.path ==='/addNewHomeCover' || req.path ==='/addNewServicePoint' || req.path === '/addNewMentor' || req.path.indexOf('/news')>-1) {
     next();
   } else {
     lusca.csrf()(req, res, next);
@@ -145,7 +146,7 @@ app.post('/signupOrg', userController.postSignupOrg);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
-app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
+app.post('/account/profile', passportConf.isAuthenticated, upload_profile.single('profile_pic'), userController.postUpdateProfile);
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
@@ -171,7 +172,7 @@ app.post('/newServiceform', matchController.postOrgForm);
 app.post('/editServiceform/:id', matchController.postEditOrgForm);
 
 app.post('/applyJob', matchController.postApplyJob);
-app.get('/volunInfo/:id', matchController.getLookupVolunInfo);
+app.get('/volunInfo/:oid/:uid', matchController.getLookupVolunInfo);
 
 app.get('/admin_login', adminController.getAdminLogin);
 app.get('/adminMgr', passportConf.isAdminAuthenticated, adminController.getAdminHome);
@@ -200,7 +201,7 @@ app.post('/addNewTalentTrain', passportConf.isAdminAuthenticated, adminControlle
 app.post('/removeTalentTrain/:id', passportConf.isAdminAuthenticated, adminController.postRemoveTalentTrain);
 app.post('/addNewVolunTrain', passportConf.isAdminAuthenticated, adminController.postNewVolunTrain ); 
 app.post('/removeVolunTrain/:id', passportConf.isAdminAuthenticated, adminController.postRemoveVolunTrain);
-
+app.post('/editVolunform/:id', passportConf.isAdminAuthenticated, adminController.postEditVolunForm);
 
 
 app.get('/noveltyMgr', passportConf.isAdminAuthenticated, adminController.getNoveltyMgr );

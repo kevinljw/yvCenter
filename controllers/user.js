@@ -235,6 +235,8 @@ exports.postUpdateProfile = function(req, res, next) {
     user.profile.website = req.body.website || '';
     user.profile.contact = req.body.contact || '';
     user.profile.phone = req.body.phone || '';
+    if(req.file && req.file.filename) user.profile.picture = '/uploads/profile/'+req.file.filename || user.profile.picture;
+
     user.save(function(err) {
       if (err) {
         return next(err);
@@ -310,7 +312,7 @@ exports.getOauthUnlink = function(req, res, next) {
     user.save(function(err) {
       if (err) return next(err);
       req.flash('info', { msg: provider + ' account has been unlinked.' });
-      res.redirect('/account');
+      res.redirect('/youth/bevo');
     });
   });
 };

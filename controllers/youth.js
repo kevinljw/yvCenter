@@ -39,7 +39,7 @@ exports.getBevo = function(req, res) {
       }
 
       if(req.hasOwnProperty("user")){
-        VolunForm.findOne(req.user.id, function(err, thisForm) {
+        VolunForm.findOne({uid: req.user.id}, function(err, thisForm) {
           if (err) {
             return next(err);
           }

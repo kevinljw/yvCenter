@@ -7,22 +7,25 @@ var moment = require('moment');
  * About page.
  */
 exports.getLookupVolunInfo = function(req, res, next) {
-  console.log(req.params.id);
-  OrgForm.findOne({uid:req.params.id}, function(err, existForm) {
+  console.log(req.params.oid, req.params.uid);
+  OrgForm.findById(req.params.oid, function(err, existForm) {
     if (err) {
       return next(err);
     }
     if(existForm){
       existForm.timesOfView += 1;
-      console.log(existForm.timesOfView);
+      // console.log(existForm.timesOfView);
       existForm.save(function(err) {
         if (err) {
           return next(err);
         }
       });
     }
+    else{
+      console.log("can't find: "+existForm.timesOfView);
+    }
   });
-  VolunForm.findOne({uid:req.params.id}, function(err, existingUser) {
+  VolunForm.findOne({uid:req.params.uid}, function(err, existingUser) {
     if (err) {
       return next(err);
     }
@@ -52,7 +55,7 @@ exports.getLookupVolunInfo = function(req, res, next) {
 };
 exports.postForm = function(req, res) {
   // console.log(req.params.id);
-  console.log(req.body);
+  // console.log(req.body);
   VolunForm.findOne({uid:req.user.id}, function(err, existingUser) {
     if (err) {
       return next(err);
@@ -65,7 +68,8 @@ exports.postForm = function(req, res) {
       existingUser.idcode= req.body.idcode || existingUser.idcode;
       existingUser.birth= req.body.birth || existingUser.birth;
       existingUser.role= req.body.role || existingUser.role;
-      existingUser.role_text= req.body.role_text[existingUser.role=='student'?0:(existingUser.role=='worker'?1:2)] || existingUser.role_text;
+      existingUser.role_text= req.body.role_text[existingUser.role=='在學學生'?0:(existingUser.role=='社會人士'?1:2)] || existingUser.role_text;
+      existingUser.transportation=req.body.transportation || existingUser.transportation;
       existingUser.callnumber= req.body.callnumber || existingUser.callnumber;
       existingUser.phonenumber= req.body.phonenumber || existingUser.phonenumber;
       existingUser.speak= req.body.speak || existingUser.speak;
@@ -162,7 +166,7 @@ exports.postApplyJob = function(req, res, next) {
 
   //     });
   // });
-  // console.log(applyJobArr);
+  console.log(applyJobArr);
 
   VolunForm.findOne({uid:req.user.id}, function(err, thisForm) {
     if (err) {
@@ -170,21 +174,28 @@ exports.postApplyJob = function(req, res, next) {
     }
     if(thisForm){
       thisForm.applyIdArr = applyJobArr;
+      var applyNameArrTmp = [];
+      // thisForm.applyNameArr=[];
       thisForm.save(function(err) {
         if (err) {
           return next(err);
         }
       });
-      applyJobArr.forEach(function(eachOrgId){
+      applyJobArr.forEach(function(eachOrgId,indexOrg){
+
           OrgForm.findById(eachOrgId, function(err, thisOrg) {
             if (err) {
               return next(err);
             }
-
+            
+            applyNameArrTmp.push(thisOrg.uname+':'+thisOrg.activity_name);
+            
             if(thisOrg.applyIdArr.indexOf(req.user.id)<0){
+
               var eachItem = {
                 "uid": req.user.id,
                 "uname": req.user.profile.name,
+                "gender": req.user.profile.gender,
                 "location": thisForm.location,
                 "role": thisForm.role,
                 "hasTrain": thisForm.hasTrain,
@@ -202,9 +213,21 @@ exports.postApplyJob = function(req, res, next) {
 
               });
             }
-            
+            if(indexOrg>=applyJobArr.length-1){
+              thisForm.applyNameArr=applyNameArrTmp;
+              thisForm.save(function(err) {
+                if (err) {
+                  return next(err);
+                }
+              });
+            }
           });
-      })
+
+      });
+
+      
+      // console.log(thisForm.applyNameArr);
+      
       req.flash('success', { msg: ' 志工申請送出成功。' });
     }
     else{

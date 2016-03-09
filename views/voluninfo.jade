@@ -4,9 +4,70 @@ block content
   .wrapper
     .landing-header.section-nude
       .container
-        .motto.col-md-6
+        h4.col-sm-12.text-center 志工個人資訊
+          br
+          small 僅提供部分聯絡資訊
+          hr
+        .motto
           if userInfo
-            h4 志工姓名: #{userInfo.name}
+            .col-sm-6
+              h5.col-xs-5.text-right 志工姓名:
+              h5.col-xs-7 #{userInfo.name}
+              h5.col-xs-5.text-right 性別:
+              h5.col-xs-7 #{userInfo.gender}
+              h5.col-xs-5.text-right 所在地:
+              h5.col-xs-7 #{userInfo.location}
+              h5.col-xs-5.text-right 身份別:
+              h5.col-xs-7 #{userInfo.role}-#{userInfo.role_text}
+              h5.col-xs-5.text-right 語言:
+              h5.col-xs-7 #{userInfo.speak}
+              h5.col-xs-5.text-right 志願服務類型:
+              h5.col-xs-7 #{userInfo.service_type}
+            .col-sm-6
+              h5.col-xs-5.text-right Email:
+              h5.col-xs-7 #{userInfo.email}
+              h5.col-xs-5.text-right 室內電話:
+              h5.col-xs-7 #{userInfo.callnumber}
+              h5.col-xs-5.text-right 手機:
+              h5.col-xs-7 #{userInfo.phonenumber}
+              h5.col-xs-5.text-right 基礎訓練:
+              h5.col-xs-7 #{userInfo.hasTrain=='t'?'已接受過志工基礎訓練':'尚未接受過訓練'}
+              h5.col-xs-5.text-right 服務證明:
+              h5.col-xs-7 #{userInfo.needProof=='t'?'需要提供服務證明':'不需要服務證明'}
+              h5.col-xs-5.text-right 自備交通工具:
+              h5.col-xs-7 #{userInfo.transportation}
+            .col-xs-12
+              br
+            h4.col-sm-12.text-center 志工專長項目
+              hr
+            .col-sm-9
+              h5.col-xs-5.text-right 電腦類:
+              h5.col-xs-7 #{userInfo.ability_computer.length>0?userInfo.ability_computer:'無'}
+            .col-sm-9
+              h5.col-xs-5.text-right 活動類:
+              h5.col-xs-7 #{userInfo.ability_activity.length>0?userInfo.ability_activity:'無'}
+            .col-sm-9
+              h5.col-xs-5.text-right 影像類:
+              h5.col-xs-7 #{userInfo.ability_photo.length>0?userInfo.ability_photo:'無'}
+            .col-sm-9
+              h5.col-xs-5.text-right 教學類:
+              h5.col-xs-7 #{userInfo.ability_teach.length>0?userInfo.ability_teach:'無'}
+            .col-sm-9
+              h5.col-xs-5.text-right 設計類:
+              h5.col-xs-7 #{userInfo.ability_design.length>0?userInfo.ability_design:'無'}
+            .col-sm-9
+              h5.col-xs-5.text-right 技藝類:
+              h5.col-xs-7 #{userInfo.ability_skill.length>0?userInfo.ability_skill:'無'}
+            .col-sm-9
+              h5.col-xs-5.text-right 證照類:
+              h5.col-xs-7 #{userInfo.ability_license.length>0?userInfo.ability_license:'無'}
+            .col-sm-9
+              h5.col-xs-5.text-right 其他:
+              h5.col-xs-7 #{userInfo.ability_other!=''?userInfo.ability_other:'無'}
+            .col-sm-12
+              br
+              hr
+              br
+
           else
-            h4 查無資料
-        
+            h5 查無資料

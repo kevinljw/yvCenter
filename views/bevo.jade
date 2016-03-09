@@ -94,7 +94,7 @@ block content
    .section.text-center.landing-section
     .container
       .row
-        .col-md-10.col-md-offset-1
+        .col-md-12
           h3 志工需求列表
           h3
             small 快來申請加入志工的行列
@@ -111,6 +111,7 @@ block content
                     th(style='width: 30%') 服務名稱
                   th(style='width: 10%') 服務日期
                   th(style='width: 10%') 需求人數
+                  th(style='width: 10%') 申請人數
                   th(style='width: 10%') 截止日期
                   th(style='width: 10%') 資訊
                   
@@ -125,6 +126,7 @@ block content
                       td #{val.activity_name}
                       td #{val.service_date_since} ~ #{val.service_date_until}
                       td #{val.volunNum}
+                      td #{val.applyIdArr.length}
                       td #{val.recruit_deadline}
                       td
                         a.col-sm-12.btn.btn-info.btn-xs(data-toggle="modal" data-target="#viewServiceModel_#{index}") 查看

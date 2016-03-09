@@ -196,6 +196,52 @@ exports.postNewMentor   = function(req, res, next) {
     });
 
 }
+exports.postEditVolunForm  = function(req, res, next) {
+    
+  VolunForm.findById(req.params.id, function(err, existingUser) {
+    if (err) {
+      return next(err);
+    }
+
+    if(existingUser){
+      // console.log(req.body);
+      existingUser.name= req.body.name || existingUser.name;
+      existingUser.gender= req.body.gender || existingUser.gender;
+      existingUser.location= req.body.location || existingUser.location;
+      existingUser.email= req.body.email || existingUser.email;
+      existingUser.idcode= req.body.idcode || existingUser.idcode;
+      existingUser.birth= req.body.birth || existingUser.birth;
+      existingUser.role= req.body.role || existingUser.role;
+      existingUser.role_text= req.body.role_text[existingUser.role=='在學學生'?0:(existingUser.role=='社會人士'?1:2)] || existingUser.role_text;
+      existingUser.callnumber= req.body.callnumber || existingUser.callnumber;
+      existingUser.phonenumber= req.body.phonenumber || existingUser.phonenumber;
+      existingUser.transportation=req.body.transportation || existingUser.transportation;
+      existingUser.speak= req.body.speak || existingUser.speak;
+      existingUser.hasTrain= req.body.hasTrain || existingUser.hasTrain;
+      existingUser.needProof= req.body.needProof || existingUser.needProof;
+      existingUser.ability_computer= req.body.ability_computer || existingUser.ability_computer;
+      existingUser.ability_activity= req.body.ability_activity || existingUser.ability_activity;
+      existingUser.ability_photo= req.body.ability_photo || existingUser.ability_photo;
+      existingUser.ability_teach= req.body.ability_teach || existingUser.ability_teach;
+      existingUser.ability_design= req.body.ability_design || existingUser.ability_design;
+      existingUser.ability_skill= req.body.ability_skill || existingUser.ability_skill;
+      existingUser.ability_license= req.body.ability_license || existingUser.ability_license;
+      existingUser.ability_other= req.body.ability_other || existingUser.ability_other;
+      existingUser.service_type = req.body.service_type || existingUser.service_type;
+      existingUser.time = req.body.time || existingUser.time;
+
+      existingUser.save(function(err) {
+        if (err) {
+          return next(err);
+        }
+      
+        // req.flash('success', { msg: '表單修改成功。' });
+        res.redirect('/volunMgr');
+      });
+    }   
+  });
+
+}
 exports.postNewVolunTrain  = function(req, res, next) {
     
       var newVolunTrain = new VolunTrain({

@@ -128,10 +128,11 @@ block content
                                   tr
                                     th(style='width: 5%') 序號
                                     th(style='width: 15%') 投遞日期
-                                    th(style='width: 20%') 志工姓名
-                                    th(style='width: 15%') 身份別
+                                    th(style='width: 15%') 志工姓名
+                                    th(style='width: 10%') 性別
+                                    th(style='width: 10%') 身份別
                                     th(style='width: 15%') 居住
-                                    th(style='width: 8%') 基礎訓練
+                                    th(style='width: 10%') 基礎訓練
                                     th(style='width: 15%') 詳細資訊
                                     
                                 tbody
@@ -142,6 +143,7 @@ block content
                                         h6
                                           small #{eachVolun.timestamp}
                                       td #{eachVolun.uname}
+                                      td #{eachVolun.gender}
                                       td #{eachVolun.role}
                                       td #{eachVolun.location}
                                       td
@@ -150,7 +152,7 @@ block content
                                         else
                                           i.fa.fa-square-o
                                       td
-                                        a.col-sm-12.btn.btn-info.btn-fill.btn-xs(href='/volunInfo/#{eachVolun.uid}', target='_blank') 查看
+                                        a.col-sm-12.btn.btn-info.btn-fill.btn-xs(href='/volunInfo/#{val.id}/#{eachVolun.uid}', target='_blank') 查看
 
               else
                 h5 貴機構尚未填寫需求表單

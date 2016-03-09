@@ -36,8 +36,9 @@ block content
                   th(style='width: 15%') Email
                   th(style='width: 10%') 身份別
                   th(style='width: 15%') 被瀏覽數
-                  th(style='width: 15%') 申請數
-                  th(style='width: 48%') 編輯
+                  th(style='width: 23%') 申請機構(數量)
+                  th(style='width: 10%') 個資
+                  th(style='width: 10%') 編輯
               tbody
                 each val, index in allVoluns
                   tr
@@ -46,8 +47,14 @@ block content
                     td #{val.email}
                     td #{val.role}   
                     td #{val.timesOfView}
-                    td #{val.applyIdArr.length} 
-                    td                   
-                      
+                    td
+                      button.col-sm-12.btn.btn-success.btn-xs(type='button', data-toggle='popover', data-placement='top', title='申請機構 (#{val.applyIdArr.length})', data-content='#{val.applyNameArr.join(" , ")}') 查看 ( #{val.applyIdArr.length} )
+                    td
+                      a.col-sm-12.btn.btn-info.btn-xs(data-toggle="modal" data-target="#viewVolunModel_#{index}") 查看         
+                    td
+                      a.col-sm-12.btn.btn-primary.btn-xs(data-toggle="modal" data-target="#editVolunModel_#{index}") 修改   
+
+  each vForm,index in allVoluns
+    include ../partModel/editVolunModel                    
                 
   

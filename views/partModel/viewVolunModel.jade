@@ -1,0 +1,104 @@
+.modal.fade(tabindex='-1', role='dialog', aria-labelledby='viewVolunLabel', aria-hidden='true', id='viewVolunModel_#{index}')
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+        h4#viewVolunLabel.modal-title 服務青表單
+      .modal-body(style='min-height:2000px;')
+        if vForm.service_date_since
+          h5.col-xs-4.text-right 志工姓名:
+          h5.col-xs-7 #{vForm.service_date_since} ~ #{vForm.service_date_until}
+        if vForm.service_time_since
+          h5.col-xs-4.text-right 服務時間:
+          h5.col-xs-7 #{vForm.service_time_since} ~ #{vForm.service_time_until}
+        if vForm.service_hours
+          h5.col-xs-4.text-right 服務時數:
+          h5.col-xs-7 #{vForm.service_hours} 小時
+        if vForm.service_location
+          h5.col-xs-4.text-right 服務地點:
+          h5.col-xs-7 #{vForm.service_location}
+        if vForm.service_type
+          h5.col-xs-4.text-right 服務類型:
+          h5.col-xs-7 #{(vForm.service_type[vForm.service_type.length-1]!='')?vForm.service_type:vForm.service_type.slice(0,vForm.service_type.length-1)}
+        .col-xs-12
+          hr
+        if vForm.volunNum
+          h5.col-xs-4.text-right 志工需求:
+          h5.col-xs-7 #{vForm.volunNum} 人
+        if vForm.volunConditions
+          h5.col-xs-4.text-right 志工條件:
+          h5.col-xs-7 #{(vForm.volunConditions[vForm.volunConditions.length-1]!='')?vForm.volunConditions:vForm.volunConditions.slice(0,vForm.volunConditions.length-1)}
+        .col-xs-12
+          br
+          
+        if vForm.activity_abstract
+          h4.col-xs-12.page-header.text-center
+            small 活動簡介
+          h5.col-xs-12   
+            | !{vForm.activity_abstract} 
+          br
+        if vForm.service_content
+          h4.col-xs-12.page-header.text-center
+            small 服務內容
+          h5.col-xs-12   
+            | !{vForm.service_content} 
+          br
+        .col-xs-12 
+          hr
+        if vForm.hasFood
+          h5.col-xs-4.text-right 供餐:
+          if vForm.hasFood=='y'
+            h5.col-xs-7 本服務活動將提供餐點
+          else
+            h5.col-xs-7 本服務活動將不會供餐
+        if vForm.volunInsurance
+          h5.col-xs-4.text-right 服務保險:
+          h5.col-xs-7 #{(vForm.volunInsurance[vForm.volunInsurance.length-1]!='')?vForm.volunInsurance:vForm.volunInsurance.slice(0,vForm.volunInsurance.length-1)}
+        if vForm.volunLisence
+          h5.col-xs-4.text-right 服務證明:
+          if vForm.volunLisence=='y'
+            h5.col-xs-7 本服務活動可以提供服務證明
+          else
+            h5.col-xs-7 本服務活動將不會提供服務證明
+        if vForm.volunSubsidy
+          h5.col-xs-4.text-right 志工補貼:
+          h5.col-xs-7 !{vForm.volunSubsidy}
+        if vForm.recruit_deadline
+          h5.col-xs-4.text-right 招募期限:
+          h5.col-xs-7 #{vForm.recruit_deadline} 截止
+        if vForm.howToInform
+          h5.col-xs-4.text-right 錄取通知方式:
+          h5.col-xs-7 #{vForm.howToInform}
+        if vForm.otherInfo
+          h5.col-xs-4.text-right 補充說明:
+          h5.col-xs-7 !{vForm.otherInfo}
+        if vForm.pre_train
+          h5.col-xs-4.text-right 行前培訓:
+          if vForm.pre_train=='y'
+            h5.col-xs-7 參與志工須參加行前培訓
+              small (請參見以下資訊)
+            h4.col-xs-12.page-header.text-center
+              small 行前培訓資訊
+            if vForm.pre_train_date_since
+              h5.col-xs-4.text-right 培訓日期:
+              h5.col-xs-7 #{vForm.pre_train_date_since} ~ #{vForm.pre_train_date_until}
+            if vForm.pre_train_time_since
+              h5.col-xs-4.text-right 培訓時間:
+              h5.col-xs-7 #{vForm.pre_train_time_since} ~ #{vForm.pre_train_time_until}
+            if vForm.pre_train_location
+              h5.col-xs-4.text-right 培訓地點:
+              h5.col-xs-7 #{vForm.pre_train_location}           
+          else
+            h5.col-xs-7 參與志工不須參加行前培訓
+        .col-xs-12
+          br
+          hr
+      .modal-footer
+        .left-side
+          a.btn.btn-success.btn-simple(href='#{vForm.activity_website?vForm.activity_website:""}', target='_blank')
+            i.fa.fa-paper-plane-o
+            | 前往連結
+        .divider
+        .right-side.form-group
+          button.btn.btn-danger.btn-simple(type='button', data-dismiss='modal') 關閉
+          
