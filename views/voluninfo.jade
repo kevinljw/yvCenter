@@ -11,31 +11,43 @@ block content
         .motto
           if userInfo
             .col-sm-6
-              h5.col-xs-5.text-right 志工姓名:
-              h5.col-xs-7 #{userInfo.name}
-              h5.col-xs-5.text-right 性別:
-              h5.col-xs-7 #{userInfo.gender}
-              h5.col-xs-5.text-right 所在地:
-              h5.col-xs-7 #{userInfo.location}
-              h5.col-xs-5.text-right 身份別:
-              h5.col-xs-7 #{userInfo.role}-#{userInfo.role_text}
-              h5.col-xs-5.text-right 語言:
-              h5.col-xs-7 #{userInfo.speak}
-              h5.col-xs-5.text-right 志願服務類型:
-              h5.col-xs-7 #{userInfo.service_type}
+              if userInfo.name
+                h5.col-xs-5.text-right 志工姓名:
+                h5.col-xs-7 #{userInfo.name}
+              if userInfo.gender
+                h5.col-xs-5.text-right 性別:
+                h5.col-xs-7 #{userInfo.gender}
+              if userInfo.location
+                h5.col-xs-5.text-right 所在地:
+                h5.col-xs-7 #{userInfo.location}
+              if userInfo.role
+                h5.col-xs-5.text-right 身份別:
+                h5.col-xs-7 #{userInfo.role}-#{userInfo.role_text}
+              if userInfo.speak
+                h5.col-xs-5.text-right 語言:
+                h5.col-xs-7 #{userInfo.speak}
+              if userInfo.service_type
+                h5.col-xs-5.text-right 志願服務類型:
+                h5.col-xs-7 #{userInfo.service_type}
             .col-sm-6
-              h5.col-xs-5.text-right Email:
-              h5.col-xs-7 #{userInfo.email}
-              h5.col-xs-5.text-right 室內電話:
-              h5.col-xs-7 #{userInfo.callnumber}
-              h5.col-xs-5.text-right 手機:
-              h5.col-xs-7 #{userInfo.phonenumber}
-              h5.col-xs-5.text-right 基礎訓練:
-              h5.col-xs-7 #{userInfo.hasTrain=='t'?'已接受過志工基礎訓練':'尚未接受過訓練'}
-              h5.col-xs-5.text-right 服務證明:
-              h5.col-xs-7 #{userInfo.needProof=='t'?'需要提供服務證明':'不需要服務證明'}
-              h5.col-xs-5.text-right 自備交通工具:
-              h5.col-xs-7 #{userInfo.transportation}
+              if userInfo.email
+                h5.col-xs-5.text-right Email:
+                h5.col-xs-7 #{userInfo.email}
+              if userInfo.callnumber
+                h5.col-xs-5.text-right 室內電話:
+                h5.col-xs-7 #{userInfo.callnumber}
+              if userInfo.phonenumber
+                h5.col-xs-5.text-right 手機:
+                h5.col-xs-7 #{userInfo.phonenumber}
+              if userInfo.hasTrain
+                h5.col-xs-5.text-right 基礎訓練:
+                h5.col-xs-7 #{userInfo.hasTrain=='t'?'已接受過志工基礎訓練':'尚未接受過訓練'}
+              if userInfo.needProof
+                h5.col-xs-5.text-right 服務證明:
+                h5.col-xs-7 #{userInfo.needProof=='t'?'需要提供服務證明':'不需要服務證明'}
+              if userInfo.transportation
+                h5.col-xs-5.text-right 自備交通工具:
+                h5.col-xs-7 #{userInfo.transportation}
             .col-xs-12
               br
             h4.col-sm-12.text-center 志工專長項目

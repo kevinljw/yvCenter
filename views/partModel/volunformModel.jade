@@ -46,7 +46,7 @@
               label.radio
                 input(type='radio', checked=vForm.role=='在學學生', name='role', value='在學學生', data-toggle='radio')
                 span 在學學生：
-              input.form-control(type='text', name='role_text', id='role_text_student', value=vForm.role=='student'?'#{vForm.role_text}':'', placeholder='請填寫校名/系所年級')
+              input.form-control(type='text', name='role_text', id='role_text_student', value=vForm.role=='在學學生'?'#{vForm.role_text}':'', placeholder='請填寫校名/系所年級')
               label.radio
                 input(type='radio', checked=vForm.role=='社會人士', name='role', value='社會人士', data-toggle='radio')
                 span 社會人士：
@@ -91,9 +91,9 @@
                 input(type='checkbox', checked=vForm.speak.indexOf("手語")>-1, name='speak', value='手語', data-toggle='checkbox')
                 span 手語
               label.checkbox.col-sm-4
-                input(type='checkbox', checked=vForm.speak[vForm.speak.length-1]!='', data-toggle='checkbox')
+                input(type='checkbox', checked=vForm.speak.length>0&&vForm.speak[vForm.speak.length-1]!='', data-toggle='checkbox')
                 span 其他
-              input.form-control(type='text', name='speak', id='other_text', value='#{vForm.speak[vForm.speak.length-1]}', placeholder='請填寫其他語言')
+              input.form-control(type='text', name='speak', id='other_text', value=vForm.speak.length>0?'#{vForm.speak[vForm.speak.length-1]}':'', placeholder='請填寫其他語言')
           .form-group
             label.col-sm-4.control-label(for='hasTrain') 已完成志工基礎訓練
             .col-sm-6
