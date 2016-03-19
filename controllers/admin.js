@@ -10,6 +10,7 @@ var OpenHouse = require('../models/OpenHouse');
 var Speech = require('../models/Speech');
 var TalentTrain  = require('../models/TalentTrain');
 var VolunTrain  = require('../models/VolunTrain');
+var emailSender = require('./emailSender');
 /**
  * GET /about
  * About page.
@@ -508,6 +509,17 @@ exports.postRemoveSevice  = function(req, res, next) {
   });
 
 }
+exports.postRemoveVolunForm  = function(req, res, next) {
+
+  VolunForm.remove({ _id: req.params.id }, function(err) {
+    if (err) {
+      return next(err);
+    }
+    
+    res.redirect('/volunMgr');
+  });
+
+}
 exports.postRemoveVolunTrain  = function(req, res, next) {
 
   VolunTrain.remove({ _id: req.params.id }, function(err) {
@@ -673,6 +685,12 @@ exports.postOrgActivation = function(req, res, next) {
   User.findById(req.params.id, function(err, thisUser) {
       if (err) {
         return next(err);
+      }
+      if(thisUser.IsOrgActivation){
+        emailSender.sendOrgValidationUnAuthEmail(thisUser.profile.name, thisUser.email);
+      }
+      else{
+        emailSender.sendOrgValidationCheckEmail(thisUser.profile.name, thisUser.email);
       }
       thisUser.IsOrgActivation = !thisUser.IsOrgActivation;
       thisUser.save(function(err) {

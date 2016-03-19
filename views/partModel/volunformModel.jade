@@ -389,6 +389,15 @@
             .col-sm-12.text-center
                 h5
                   small 將提供上述資料供本平台自動媒合使用，實際服務時段依各單位需求為主
+          .form-group
+            label.col-sm-7.control-label(for='informUser') 是否要接收機構發佈新服務時通知信？
+            .col-sm-5
+              label.radio.col-sm-4
+                input(type='radio', checked=vForm.informUser=='t', name='informUser', value='t', data-toggle='radio')
+                span 是
+              label.radio.col-sm-4
+                input(type='radio', checked=vForm.informUser=='f', name='informUser', value='f', data-toggle='radio')
+                span 否 
         .modal-footer
           .left-side
             button.btn.btn-danger.btn-simple(type='button', data-dismiss='modal') 取消

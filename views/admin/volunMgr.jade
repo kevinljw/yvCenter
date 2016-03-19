@@ -37,8 +37,8 @@ block content
                   th(style='width: 10%') 身份別
                   th(style='width: 15%') 被瀏覽數
                   th(style='width: 23%') 申請機構(數量)
-                  th(style='width: 10%') 個資
-                  th(style='width: 10%') 編輯
+                  //- th(style='width: 10%') 個資
+                  th(style='width: 25%') 編輯
               tbody
                 each val, index in allVoluns
                   tr
@@ -49,10 +49,16 @@ block content
                     td #{val.timesOfView}
                     td
                       button.col-sm-12.btn.btn-success.btn-xs(type='button', data-toggle='popover', data-placement='top', title='申請機構 (#{val.applyIdArr.length})', data-content='#{val.applyNameArr.join(" , ")}') 查看 ( #{val.applyIdArr.length} )
+                    //- td
+                    //-   a.col-sm-12.btn.btn-info.btn-xs(data-toggle="modal" data-target="#viewVolunModel_#{index}") 查看         
                     td
-                      a.col-sm-12.btn.btn-info.btn-xs(data-toggle="modal" data-target="#viewVolunModel_#{index}") 查看         
-                    td
-                      a.col-sm-12.btn.btn-primary.btn-xs(data-toggle="modal" data-target="#editVolunModel_#{index}") 修改   
+                      a.col-sm-5.btn.btn-primary.btn-xs(data-toggle="modal" data-target="#editVolunModel_#{index}") 修改 
+                      form.form-horizontal(action='/removeVolunForm/#{val.id}', onsubmit="return confirm('確認要刪除?');", method='POST')
+                        input(type='hidden', name='_csrf', value=_csrf)
+                        .form-group
+                          button.col-sm-5.btn.btn-xs.btn-danger(type='submit')
+                            i.fa.fa-trash
+                            |  移除 
 
   each vForm,index in allVoluns
     include ../partModel/editVolunModel                    

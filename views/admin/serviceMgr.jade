@@ -70,13 +70,13 @@ block content
                     td
                       a.col-sm-12.btn.btn-info.btn-xs(data-toggle="modal" data-target="#viewServiceModel_#{index}") 查看
                     td
-                      a.btn.btn-primary.btn-sm(data-toggle="modal" data-target="#editServiceModel_#{index}")
+                      a.col-sm-12.btn.btn-primary.btn-xs(data-toggle="modal" data-target="#editServiceModel_#{index}")
                         i.fa.fa-pencil-square-o
                           |  修改
-                      form.form-horizontal(action='/removeService/#{val.id}', method='POST')
+                      form.form-horizontal(action='/removeService/#{val.id}', onsubmit="return confirm('確認要刪除?');", method='POST')
                         input(type='hidden', name='_csrf', value=_csrf)
                         .form-group
-                          button.btn.btn.btn-danger.btn-sm(type='submit')
+                          button.btn.col-sm-12.btn-danger.btn-xs(type='submit')
                             i.fa.fa-trash
                             |  移除
   if allServices

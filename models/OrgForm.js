@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var orgSchema = new mongoose.Schema({
   uid: { type: String, default: ''},
   uname: { type: String, default: ''},
+  email: { type: String, default: ''},
   timestamp: { type: String, default: ''},
   activity_name: { type: String, default: ''},
   activity_abstract: { type: String, default: ''},

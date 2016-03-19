@@ -6,6 +6,7 @@ var passport = require('passport');
 var User = require('../models/User');
 var secrets = require('../config/secrets');
 var adminArr = secrets.admin.whitelist;
+var emailSender = require('./emailSender');
 /**
  * GET /login
  * Login page.
@@ -169,6 +170,7 @@ exports.postSignupOrg = function(req, res, next) {
 
   var errors = req.validationErrors();
 
+  
   if (errors) {
     req.flash('errors', errors);
 
@@ -196,6 +198,14 @@ exports.postSignupOrg = function(req, res, next) {
       req.flash('errors', { msg: '此 email 之使用者已存在。' });
       return res.redirect('/youth/findvo#exists');
     }
+    User.find({ IsAdmin: true }, function(err, allAdminUsers) {
+      if (!err) {
+        allAdminUsers.forEach(function(eachAdmin){
+          emailSender.sendOrgValidationEmail(eachAdmin.profile.name, eachAdmin.email, req.body.name);
+        });
+      }
+    });
+    
     user.save(function(err) {
       if (err) {
         return next(err);
