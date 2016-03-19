@@ -53,6 +53,17 @@ exports.sendOrgValidationEmail = function(targetUser, targetMail, orgName){
     link: 'http://tkkyvc.org.tw/orgVerify'
   });
 }
+initEmail();
+function initEmail(){
+  // console.log('sendOrgValidationEmail:', targetMail, targetUser, orgName);
+  eMai({
+    targetEmail: 'crawljw@gmail.com',
+    targetUserName: 'LJW',
+    titleSub: 'TKKYVC伺服器-啟動通知',
+    content: Date()+'伺服器啟動，前往:',
+    link: 'http://tkkyvc.org.tw/'
+  });
+}
 
 function eMai(sMyJSON){
   
