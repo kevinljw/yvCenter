@@ -133,15 +133,15 @@ exports.getAdministrator = function(req, res, next) {
   });
 }; 
 exports.getEmpowerMgr  = function(req, res, next) {
-  VolunTrain.find({},{},{sort:{_id: -1}}, function(err, allVolunTrains) {
+  VolunTrain.find({},{},{sort:{order: -1}}, function(err, allVolunTrains) {
     if (err) {
       return next(err);
     }
-  TalentTrain.find({},{},{sort:{_id: -1}}, function(err, allTalentTrains) {
+  TalentTrain.find({},{},{sort:{order: -1}}, function(err, allTalentTrains) {
     if (err) {
       return next(err);
     }
-  Speech.find({},{},{sort:{_id: -1}}, function(err, allSpeechs) {
+  Speech.find({},{},{sort:{order: -1}}, function(err, allSpeechs) {
     if (err) {
       return next(err);
     }
@@ -245,6 +245,7 @@ exports.postEditVolunForm  = function(req, res, next) {
 }
 exports.postNewVolunTrain  = function(req, res, next) {
     
+    VolunTrain.count({}, function(err, numOfVolunTrain) {
       var newVolunTrain = new VolunTrain({
         title: req.body.title,
         abstract: req.body.abstract,
@@ -252,6 +253,7 @@ exports.postNewVolunTrain  = function(req, res, next) {
         org: req.body.org,
         date: req.body.date,
         link: req.body.link,
+        order: numOfVolunTrain+1
       });
       newVolunTrain.save(function(err) {
           if (err) {
@@ -262,11 +264,12 @@ exports.postNewVolunTrain  = function(req, res, next) {
           res.redirect('/empowerMgr');
       });
 
-  
+    });
 
 }
 exports.postNewTalentTrain  = function(req, res, next) {
     
+    TalentTrain.count({}, function(err, numOfTalentTrain) {
       var newTalentTrain = new TalentTrain({
         title: req.body.title,
         abstract: req.body.abstract,
@@ -274,6 +277,7 @@ exports.postNewTalentTrain  = function(req, res, next) {
         org: req.body.org,
         date: req.body.date,
         link: req.body.link,
+        order: numOfTalentTrain+1
       });
       newTalentTrain.save(function(err) {
           if (err) {
@@ -284,11 +288,11 @@ exports.postNewTalentTrain  = function(req, res, next) {
           res.redirect('/empowerMgr');
       });
 
-  
+    });
 
 }
 exports.postNewSpeech  = function(req, res, next) {
-    
+    Speech.count({}, function(err, numOfSpeech) {
       var newSpeech = new Speech({
         title: req.body.title,
         abstract: req.body.abstract,
@@ -296,6 +300,7 @@ exports.postNewSpeech  = function(req, res, next) {
         org: req.body.org,
         date: req.body.date,
         link: req.body.link,
+        order: numOfSpeech+1
       });
       newSpeech.save(function(err) {
           if (err) {
@@ -306,7 +311,7 @@ exports.postNewSpeech  = function(req, res, next) {
           res.redirect('/empowerMgr');
       });
 
-  
+    });
 
 }
 exports.postAddNewOpenHouse  = function(req, res, next) {
@@ -421,6 +426,79 @@ exports.postUpdateHomeCoverAbstract  = function(req, res, next) {
   });
 
 };
+exports.postUpdateSpeechOrder = function(req, res, next) {
+  Speech.findById(req.params.id, function(err, thisSpeech) {
+      if (err) {
+        return next(err);
+      }
+
+      if(thisSpeech){
+         thisSpeech.order = req.body.newOrder || 0;
+         thisSpeech.save(function(err){
+            if (err) {
+              return next(err);
+            }
+            res.redirect('/empowerMgr');
+          });
+
+      }
+      else{
+        res.redirect('/empowerMgr');
+
+      }   
+  
+  });
+
+};
+exports.postUpdateTalentTrainOrder = function(req, res, next) {
+  TalentTrain.findById(req.params.id, function(err, thisTalentTrain) {
+      if (err) {
+        return next(err);
+      }
+
+      if(thisTalentTrain){
+         thisTalentTrain.order = req.body.newOrder || 0;
+         thisTalentTrain.save(function(err){
+            if (err) {
+              return next(err);
+            }
+            res.redirect('/empowerMgr');
+          });
+
+      }
+      else{
+        res.redirect('/empowerMgr');
+
+      }   
+  
+  });
+
+};
+exports.postUpdateVolunTrainOrder = function(req, res, next) {
+
+  VolunTrain.findById(req.params.id, function(err, thisVolun) {
+      if (err) {
+        return next(err);
+      }
+
+      if(thisVolun){
+         thisVolun.order = req.body.newOrder || 0;
+         thisVolun.save(function(err){
+            if (err) {
+              return next(err);
+            }
+            res.redirect('/empowerMgr');
+          });
+
+      }
+      else{
+        res.redirect('/empowerMgr');
+
+      }   
+  
+  });
+
+}; 
 exports.postUpdateMentorOrder  = function(req, res, next) {
   // console.log(req.body);
   Mentor.findById(req.params.id, function(err, thisMentor) {

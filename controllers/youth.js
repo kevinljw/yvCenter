@@ -87,15 +87,15 @@ exports.getLaunchteam = function(req, res) {
   });
 };
 exports.getEmpower = function(req, res) {
-  VolunTrain.find({},{},{sort:{_id: -1}}, function(err, allVolunTrains) {
+  VolunTrain.find({},{},{sort:{order: -1}}, function(err, allVolunTrains) {
       if (err) {
         return next(err);
       }
-  TalentTrain.find({},{},{sort:{_id: -1}}, function(err, allTalentTrains) {
+  TalentTrain.find({},{},{sort:{order: -1}}, function(err, allTalentTrains) {
       if (err) {
         return next(err);
       }
-    Speech.find({},{},{sort:{_id: -1}}, function(err, allSpeechs) {
+    Speech.find({},{},{sort:{order: -1}}, function(err, allSpeechs) {
         if (err) {
           return next(err);
         }

@@ -195,6 +195,10 @@ app.get('/empowerMgr', passportConf.isAdminAuthenticated, adminController.getEmp
 app.post('/addNewMentor', passportConf.isAdminAuthenticated, upload_profile.single('profile_pic'), adminController.postNewMentor ); 
 app.post('/updateMentorOrder/:id', passportConf.isAdminAuthenticated, adminController.postUpdateMentorOrder);
 app.post('/removeMentor/:id', passportConf.isAdminAuthenticated, adminController.postRemoveMentor);
+app.post('/updateVolunTrainOrder/:id', passportConf.isAdminAuthenticated, adminController.postUpdateVolunTrainOrder);
+app.post('/updateTalentTrainOrder/:id', passportConf.isAdminAuthenticated, adminController.postUpdateTalentTrainOrder);
+app.post('/updateSpeechOrder/:id', passportConf.isAdminAuthenticated, adminController.postUpdateSpeechOrder);
+
 app.post('/addNewSpeech', passportConf.isAdminAuthenticated, adminController.postNewSpeech ); 
 app.post('/removeSpeech/:id', passportConf.isAdminAuthenticated, adminController.postRemoveSpeech);
 app.post('/addNewTalentTrain', passportConf.isAdminAuthenticated, adminController.postNewTalentTrain ); 

@@ -128,7 +128,15 @@ block content
               tbody
                 each val,index in allVolunTrains
                   tr
-                    td #{index}   
+                    td
+                      form.form-horizontal(action='/updateVolunTrainOrder/#{val.id}', method='POST')
+                        input(type='hidden', name='_csrf', value=_csrf)
+                        .form-group
+                          input(type='text', name='newOrder', value='#{val.order}',size="6") 
+                        .form-group
+                          button.btn.btn.btn-primary.btn-xs(type='submit')
+                            i.fa.fa-retweet
+                            |  更新  
                     td #{val.title}
                     td #{val.org}
                     td #{val.location}
@@ -220,7 +228,15 @@ block content
               tbody
                 each val,index in allTalentTrains
                   tr
-                    td #{index}   
+                    td
+                      form.form-horizontal(action='/updateTalentTrainOrder/#{val.id}', method='POST')
+                        input(type='hidden', name='_csrf', value=_csrf)
+                        .form-group
+                          input(type='text', name='newOrder', value='#{val.order}',size="6") 
+                        .form-group
+                          button.btn.btn.btn-primary.btn-xs(type='submit')
+                            i.fa.fa-retweet
+                            |  更新  
                     td #{val.title}
                     td #{val.org}
                     td #{val.location}
@@ -312,7 +328,15 @@ block content
               tbody
                 each val,index in allSpeechs
                   tr
-                    td #{index}   
+                    td
+                      form.form-horizontal(action='/updateSpeechOrder/#{val.id}', method='POST')
+                        input(type='hidden', name='_csrf', value=_csrf)
+                        .form-group
+                          input(type='text', name='newOrder', value='#{val.order}',size="6") 
+                        .form-group
+                          button.btn.btn.btn-primary.btn-xs(type='submit')
+                            i.fa.fa-retweet
+                            |  更新   
                     td #{val.title}
                     td #{val.org}
                     td #{val.location}
