@@ -4,7 +4,7 @@
       .modal-header
         button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
         h4#forgetLabel.modal-title 忘記密碼
-      form.form-horizontal(action='/forget', method='POST')
+      form.form-horizontal(action='/forgot', method='POST')
         input(type='hidden', name='_csrf', value=_csrf)
         .modal-body
           .form-group
