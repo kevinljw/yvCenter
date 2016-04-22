@@ -48,10 +48,11 @@
                            onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                             <span class="social__icon--hidden">Google+</span>
                         </a>
-                        <div class="fb-like" style="display: block; margin-top: 20px;" data-href="{{url absolute="true"}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false" data-colorscheme="dark"></div>
+                        <div class="fb-like" style="display: block; margin-top: 20px;" data-href="{{url absolute="true"}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
                     </div>      
                     {{#if tags}}
-                    <ul class="post__meta post__meta--subpage">
+                    <!-- <ul class="post__meta post__meta--subpage"> -->
+                    <ul class="post__meta--subpage">
                       {{#foreach tags}}
                         <li class="post__tag"><a href="{{url}}" class="post__link post__tag_link">{{name}}</a>{{#if @last}} {{else}}, {{/if}}</li>
                       {{/foreach}}
