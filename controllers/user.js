@@ -402,7 +402,7 @@ exports.postReset = function(req, res, next) {
         content: '您在志工中心的密碼在不久前已變更完成，若正確請忽略此信，若有問題請至網站聯絡志工中心：',
         link: 'http://tkkyvc.org.tw/'
       }, function(err) {
-        req.flash('success', { msg: 'Success! Your password has been changed.' });
+        req.flash('success', { msg: '成功！您的密碼已確認變更。' });
         done(err);
       });
       // var mailOptions = {

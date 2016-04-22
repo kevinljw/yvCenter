@@ -3,7 +3,7 @@
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1751258648430941";
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1701198646764449";
   fjs.parentNode.insertBefore(js, fjs);
   // console.log("fb-cmts_load")
 }(document, 'script', 'facebook-jssdk'));</script>
@@ -34,7 +34,7 @@
                     {{content}}
                 </section>
                 <footer class="post__footer">
-                    <div class="social social--share">
+                    <div class="social social--share">           
                         <span class="social__label">Share: </span>
                         <a class="social__icon social__icon--twitter" href="http://twitter.com/share?text={{encode title}}&url={{url absolute="true"}}"
                             onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
@@ -48,7 +48,8 @@
                            onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                             <span class="social__icon--hidden">Google+</span>
                         </a>
-                    </div>                 
+                        <div class="fb-like" style="display: block; margin-top: 20px;" data-href="{{url absolute="true"}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false" data-colorscheme="dark"></div>
+                    </div>      
                     {{#if tags}}
                     <ul class="post__meta post__meta--subpage">
                       {{#foreach tags}}
@@ -57,6 +58,7 @@
                     </ul>
                     {{/if}}
                 </footer>
+
             </div>
             {{#if tags}}
                 <aside class="author">   
