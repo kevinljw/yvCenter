@@ -189,6 +189,7 @@ app.post('/addLocalData', passportConf.isAdminAuthenticated, adminController.pos
 app.post('/removeResource/:id', passportConf.isAdminAuthenticated, adminController.postRemoveResource);
 app.post('/removeService/:id', passportConf.isAdminAuthenticated, adminController.postRemoveSevice);
 app.post('/removeVolunForm/:id', passportConf.isAdminAuthenticated, adminController.postRemoveVolunForm);
+app.post('/removeOrg/:id', passportConf.isAdminAuthenticated, adminController.postRemoveOrg);
 // app.get('/calendarMgr',passportConf.isAdminAuthenticated, adminController.getCalendar);
 
 app.get('/empowerMgr', passportConf.isAdminAuthenticated, adminController.getEmpowerMgr );

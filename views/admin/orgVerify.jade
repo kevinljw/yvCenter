@@ -56,14 +56,22 @@ block content
                     td #{val.email}
                     td #{val.profile.contact}
                     td #{val.profile.phone}
-                    td        
-                      form.form-horizontal(action='/activation/#{val.id}', method='POST')
-                        input(type='hidden', name='_csrf', value=_csrf)
-                        .form-group
-                          button.btn.btn.btn-sm(type='submit' class='#{val.IsOrgActivation?"btn-danger":"btn-primary"}')
-                            i.fa.fa-mobile
-                            if val.IsOrgActivation
-                              |  取消授權
-                            else
-                              |  授權
+                    td
+                      .col-xs-10    
+                        form.form-horizontal(action='/activation/#{val.id}', method='POST')
+                          input(type='hidden', name='_csrf', value=_csrf)
+                          .form-group
+                            button.col-sm-12.btn.btn-sm(type='submit' class='#{val.IsOrgActivation?"btn-warning":"btn-primary"}')
+                              i.fa.fa-mobile
+                              if val.IsOrgActivation
+                                |  取消授權
+                              else
+                                |  授權
+                      .col-xs-10
+                        form.form-horizontal(action='/removeOrg/#{val.id}', onsubmit="return confirm('確認要永久刪除「#{val.profile.name}」之帳號及其所有服務需求案?');", method='POST')
+                          input(type='hidden', name='_csrf', value=_csrf)
+                          .form-group
+                            button.col-sm-12.btn.btn-danger.btn-sm(type='submit')
+                              i.fa.fa-trash
+                              |  移除
  

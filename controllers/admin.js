@@ -587,6 +587,24 @@ exports.postRemoveSevice  = function(req, res, next) {
   });
 
 }
+exports.postRemoveOrg = function(req, res, next) {
+
+  OrgForm.remove({ uid: req.params.id }, function(err) {
+    
+    if (err) {
+      return next(err);
+    }
+
+    User.remove({ _id: req.params.id }, function(err) {
+      if (err) {
+        return next(err);
+      }
+     
+      res.redirect('/orgVerify');
+    });
+
+  });
+}
 exports.postRemoveVolunForm  = function(req, res, next) {
 
   VolunForm.remove({ _id: req.params.id }, function(err) {
