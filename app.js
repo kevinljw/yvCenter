@@ -193,6 +193,12 @@ app.post('/removeOrg/:id', passportConf.isAdminAuthenticated, adminController.po
 // app.get('/calendarMgr',passportConf.isAdminAuthenticated, adminController.getCalendar);
 
 app.get('/empowerMgr', passportConf.isAdminAuthenticated, adminController.getEmpowerMgr );
+app.get('/empowerMgr_mentor', passportConf.isAdminAuthenticated, adminController.getEmpowerMgr_mentor );
+app.get('/empowerMgr_volunTrain', passportConf.isAdminAuthenticated, adminController.getEmpowerMgr_volunTrain );
+app.get('/empowerMgr_talentTrain', passportConf.isAdminAuthenticated, adminController.getEmpowerMgr_talentTrain );
+app.get('/empowerMgr_speech', passportConf.isAdminAuthenticated, adminController.getEmpowerMgr_speech );
+
+
 app.post('/addNewMentor', passportConf.isAdminAuthenticated, upload_profile.single('profile_pic'), adminController.postNewMentor ); 
 app.post('/updateMentorOrder/:id', passportConf.isAdminAuthenticated, adminController.postUpdateMentorOrder);
 app.post('/removeMentor/:id', passportConf.isAdminAuthenticated, adminController.postRemoveMentor);
@@ -207,6 +213,13 @@ app.post('/removeTalentTrain/:id', passportConf.isAdminAuthenticated, adminContr
 app.post('/addNewVolunTrain', passportConf.isAdminAuthenticated, adminController.postNewVolunTrain ); 
 app.post('/removeVolunTrain/:id', passportConf.isAdminAuthenticated, adminController.postRemoveVolunTrain);
 app.post('/editVolunform/:id', passportConf.isAdminAuthenticated, adminController.postEditVolunForm);
+app.post('/editMentorData/:id', passportConf.isAdminAuthenticated, adminController.postEditMentorData);
+app.post('/editVolunTrainData/:id', passportConf.isAdminAuthenticated, adminController.postEditVolunTrainData);
+app.post('/editTalentTrainData/:id', passportConf.isAdminAuthenticated, adminController.postEditTalentTrainData);
+app.post('/editSpeechData/:id', passportConf.isAdminAuthenticated, adminController.postEditSpeechData);
+
+app.post('/editLinksData/:id', passportConf.isAdminAuthenticated, adminController.postEditLinksData);
+
 
 
 app.get('/noveltyMgr', passportConf.isAdminAuthenticated, adminController.getNoveltyMgr );

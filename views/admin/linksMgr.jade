@@ -115,9 +115,9 @@ block content
                   th(style='width: 20%') 名稱
                   th(style='width: 15%') 圖示
                   th(style='width: 43%') 連結
-                  th(style='width: 10%') 移除
+                  th(style='width: 10%') 編輯
               tbody
-                each val in allLinks
+                each val,index in allLinks
                   if val.area == 'gov'
                     tr
                       td
@@ -135,10 +135,13 @@ block content
                       td 
                         a(href='#{val.link}', target='_blank') #{val.link}
                       td
+                        a.col-md-11.btn.btn-success.btn-sm(data-toggle="modal" data-target="#editLinksModel_#{index}")
+                          i.fa.fa-edit
+                            |  修改
                         form.form-horizontal(action='/removeLink/#{val.id}', method='POST')
                           input(type='hidden', name='_csrf', value=_csrf)
                           .form-group
-                            button.btn.btn.btn-danger.btn-sm(type='submit')
+                            button.col-md-11.btn.btn.btn-danger.btn-sm(type='submit')
                               i.fa.fa-trash
                               |  移除
       .col-md-12
@@ -162,9 +165,9 @@ block content
                   th(style='width: 20%') 名稱
                   th(style='width: 15%') 圖示
                   th(style='width: 43%') 連結
-                  th(style='width: 10%') 移除
+                  th(style='width: 10%') 編輯
               tbody
-                each val in allLinks
+                each val,index in allLinks
                   if val.area == 'vcenter'
                     tr
                       td
@@ -182,10 +185,13 @@ block content
                       td 
                         a(href='#{val.link}', target='_blank') #{val.link}
                       td
+                        a.col-md-11.btn.btn-success.btn-sm(data-toggle="modal" data-target="#editLinksModel_#{index}")
+                          i.fa.fa-edit
+                            |  修改
                         form.form-horizontal(action='/removeLink/#{val.id}', method='POST')
                           input(type='hidden', name='_csrf', value=_csrf)
                           .form-group
-                            button.btn.btn.btn-danger.btn-sm(type='submit')
+                            button.col-md-11.btn.btn.btn-danger.btn-sm(type='submit')
                               i.fa.fa-trash
                               |  移除
       .col-md-12
@@ -210,9 +216,9 @@ block content
                   th(style='width: 15%') 圖示
                   th(style='width: 30%') 簡介
                   th(style='width: 13%') 連結
-                  th(style='width: 10%') 移除
+                  th(style='width: 10%') 編輯
               tbody
-                each val in allLinks
+                each val,index in allLinks
                   if val.area == 'servicePoint'
                     tr
                       td
@@ -231,10 +237,13 @@ block content
                       td 
                         a(href='#{val.link}', target='_blank') #{val.link}
                       td
+                        a.col-md-11.btn.btn-success.btn-sm(data-toggle="modal" data-target="#editLinksModel_#{index}")
+                          i.fa.fa-edit
+                            |  修改
                         form.form-horizontal(action='/removeLink/#{val.id}', method='POST')
                           input(type='hidden', name='_csrf', value=_csrf)
                           .form-group
-                            button.btn.btn.btn-danger.btn-sm(type='submit')
+                            button.col-md-11.btn.btn.btn-danger.btn-sm(type='submit')
                               i.fa.fa-trash
                               |  移除     
       .col-md-12
@@ -258,9 +267,9 @@ block content
                   th(style='width: 20%') 名稱
                   th(style='width: 15%') 圖示
                   th(style='width: 43%') 連結
-                  th(style='width: 10%') 移除
+                  th(style='width: 10%') 編輯
               tbody
-                each val in allLinks
+                each val,index in allLinks
                   if val.area == 'goodLink'
                     tr
                       td
@@ -278,12 +287,16 @@ block content
                       td 
                         a(href='#{val.link}', target='_blank') #{val.link}
                       td
+                        a.col-md-11.btn.btn-success.btn-sm(data-toggle="modal" data-target="#editLinksModel_#{index}")
+                          i.fa.fa-edit
+                            |  修改
                         form.form-horizontal(action='/removeLink/#{val.id}', method='POST')
                           input(type='hidden', name='_csrf', value=_csrf)
                           .form-group
-                            button.btn.btn.btn-danger.btn-sm(type='submit')
+                            button.col-md-11.btn.btn.btn-danger.btn-sm(type='submit')
                               i.fa.fa-trash
                               |  移除                   
-      
+  each thisLinks,index in allLinks
+    include ../partModel/editLinksModel    
                 
   

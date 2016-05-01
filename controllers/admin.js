@@ -131,6 +131,66 @@ exports.getAdministrator = function(req, res, next) {
         });
     });
   });
+};
+exports.getEmpowerMgr_speech  = function(req, res, next) {
+ 
+    Speech.find({},{},{sort:{order: 1}}, function(err, allSpeechs) {
+        if (err) {
+          return next(err);
+        }
+      
+          res.render('admin/empowerMgr_speech', {
+            title: '青年培力-研習講座',
+            allSpeechs: allSpeechs,
+          });
+      
+    });
+  
+}; 
+exports.getEmpowerMgr_talentTrain  = function(req, res, next) {
+ 
+    TalentTrain.find({},{},{sort:{order: 1}}, function(err, allTalentTrains) {
+        if (err) {
+          return next(err);
+        }
+      
+          res.render('admin/empowerMgr_talentTrain', {
+            title: '青年培力-專長訓練',
+            allTalentTrains: allTalentTrains,
+          });
+      
+    });
+  
+}; 
+exports.getEmpowerMgr_volunTrain  = function(req, res, next) {
+ 
+    VolunTrain.find({},{},{sort:{order: 1}}, function(err, allVolunTrains) {
+        if (err) {
+          return next(err);
+        }
+      
+          res.render('admin/empowerMgr_volunTrain', {
+            title: '青年培力-志工訓練',
+            allVolunTrains: allVolunTrains,
+          });
+      
+    });
+  
+}; 
+exports.getEmpowerMgr_mentor  = function(req, res, next) {
+ 
+    Mentor.find({},{},{sort:{order: 1}}, function(err, allMentors) {
+        if (err) {
+          return next(err);
+        }
+      
+          res.render('admin/empowerMgr_mentor', {
+            title: '青年培力-諮詢業師',
+            allMentors: allMentors,
+          });
+      
+    });
+  
 }; 
 exports.getEmpowerMgr  = function(req, res, next) {
   VolunTrain.find({},{},{sort:{order: -1}}, function(err, allVolunTrains) {
@@ -195,6 +255,132 @@ exports.postNewMentor   = function(req, res, next) {
       });
 
     });
+
+}
+exports.postEditLinksData  = function(req, res, next) {
+    
+  Link.findById(req.params.id, function(err, existingOne) {
+    if (err) {
+      return next(err);
+    }
+    if(existingOne){
+      existingOne.name= req.body.name || existingOne.name;
+      existingOne.link= req.body.link || existingOne.link;
+      existingOne.abstract= req.body.abstract;
+      
+      existingOne.save(function(err) {
+        if (err) {
+          return next(err);
+        }
+      
+        // req.flash('success', { msg: '表單修改成功。' });
+        res.redirect('/linksMgr');
+      });
+  
+    }   
+  });
+
+}
+exports.postEditSpeechData  = function(req, res, next) {
+    
+  Speech.findById(req.params.id, function(err, existingOne) {
+    if (err) {
+      return next(err);
+    }
+    if(existingOne){
+      existingOne.title= req.body.title || existingOne.title;
+      existingOne.location= req.body.location;
+      existingOne.abstract= req.body.abstract || existingOne.abstract;
+      existingOne.org= req.body.org || existingOne.org;
+      existingOne.link= req.body.link;
+      existingOne.date= req.body.date || existingOne.date;
+      existingOne.save(function(err) {
+        if (err) {
+          return next(err);
+        }
+      
+        // req.flash('success', { msg: '表單修改成功。' });
+        res.redirect('/empowerMgr_speech');
+      });
+  
+    }   
+  });
+
+}
+exports.postEditTalentTrainData  = function(req, res, next) {
+    
+  TalentTrain.findById(req.params.id, function(err, existingOne) {
+    if (err) {
+      return next(err);
+    }
+    if(existingOne){
+      existingOne.title= req.body.title || existingOne.title;
+      existingOne.location= req.body.location;
+      existingOne.abstract= req.body.abstract || existingOne.abstract;
+      existingOne.org= req.body.org || existingOne.org;
+      existingOne.link= req.body.link;
+      existingOne.date= req.body.date || existingOne.date;
+      existingOne.save(function(err) {
+        if (err) {
+          return next(err);
+        }
+      
+        // req.flash('success', { msg: '表單修改成功。' });
+        res.redirect('/empowerMgr_talentTrain');
+      });
+  
+    }   
+  });
+
+}
+exports.postEditVolunTrainData  = function(req, res, next) {
+    
+  VolunTrain.findById(req.params.id, function(err, existingOne) {
+    if (err) {
+      return next(err);
+    }
+    if(existingOne){
+      existingOne.title= req.body.title || existingOne.title;
+      existingOne.location= req.body.location;
+      existingOne.abstract= req.body.abstract || existingOne.abstract;
+      existingOne.org= req.body.org || existingOne.org;
+      existingOne.link= req.body.link;
+      existingOne.date= req.body.date || existingOne.date;
+      existingOne.save(function(err) {
+        if (err) {
+          return next(err);
+        }
+      
+        // req.flash('success', { msg: '表單修改成功。' });
+        res.redirect('/empowerMgr_volunTrain');
+      });
+  
+    }   
+  });
+
+}
+exports.postEditMentorData  = function(req, res, next) {
+    
+  Mentor.findById(req.params.id, function(err, existingOne) {
+    if (err) {
+      return next(err);
+    }
+    if(existingOne){
+      existingOne.name= req.body.name || existingOne.name;
+      existingOne.job= req.body.job || existingOne.job;
+      existingOne.abstract= req.body.abstract || existingOne.abstract;
+      existingOne.link= req.body.link || existingOne.link;
+      existingOne.save(function(err) {
+        if (err) {
+          return next(err);
+        }
+      
+        // req.flash('success', { msg: '表單修改成功。' });
+        res.redirect('/empowerMgr_mentor');
+      });
+  
+    }   
+  });
 
 }
 exports.postEditVolunForm  = function(req, res, next) {

@@ -1,0 +1,30 @@
+.modal.fade(tabindex='-1', role='dialog', aria-labelledby='LinksLabel', id='editLinksModel_#{index}', aria-hidden='true')
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+        h4#LinksLabel.modal-title 友好連結-修改
+      form.form-horizontal(action='/editLinksData/#{thisLinks.id}', method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .modal-body
+          .form-group
+            label.col-sm-3.control-label(for='name') 名稱
+            .col-sm-9
+              input.form-control(type='text', name='name', id='name', value='#{thisLinks.name}')
+          .form-group
+            label.col-sm-3.control-label(for='link') 連結
+            .col-sm-9
+              input.form-control(type='text', name='link', id='link', value='#{thisLinks.link}')
+          if thisLinks.abstract
+            .form-group
+              label.col-sm-3.control-label(for='abstract') 簡介
+              .col-sm-9
+                textarea.form-control(type='text', name='abstract', id='abstract', rows=5) #{thisLinks.abstract}
+        .modal-footer
+          .left-side
+            button.btn.btn-danger.btn-simple(type='button', data-dismiss='modal') 取消
+          .divider
+          .right-side.form-group
+            button.btn.btn-success.btn-simple(type='submit')
+              i.fa.fa-paper-plane-o
+              | 送出修改

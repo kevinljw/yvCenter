@@ -1,0 +1,41 @@
+.modal.fade(tabindex='-1', role='dialog', aria-labelledby='VolunTrainLabel', id='editVolunTrainModel_#{index}', aria-hidden='true')
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+        h4#VolunTrainLabel.modal-title 志工訓練-修改
+      form.form-horizontal(action='/editVolunTrainData/#{thisVolunTrain.id}', method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .modal-body
+          .form-group
+            label.col-sm-3.control-label(for='title') 訓練名稱
+            .col-sm-9
+              input.form-control(type='text', name='title', id='title', value='#{thisVolunTrain.title}')
+          .form-group
+            label.col-sm-3.control-label(for='org') 主辦單位
+            .col-sm-9
+              input.form-control(type='text', name='org', id='org', value='#{thisVolunTrain.org}')
+          .form-group
+            label.col-sm-3.control-label(for='location') 位置
+            .col-sm-9
+              input.form-control(type='text', name='location', id='location', value='#{thisVolunTrain.location}')
+          .form-group
+            label.col-sm-3.control-label(for='link') 連結
+            .col-sm-9
+              input.form-control(type='text', name='link', id='link', value='#{thisVolunTrain.link}')
+          .form-group
+            label.col-sm-3.control-label(for='date') 活動日期
+            .col-sm-9
+              input.form-control(type='text', name='date', id='date', value='#{thisVolunTrain.date}')
+          .form-group
+            label.col-sm-3.control-label(for='abstract') 簡介
+            .col-sm-9
+              textarea.form-control(type='text', name='abstract', id='abstract', rows=5) #{thisVolunTrain.abstract}
+        .modal-footer
+          .left-side
+            button.btn.btn-danger.btn-simple(type='button', data-dismiss='modal') 取消
+          .divider
+          .right-side.form-group
+            button.btn.btn-success.btn-simple(type='submit')
+              i.fa.fa-paper-plane-o
+              | 送出修改

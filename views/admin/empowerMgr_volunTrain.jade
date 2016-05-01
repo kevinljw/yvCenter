@@ -1,0 +1,115 @@
+extends layout
+
+block content
+  //- page content
+  br
+  div
+    .row
+      .col-md-9
+        .x_panel
+          .x_title
+            h2
+              | 新增志工訓練
+              small Add New Train
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            h5 新增以下志工訓練資訊:
+            br
+            form.form-horizontal(action='/addNewVolunTrain', method='POST')
+              input(type='hidden', name='_csrf', value=_csrf)
+              .col-sm-6
+                .form-group
+                  label.col-sm-2.control-label(for='title') 訓練名稱
+                  .col-sm-10
+                    input.form-control(type='text', name='title', id='title', placeholder='請輸入訓練名稱', autofocus)
+                .form-group
+                  label.col-sm-2.control-label(for='org') 主辦單位
+                  .col-sm-10
+                    input.form-control(type='text', name='org', id='org', placeholder='請輸入機構/主辦單位名稱', autofocus)
+                .form-group
+                  label.col-sm-2.control-label(for='location') 位置
+                  .col-sm-10
+                    input.form-control(type='text', name='location', id='location', placeholder='請輸入活動位置', autofocus)
+                .form-group
+                  label.col-sm-2.control-label(for='link') 連結
+                  .col-sm-10
+                    input.form-control(type='text', name='link', id='link', placeholder='請輸入連結', autofocus)
+                
+              .col-sm-6
+                .form-group
+                  label.col-sm-2.control-label(for='date') 活動日期
+                  .col-sm-10
+                    input.form-control(type='text', name='date', id='date', placeholder='Ex. 2016-05-01 09:10~16:00', autofocus)
+                .form-group
+                  label.col-sm-2.control-label(for='abstract') 簡述
+                  .col-sm-10
+                    textarea.form-control(type='text', name='abstract', id='abstract', autofocus, rows='3')
+                
+              
+              
+              .form-group
+                .col-sm-offset-2.col-sm-4
+                  button.col-sm-12.btn.btn.btn-primary.btn-sm(type='submit')
+                    i.fa.fa-plus
+                    |  新增       
+      .col-md-12
+        .x_panel
+          .x_title
+            h2
+              | 志工訓練 列表
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            table.table.table-striped.projects
+              thead
+                tr
+                  th(style='width: 1%') 排序
+                  th(style='width: 20%') 訓練名稱
+                  th(style='width: 18%') 主辦單位
+                  th(style='width: 13%') 位置
+                  th(style='width: 5%') 日期
+                  th(style='width: 30%') 簡介
+                  th(style='width: 13%') 編輯
+              tbody
+                each val,index in allVolunTrains
+                  tr
+                    td
+                      form.form-horizontal(action='/updateVolunTrainOrder/#{val.id}', method='POST')
+                        input(type='hidden', name='_csrf', value=_csrf)
+                        .form-group
+                          input(type='text', name='newOrder', value='#{val.order}',size="6") 
+                        .form-group
+                          button.btn.btn.btn-primary.btn-xs(type='submit')
+                            i.fa.fa-retweet
+                            |  更新  
+                    td #{val.title}
+                      br
+                      if val.link
+                        a.btn.btn-xs.btn-info(href='#{val.link}', target='_blank') 連結
+                    td #{val.org}
+                    td #{val.location}
+                    td #{val.date}
+                    td #{val.abstract}
+                    td
+                      a.col-md-11.btn.btn-success.btn-sm(data-toggle="modal" data-target="#editVolunTrainModel_#{index}") 修改
+                      
+                      form.form-horizontal(action='/removeVolunTrain/#{val.id}', onsubmit="return confirm('確認要刪除?');", method='POST')
+                        input(type='hidden', name='_csrf', value=_csrf)
+                        .form-group
+                          button.col-md-11.btn.btn-danger.btn-sm(type='submit') 移除
+  each thisVolunTrain,index in allVolunTrains
+    include ../partModel/editVolunTrainModel      
+ 

@@ -24,11 +24,10 @@ block content
                 tr
                   th(style='width: 2%') 排序
                   th(style='width: 10%') 照片
-                  th(style='width: 10%') 名字
-                  th(style='width: 10%') 職業
+                  th(style='width: 15%') 姓名
+                  th(style='width: 15%') 職業
                   th(style='width: 48%') 簡介
-                  th(style='width: 10%') 連結
-                  th(style='width: 10%') 移除
+                  th(style='width: 10%') 編輯
               tbody
                 each val in allMentors
                   tr
@@ -43,18 +42,16 @@ block content
                             |  更新
                     td
                       img(src='/uploads/#{val.picture}', height='100px')
-                    td #{val.name}
+                    td
+                      a.btn.btn-xs.btn-default(href='#{val.link}', target='_blank') #{val.name}
                     td #{val.job}
                     td #{val.abstract}
                     td 
-                      a.btn.btn-sm.btn-info(href='#{val.link}', target='_blank') 查看
-                    td
+                      a.col-md-11.btn.btn-sm.btn-success(href='#{val.link}', target='_blank') 修改
                       form.form-horizontal(action='/removeMentor/#{val.id}', method='POST')
                         input(type='hidden', name='_csrf', value=_csrf)
                         .form-group
-                          button.btn.btn-danger.btn-sm(type='submit')
-                            i.fa.fa-trash
-                            |  移除
+                          button.col-md-11.btn.btn-danger.btn-sm(type='submit') 移除
 
       .col-md-4
         .x_panel
@@ -123,8 +120,7 @@ block content
                   th(style='width: 13%') 位置
                   th(style='width: 3%') 日期
                   th(style='width: 38%') 簡介
-                  th(style='width: 2%') 連結
-                  th(style='width: 2%') 移除
+                  th(style='width: 4%') 編輯
               tbody
                 each val,index in allVolunTrains
                   tr
@@ -144,7 +140,6 @@ block content
                     td #{val.abstract}
                     td 
                       a.btn.btn-sm.btn-info(href='#{val.link}', target='_blank') 查看
-                    td
                       form.form-horizontal(action='/removeVolunTrain/#{val.id}', method='POST')
                         input(type='hidden', name='_csrf', value=_csrf)
                         .form-group
@@ -223,8 +218,7 @@ block content
                   th(style='width: 13%') 位置
                   th(style='width: 3%') 日期
                   th(style='width: 38%') 簡介
-                  th(style='width: 2%') 連結
-                  th(style='width: 2%') 移除
+                  th(style='width: 4%') 連結
               tbody
                 each val,index in allTalentTrains
                   tr
@@ -244,7 +238,6 @@ block content
                     td #{val.abstract}
                     td 
                       a.btn.btn-sm.btn-info(href='#{val.link}', target='_blank') 查看
-                    td
                       form.form-horizontal(action='/removeTalentTrain/#{val.id}', method='POST')
                         input(type='hidden', name='_csrf', value=_csrf)
                         .form-group
@@ -323,8 +316,7 @@ block content
                   th(style='width: 13%') 位置
                   th(style='width: 3%') 日期
                   th(style='width: 38%') 簡介
-                  th(style='width: 2%') 連結
-                  th(style='width: 2%') 移除
+                  th(style='width: 4%') 連結
               tbody
                 each val,index in allSpeechs
                   tr
@@ -344,7 +336,6 @@ block content
                     td #{val.abstract}
                     td 
                       a.btn.btn-sm.btn-info(href='#{val.link}', target='_blank') 查看
-                    td
                       form.form-horizontal(action='/removeSpeech/#{val.id}', method='POST')
                         input(type='hidden', name='_csrf', value=_csrf)
                         .form-group

@@ -1,0 +1,109 @@
+extends layout
+
+block content
+  //- page content
+  br
+  div
+    .row
+      .col-md-9
+        .x_panel
+          .x_title
+            h2
+              | 新增業師
+              small Add New Mentor
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            h5 新增以下業師:
+            br
+            form.form-horizontal(action='/addNewMentor', enctype='multipart/form-data', method='POST')
+              input(type='hidden', name='_csrf', value=_csrf)
+              .col-sm-5
+                .form-group
+                  label.col-sm-3.control-label(for='name') 名字
+                  .col-sm-9
+                    input.form-control(type='text', name='name', id='name', placeholder='請輸入名字', autofocus)
+                .form-group
+                  label.col-sm-3.control-label(for='job') 職業
+                  .col-sm-9
+                    input.form-control(type='text', name='job', id='job', placeholder='請輸入職業', autofocus)
+                .form-group
+                  label.col-sm-3.control-label(for='link') 連結
+                  .col-sm-9
+                    input.form-control(type='text', name='link', id='link', placeholder='請輸入連結', autofocus)
+                
+              .col-sm-7
+                .form-group
+                  label.col-sm-2.control-label 照片
+                  .col-sm-10
+                    input(type='file', name='profile_pic')
+                .form-group
+                  label.col-sm-2.control-label(for='abstract') 簡介
+                  .col-sm-10
+                    textarea.form-control(type='text', name='abstract', id='abstract', autofocus, rows='2')
+              
+              .form-group
+                .col-sm-offset-2.col-sm-4
+                  button.col-sm-12.btn.btn.btn-primary.btn-sm(type='submit')
+                    i.fa.fa-plus
+                    |  新增
+      .col-md-12
+        .x_panel
+          .x_title
+            h2
+              | 諮詢業師 列表
+            ul.nav.navbar-right.panel_toolbox
+              li
+                a.collapse-link
+                  i.fa.fa-chevron-up
+              li
+                a.close-link
+                  i.fa.fa-close
+            .clearfix
+          .x_content
+            table.table.table-striped.projects
+              thead
+                tr
+                  th(style='width: 2%') 排序
+                  th(style='width: 10%') 照片
+                  th(style='width: 15%') 姓名
+                  th(style='width: 15%') 職業
+                  th(style='width: 48%') 簡介
+                  th(style='width: 10%') 編輯
+              tbody
+                each val,index in allMentors
+                  tr
+                    td
+                      form.form-horizontal(action='/updateMentorOrder/#{val.id}', method='POST')
+                        input(type='hidden', name='_csrf', value=_csrf)
+                        .form-group
+                          input(type='text', name='newOrder', value='#{val.order}',size="6") 
+                        .form-group
+                          button.btn.btn.btn-primary.btn-xs(type='submit')
+                            i.fa.fa-retweet
+                            |  更新
+                    td
+                      img(src='/uploads/#{val.picture}', height='100px')
+                    td #{val.name}
+                      br
+                      if val.link
+                        a.btn.btn-xs.btn-info(href='#{val.link}', target='_blank') 連結
+                    td #{val.job}
+                    td #{val.abstract}
+                    td
+                      
+                      a.col-md-11.btn.btn-success.btn-sm(data-toggle="modal" data-target="#editMentorModel_#{index}") 修改
+                      form.form-horizontal(action='/removeMentor/#{val.id}', onsubmit="return confirm('確認要刪除?');", method='POST')
+                        input(type='hidden', name='_csrf', value=_csrf)
+                        .form-group
+                          button.col-md-11.btn.btn-danger.btn-sm(type='submit') 移除
+
+  each thisMentor,index in allMentors
+    include ../partModel/editMentorModel
+      
