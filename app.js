@@ -240,7 +240,7 @@ app.post('/removeHomeCover/:id', passportConf.isAdminAuthenticated, adminControl
 app.post('/updateHomeCoverOrder/:id', passportConf.isAdminAuthenticated, adminController.postUpdateHomeCoverOrder);
 app.post('/updateHomeCoverAbstract/:id', passportConf.isAdminAuthenticated, adminController.postUpdateHomeCoverAbstract);
 
-
+app.get('/volunPage',youthController.getVolunPage);
 
 /**
  * API examples routes.

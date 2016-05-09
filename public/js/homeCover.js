@@ -24,7 +24,7 @@ $(document).ready(function() {
     while($('#carousel_home .item:eq('+index+')').children().length>0){
       index++;
     }
-    $('#carousel_home .item:eq('+index+')').append('<div class="col-sm-12"><a data-toggle="modal" data-target="#homeCoverModel"><img src="/uploads/'+eachCover.picture+'" alt="'+eachCover.title+'" height="480px"/><h3>'+eachCover.title+'</h3></a></div>');
+    $('#carousel_home .item:eq('+index+')').append('<div class="col-sm-12"><a data-toggle="modal" data-target="#homeCoverModel"><img src="/uploads/'+eachCover.picture+'" alt="'+eachCover.title+'" height="320px"/><h3>'+eachCover.title+'</h3></a></div>');
   });
 
   // setHomeCoverModel(nowHomeCarouselIndex);

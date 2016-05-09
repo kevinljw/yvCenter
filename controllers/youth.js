@@ -32,6 +32,18 @@ exports.getLocalDistrict = function(req, res) {
   });
 
 };
+exports.getVolunPage = function(req, res) {
+  OrgForm.find({},{},{sort:{_id: -1}, limit:5}, function(err, allOrgForms) {
+      if (err) {
+        return next(err);
+      }
+        res.render('volunPage', {
+          title: '青年當志工',
+          allServices: allOrgForms
+        });
+      
+  });
+};
 exports.getBevo = function(req, res) {
   OrgForm.find({},{},{sort:{_id: -1}}, function(err, allOrgForms) {
       if (err) {

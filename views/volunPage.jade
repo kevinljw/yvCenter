@@ -1,0 +1,63 @@
+doctype html
+//- saved from url=(0039)http://-localhost:3000/news/news-report/
+html
+  head
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    #fit-vids-style.fit-vids-style(style='display: none;')
+      | ­
+      style.
+        .fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}
+    //- <base target="_parent">
+    base(href='.', target='_parent')
+    title 青年當志工
+    meta(name='description', content='')
+    meta(name='HandheldFriendly', content='True')
+    meta(name='MobileOptimized', content='320')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(property='og:type', content='article')
+    meta(property='og:title', content='青年當志工')
+    meta(property='og:description', content='')
+
+
+    link(rel='stylesheet', href='/assets/css/ghost_main.css')
+    link(rel='stylesheet', type='text/css', href='/assets/css/ghost_normalize.css')
+    link(href='/assets/css/ct-paper.css', rel='stylesheet')
+    link(href='/assets/css/demo.css', rel='stylesheet')
+
+    //- link(rel='stylesheet', type='text/css', href='./新聞報導_files/main(1).css')
+    //- link(rel='stylesheet', href='./新聞報導_files/ct-paper.css')
+    //- link(rel='stylesheet', href='./新聞報導_files/demo.css')
+    //- link(rel='stylesheet', type='text/css', href='./新聞報導_files/css')
+    //-if (gte IE 6)&(lte IE 8)
+      script(type='text/javascript', src='http://html5shim.googlecode.com/svn/trunk/html5.js')
+    meta(name='referrer', content='origin')
+  body.post-template.page-template.page.page-news-report.page-template-news-report
+    main(role='main', style='background: #EEEEEE; min-height: 600px;')
+      .main__wrapper
+        article.post.page
+          .post__wrapper--subpage(style='min-height: 380px; padding-top: 40px;margin-left:2.5%;margin-right:10px;')
+            h2.post__title(style='font-weight: 800;text-align:center;')
+              a(href='/youth/bevo', style='color:#000;text-decoration:none;')
+                | 青年當志工
+            div
+              //- <span class="menu-heading">Recent posts</span>
+              ul(style='text-align: left; list-style: square;')
+                each val,index in allServices
+                  li
+                    h5(style='font-weight: 600;')
+                      a.menu-item.tag(href='/youth/bevo#orgForm_#{index}', style='text-decoration:none;') #{val.activity_name}
+                      small
+                        |  - #{val.uname}-#{val.timestamp}
+                //- li
+                //-   h5(style='font-weight: 600;')
+                //-     a.menu-item.tag(href='http://localhost:3000/news/abc/') ABC
+                //-     small  2016-03-19 03:32:15
+                
+    script(src='/js/lib/jquery-2.2.0.min.js')
+    script(src='/js/lib/bootstrap.min.js')
+    script(type='text/javascript', src='/assets/js/jquery.fitvids.js')
+    script(type='text/javascript', src='/assets/js/index.js')
+    script(src='/assets/js/ct-paper.js')
+
+

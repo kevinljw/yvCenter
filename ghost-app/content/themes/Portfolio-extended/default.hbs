@@ -34,13 +34,10 @@
         {{navigation}}
     {{/if}}
     {{> logo}}
-    
     {{{body}}}
     {{> footer}}
-
     {{! Ghost outputs important scripts and data with this tag }}
     {{ghost_foot}}
-
     <script type="text/javascript">  
     if (typeof jQuery == 'undefined') {
   	document.write('<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></'+'script>');
@@ -70,6 +67,13 @@
       jQuery(document).ready(function(){
             jQuery(document).fitVids();
       });
+    </script>
+    <script type="text/javascript" src="{{asset "js/jquery.ghostHunter.min.js"}}"></script>
+    <script>
+        $("#search-field").ghostHunter({
+            results   : "#results",
+            rss       : "/news/rss"
+        });
     </script>
 </body>
 </html>

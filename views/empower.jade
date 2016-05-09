@@ -9,7 +9,7 @@ block content
           br
           h5
             | 本會每年協助十大傑出青年選拔，為台灣豎立各領域的傑出青年標竿，在他們身上除了能感受到其對於社會的影響力，也看見他們帶領社會向前邁進的實踐力。
-  .section.section-nude.text-center.landing-section
+  #MentorTag.section.section-nude.text-center.landing-section
     .container
       .row
         .col-md-8.col-md-offset-2.paragrahIndent
@@ -31,7 +31,7 @@ block content
           
 
 
-  .section.section-white.text-center.landing-section
+  #VolunTrainTag.section.section-white.text-center.landing-section
     .container
       .row
         .col-md-8.col-md-offset-2.paragrahIndent
@@ -62,7 +62,7 @@ block content
                   td
                     a.col-sm-12.btn.btn.btn-success.btn-xs(href='#{val.link}', target='_blank', style='font-weight:900;') 瀏覽          
           br
-  .section.section-gray.text-center.landing-section
+  #TalentTrainTag.section.section-gray.text-center.landing-section
     .container
       .row
         .col-md-10.col-md-offset-1.paragrahIndent
@@ -90,7 +90,7 @@ block content
                   td
                     a.col-sm-12.btn.btn.btn-success.btn-xs(href='#{val.link}', target='_blank', style='font-weight:900;') 瀏覽
           
-  .section.section-nude.text-center.landing-section
+  #SpeechTag.section.section-nude.text-center.landing-section
     .container
       .row
         .col-md-10.col-md-offset-1.paragrahIndent
@@ -136,7 +136,10 @@ block content
                 small #{val.job}
             .col-sm-offset-1.col-sm-5
               h5.text-center 簡述
-              h6.paragrahIndent !{val.abstract}
+              //- h6 !{"<li>"+val.abstract.split(',')+"</li>"}
+              each eachAbs in val.abstract.split(',')
+                li=eachAbs
+              
           .modal-footer
             .left-side
               a.btn.btn-success.btn-simple(href='#{val.link}', target='_blank')

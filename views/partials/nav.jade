@@ -69,12 +69,40 @@ nav#demo-navbar.navbar.navbar-ct-warning(role='navigation-demo')
             li.divider
             li
               a(href='/youth/launchteam') 揪團去服務
-        li
-          a.btn.btn-default.btn-simple(href='/youth/empower') 
+        li.dropdown
+          a.dropdown-toggle.btn.btn-default.btn-simple(href='/youth/empower', data-toggle='dropdown') 
             | 青年培力
-        li
-          a.btn.btn-default.btn-simple(href='/novelty')
+            b.caret
+          ul.dropdown-menu.dropdown-warning.dropdown-menu-right
+            li.dropdown-header Youth Empower
+            li
+              a(href='/youth/empower#MentorTag') 諮詢業師
+            
+            li
+              a(href='/youth/empower#VolunTrainTag') 志工訓練
+            
+            li
+              a(href='/youth/empower#TalentTrainTag') 專長訓練
+            
+            li
+              a(href='/youth/empower#SpeechTag') 研習講座
+        li.dropdown
+          a.dropdown-toggle.btn.btn-default.btn-simple(href='/novelty', data-toggle='dropdown')
             | 公益新鮮事
+            b.caret
+          ul.dropdown-menu.dropdown-warning.dropdown-menu-right
+            li.dropdown-header Public Interest
+            li
+              a(href='/novelty#IdeaTag') 公益好思維
+           
+            li
+              a(href='/novelty#StoryTag') 公益小故事
+            
+            li
+              a(href='/novelty#ShareTag') 公益分享會
+            
+            li
+              a(href='/novelty#TalkTag') 公益來開講
         li
           a.btn.btn-default.btn-simple(href='/links') 
             | 友好連結

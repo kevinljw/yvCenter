@@ -91,7 +91,7 @@ block content
 
 
       .main
-   .section.text-center.landing-section
+   .section.text-center.landing-section.section-gray
     .container
       .row
         .col-md-12
@@ -101,6 +101,7 @@ block content
           br
           form.form-horizontal(action='/applyJob', method='POST')
             input(type='hidden', name='_csrf', value=_csrf)
+            
             table.table.table-striped.projects
               thead
                 tr
@@ -118,10 +119,12 @@ block content
               tbody
                 each val,index in allOrgForms
                   if val.hasCompleted!='stop'
-                    tr
+                    tr(id='orgForm_#{index}')
                       if user
                         td
-                          label.checkbox.checkbox-orange
+                          if index==0
+                            .btn-tooltip(type='button', data-toggle='tooltip', data-placement='top', title='請勾選下方欲申請服務，\n\r並點選最下方送出', data-trigger='manual', style='position: relative;top:-45px;')
+                          label.checkbox.checkbox-orange.applyChkboxs
                             input(type='checkbox', checked=vForm.applyIdArr.indexOf("#{val.id}")>-1, name='applyJob', value='#{val.id}', data-toggle='checkbox')
                       td #{val.activity_name}
                       td #{val.service_date_since} ~ #{val.service_date_until}
@@ -136,7 +139,7 @@ block content
               button.btn.btn-warning.btn-fill(type='submit')
                 i.fa.fa-paper-plane-o
                 | 送出申請/修改   
-  
+
   include partModel/signinModel
   include partModel/forgetModel
   if allOrgForms

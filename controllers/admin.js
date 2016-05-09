@@ -237,10 +237,13 @@ exports.getLinksMgr = function(req, res, next) {
   });
 }; 
 exports.postNewMentor   = function(req, res, next) {
+  
+    var abstractLi = req.body.abstract.filter(Boolean)
+    // console.log("postNewMentor",abstractLi)
     Mentor.count({}, function(err, numOfMentor) {
       var newMentor = new Mentor({
         name: req.body.name,
-        abstract: req.body.abstract,
+        abstract: abstractLi,
         job: req.body.job,
         link: req.body.link,
         picture: 'profile/'+req.file.filename,
@@ -251,7 +254,7 @@ exports.postNewMentor   = function(req, res, next) {
             return next(err);
           }
           // req.flash('success', { msg: '表單送出成功。' });
-          res.redirect('/empowerMgr');
+          res.redirect('/empowerMgr_mentor');
       });
 
     });
@@ -447,7 +450,7 @@ exports.postNewVolunTrain  = function(req, res, next) {
           }
          
           // req.flash('success', { msg: '表單送出成功。' });
-          res.redirect('/empowerMgr');
+          res.redirect('/empowerMgr_volunTrain');
       });
 
     });
@@ -471,7 +474,7 @@ exports.postNewTalentTrain  = function(req, res, next) {
           }
          
           // req.flash('success', { msg: '表單送出成功。' });
-          res.redirect('/empowerMgr');
+          res.redirect('/empowerMgr_talentTrain');
       });
 
     });
@@ -494,7 +497,7 @@ exports.postNewSpeech  = function(req, res, next) {
           }
          
           // req.flash('success', { msg: '表單送出成功。' });
-          res.redirect('/empowerMgr');
+          res.redirect('/empowerMgr_speech');
       });
 
     });
@@ -809,7 +812,7 @@ exports.postRemoveVolunTrain  = function(req, res, next) {
       return next(err);
     }
    
-    res.redirect('/empowerMgr');
+    res.redirect('/empowerMgr_volunTrain');
   });
 
 }
@@ -820,7 +823,7 @@ exports.postRemoveTalentTrain  = function(req, res, next) {
       return next(err);
     }
    
-    res.redirect('/empowerMgr');
+    res.redirect('/empowerMgr_talentTrain');
   });
 
 }
@@ -831,7 +834,7 @@ exports.postRemoveSpeech  = function(req, res, next) {
       return next(err);
     }
    
-    res.redirect('/empowerMgr');
+    res.redirect('/empowerMgr_speech');
   });
 
 }
@@ -853,7 +856,7 @@ exports.postRemoveMentor  = function(req, res, next) {
       return next(err);
     }
    
-    res.redirect('/empowerMgr');
+    res.redirect('/empowerMgr_mentor');
   });
 
 }

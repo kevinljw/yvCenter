@@ -22,7 +22,19 @@ $(document).ready(function() {
       });
       
     }
+    $('.btn-tooltip').tooltip("show");
 
+    
+    $('label.applyChkboxs').click(function(){
+      // console.log("click")
+      if(!$("label.applyChkboxs input").prop("checked")){
+        $('.btn-tooltip').tooltip("hide");
+        // console.log("hide")
+      }
+      
+    });
+
+    
     // $("select#area").on('change', function() {
     // console.log('#area')
     //   if ($("#area option[value='2']").attr('selected')) {

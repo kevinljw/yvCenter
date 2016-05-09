@@ -45,14 +45,19 @@ block content
                     input(type='file', name='profile_pic')
                 .form-group
                   label.col-sm-2.control-label(for='abstract') 簡介
-                  .col-sm-10
-                    textarea.form-control(type='text', name='abstract', id='abstract', autofocus, rows='2')
+                  .col-sm-8#addAbstractPlace
+                    input.col-sm-12.form-control(type='text', name='abstract', id='abstract', placeholder='請輸入單一項簡介', autofocus)
+                  .col-sm-2
+                    a#addAbstractLi.btn.btn-info.btn-sm
+                      i.fa.fa-plus-square
+                        |  增加
+                    
               
-              .form-group
-                .col-sm-offset-2.col-sm-4
-                  button.col-sm-12.btn.btn.btn-primary.btn-sm(type='submit')
-                    i.fa.fa-plus
-                    |  新增
+                .form-group
+                  .col-sm-offset-2.col-sm-4
+                    button.col-sm-12.btn.btn-primary.btn-sm(type='submit')
+                      i.fa.fa-plus
+                      |  新增
       .col-md-12
         .x_panel
           .x_title

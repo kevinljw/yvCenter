@@ -1,6 +1,9 @@
 
 $(document).ready(function() {
-
+	$('a#addAbstractLi').click(function(){
+      console.log("add")
+      $('#addAbstractPlace').append('<input type="text" name="abstract" id="abstract" placeholder="請輸入單一項簡介" autofocus="autofocus" class="col-sm-12 form-control"/>');
+    });
   // Place JavaScript code here...
   	$(".addNewBoard").click(function() {
 

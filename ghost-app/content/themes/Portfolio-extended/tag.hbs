@@ -4,6 +4,15 @@
 <main role="main" class="{{#if @blog.cover}} custom-bg{{else}} default-bg{{/if}}"{{#if @blog.cover}} style="background-image: url({{@blog.cover}})"{{/if}}>
     <div class="main__wrapper">
     <!--     <h2 class="main__header">Tag archive: <span class="main__header--tagname">{{tag.name}} ({{pagination.total}})</span></h2> -->
+        <form style="text-align:center" class="col-sm-4 col-sm-offset-4">
+            <div class="form-group col-sm-9">
+                <input id="search-field" type="text" class="form-control" style="background: #fefefe;"/>
+            </div>
+            <div class="form-group col-sm-3">
+                <button class="btn btn-neutral btn-fill" type="submit"> 搜尋文章 </button>
+            </div>
+        </form>
+        <section class="col-sm-offset-2 col-sm-8" id="results" style="text-align:left;"></section>
         {{! Each post will be output using this markup }}
         {{#foreach posts}}
         <article class="{{post_class}} post__wrapper" data-cols="4">
