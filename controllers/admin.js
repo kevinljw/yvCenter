@@ -11,6 +11,9 @@ var Speech = require('../models/Speech');
 var TalentTrain  = require('../models/TalentTrain');
 var VolunTrain  = require('../models/VolunTrain');
 var emailSender = require('./emailSender');
+var xlsx = require("exceljs");
+var async = require('async');
+// var moment = require('moment');
 /**
  * GET /about
  * About page.
@@ -114,7 +117,8 @@ exports.getVolunMgr = function(req, res, next) {
       });
   });
   
-}; 
+};
+
 exports.getAdministrator = function(req, res, next) {
   User.find({},{"profile.name": 1, email: 1},function(err, allUsers) {
       if (err) {
@@ -1022,3 +1026,247 @@ exports.postLoginAdmin = function(req, res, next) {
     });
   })(req, res, next);
 };
+exports.getVolunXLSX = function(req, res, next) {
+  
+  VolunForm.find({},function(err, allVoluns) {
+      if (err) {
+        return next(err);
+      }
+      var xlsxFilename = Date.now()+"_志工資料.xlsx";
+      var xlsxFilePath = "./public/xlsx_data/"+xlsxFilename;
+      saveVolunXLSX(allVoluns, xlsxFilePath, function(){
+          res.download(xlsxFilePath);
+      });
+      
+  });
+  
+};
+exports.getServiceXLSX = function(req, res, next) {
+  
+  OrgForm.find({},function(err, allServices) {
+      if (err) {
+        return next(err);
+      }
+      var xlsxFilename = Date.now()+"_服務列表.xlsx";
+      var xlsxFilePath = "./public/xlsx_data/"+xlsxFilename;
+      saveServiceXLSX(allServices, xlsxFilePath, function(){
+          res.download(xlsxFilePath);
+      });
+      
+  });
+  
+};
+function saveServiceXLSX(data, filepath, callback){
+      console.log("xlsx saving..."+filepath);
+
+      var workbook = new xlsx.Workbook();
+      var sheet = workbook.addWorksheet("服務列表");
+      var tmpMatch;
+      // console.log("xlsx1");
+      var tmpColumns = [
+              { header: "編號", key: "uid", width: 26 },
+              { header: "機構名", key: "name", width: 26 },
+              { header: "Email", key: "email", width: 23 },
+              { header: "發布時間", key: "gender", width: 41 },
+              { header: "服務名稱", key: "location", width: 27 },
+              { header: "服務簡述", key: "month", width: 25 }, 
+              { header: "服務網站", key: "date", width: 36 },
+              { header: "服務日期", key: "role", width: 27 },
+              { header: "服務時間", key: "role_text", width: 16 },
+              { header: "地點", key: "order", width: 30 },
+              { header: "時數", key: "user", width: 6 },
+              { header: "服務內容", key: "msg", width: 30 },
+              { header: "服務類型", key: "sentiment", width: 26 },
+              { header: "志工需求數量", key: "comments", width: 14 },
+              { header: "志工條件", key: "like", width: 22 },
+              { header: "供餐", key: "ability", width: 6 },
+              { header: "志工保險", key: "service_type", width: 18 },
+              { header: "志工證明", key: "time", width: 12 },
+              { header: "志工補貼", key: "timesOfView", width: 12 },     
+              { header: "行前培訓", key: "pre_train", width: 13 },
+              { header: "培訓日期", key: "pre_train_date", width: 26 },
+              { header: "培訓時間", key: "pre_train_time", width: 26 },
+              { header: "培訓地點", key: "pre_train_location", width: 26 },
+              { header: "招募期限", key: "recruit_deadline", width: 15 },
+              { header: "通知方式", key: "howToInform", width: 16 },
+              { header: "其他資訊", key: "others", width: 26 },
+              { header: "聯絡人", key: "contact", width: 14 },
+              { header: "聯絡人職稱", key: "contact_job", width: 14 },
+              { header: "聯絡人手機", key: "contact_phone", width: 13 },
+              { header: "聯絡人email", key: "contact_email", width: 19 },
+              { header: "是否已結案", key: "hasCompleted", width: 14 },
+              { header: "已應徵人數", key: "applyArr_num", width: 15 },
+              { header: "應徵者姓名", key: "applyArr_name", width: 50 },
+              { header: "被點閱數", key: "timesOfView", width: 15 },
+            ];
+      // console.log(sheet.columns);
+      sheet.columns = tmpColumns;
+      // console.log("xlsx2");
+       // console.log(sheet.columns);
+      async.forEachOf(data, function (eachData, eachIndex, data_callback) {
+        // var tmpMoment = moment(eachData.created_time);
+          var rowTobeAdd = [          
+                      eachData.uid?eachData.uid:"無",
+                      eachData.uname?eachData.uname:"無",
+                      eachData.email?eachData.email:"無",
+                      eachData.timestamp?eachData.timestamp:"無",
+                      eachData.activity_name?eachData.activity_name:"無",
+                      eachData.activity_abstract?eachData.activity_abstract:"無",
+                      eachData.activity_website?eachData.activity_website:"無",
+                      eachData.service_date_since?(eachData.service_date_until?eachData.service_date_since+"-"+eachData.service_date_until:"無"):"無",
+                      eachData.service_time_since?(eachData.service_time_until?eachData.service_time_since+"-"+eachData.service_time_until:"無"):"無",
+                      eachData.service_location?eachData.service_location:"無",
+                      eachData.service_hours?eachData.service_hours:"無",
+                      eachData.service_content?eachData.service_content:"無",
+                      eachData.service_type.join(",")?eachData.service_type.join(","):"無",
+                      eachData.volunNum?eachData.volunNum:"無",
+                      eachData.volunConditions.join(",")?eachData.volunConditions.join(","):"無",
+                      eachData.hasFood?eachData.hasFood:"無",
+                      eachData.volunInsurance.join(",")?eachData.volunInsurance.join(","):"無",
+                      eachData.volunLisence?(eachData.volunLisence=='n'?"否":"是"):"無",
+                      eachData.volunSubsidy?(eachData.volunSubsidy=='n'?"否":"是"):"無",
+                      eachData.pre_train?(eachData.pre_train=='n'?"否":"是"):"無",
+                      eachData.pre_train_date_since?(eachData.pre_train_date_until?eachData.pre_train_date_since+"-"+eachData.pre_train_date_until:"無"):"無",
+                      eachData.pre_train_time_since?(eachData.pre_train_time_until?eachData.pre_train_time_since+"-"+eachData.pre_train_time_until:"無"):"無",
+                      eachData.pre_train_location?eachData.pre_train_location:"無",
+                      eachData.recruit_deadline?eachData.recruit_deadline:"無",
+                      eachData.howToInform.join(",")?eachData.howToInform.join(","):"無",
+                      eachData.otherInfo?eachData.otherInfo:"無",
+                      eachData.contact_person?eachData.contact_person:"無",
+                      eachData.contact_job_title?eachData.contact_job_title:"無",
+                      eachData.contact_phone?eachData.contact_phone:"無",
+                      eachData.contact_email?eachData.contact_email:"無",
+                      eachData.hasCompleted?eachData.hasCompleted:"無",
+                      eachData.applyArr.join(",")?eachData.applyArr.length:0,
+                      eachData.applyArr.join(",")?eachData.applyArr.map(function(obj){
+                        return obj.uname;
+                      }).join(","):"無",
+                      eachData.timesOfView?eachData.timesOfView:0,
+                   ];
+        // console.log("xlsx3_"+eachIndex);
+        // console.log(rowTobeAdd);
+        sheet.addRow(rowTobeAdd).commit();
+        data_callback();
+        
+      }, function (err) {
+      if (err) console.error(err.message); 
+      // Finished the workbook.
+      // workbook.commit();
+     // sheet.commit();
+     // console.log("xlsx4");
+      workbook.xlsx.writeFile(filepath)
+        .then(function() {
+          data.length=0;
+          var nameVal = filepath.split('/');
+          // console.log("xlsx5");
+          // console.log(nameVal[nameVal.length-2]+'/'+nameVal[nameVal.length-1]);
+            callback({source: filepath, target: nameVal[nameVal.length-1]});
+
+        });
+
+    });    
+   
+      
+}
+function saveVolunXLSX(data, filepath, callback){
+      console.log("xlsx saving..."+filepath);
+
+      var workbook = new xlsx.Workbook();
+      var sheet = workbook.addWorksheet("志工列表");
+      var tmpMatch;
+      // console.log("xlsx1");
+      var tmpColumns = [
+              { header: "編號", key: "uid", width: 26 },
+              { header: "姓名", key: "name", width: 12 },
+              { header: "性別", key: "gender", width: 7 },
+              { header: "居住縣市/鄉鎮區", key: "location", width: 12 },
+              { header: "Email", key: "email", width: 23 },
+              { header: "身份證字號", key: "month", width: 14 }, 
+              { header: "出生年月日", key: "date", width: 15 },
+              { header: "身份別", key: "role", width: 12 },
+              { header: "身份", key: "role_text", width: 20 },
+              { header: "室內電話", key: "order", width: 20 },
+              { header: "手機電話", key: "user", width: 20 },
+              { header: "自備交通工具", key: "msg", width: 19 },
+              { header: "語言", key: "sentiment", width: 20 },
+              { header: "已完成志工基礎訓練", key: "comments", width: 22 },
+              { header: "需要服務學習證明", key: "like", width: 22 },
+              //
+              { header: "志工專長-電腦", key: "ability", width: 25 },
+              { header: "志工專長-活動", key: "ability", width: 25 },
+              { header: "志工專長-影像", key: "ability", width: 25 },
+              { header: "志工專長-教學", key: "ability", width: 25 },
+              { header: "志工專長-設計", key: "ability", width: 25 },
+              { header: "志工專長-技藝", key: "ability", width: 25 },
+              { header: "志工專長-證照", key: "ability", width: 25 },
+              { header: "志工專長-其他", key: "ability", width: 25 },
+              //
+              { header: "志願服務", key: "service_type", width: 40 },
+              //
+              { header: "可服務時段", key: "time", width: 45 },
+              //
+              { header: "被點擊數", key: "timesOfView", width: 18 },
+              { header: "申請機構_ID", key: "applyIdArr", width: 26 },
+              { header: "申請機構_名稱", key: "applyNameArr", width: 26 },
+            ];
+      // console.log(sheet.columns);
+      sheet.columns = tmpColumns;
+      // console.log("xlsx2");
+       // console.log(sheet.columns);
+      async.forEachOf(data, function (eachData, eachIndex, data_callback) {
+        // var tmpMoment = moment(eachData.created_time);
+          var rowTobeAdd = [
+                    eachData.uid,
+                    eachData.name,
+                    eachData.gender?eachData.gender:"無",
+                    eachData.location?eachData.location:"無",
+                    eachData.email?eachData.email:"無",
+                    eachData.idcode?eachData.idcode:"無",
+                    eachData.birth?eachData.birth:"無",
+                    eachData.role?eachData.role:"無",
+                    eachData.role_text?eachData.role_text:"無",
+                    eachData.callnumber?eachData.callnumber:"無",
+                    eachData.phonenumber?eachData.phonenumber:"無",
+                    eachData.transportation?eachData.transportation:"無",
+                    eachData.speak.join(",")?eachData.speak.join(","):"無",
+                    eachData.hasTrain?(eachData.hasTrain=='f'?"否":"是"):"無",
+                    eachData.needProof?(eachData.needProof=='f'?"否":"是"):"無",
+                    eachData.ability_computer.join(",")?eachData.ability_computer.join(","):"無",
+                    eachData.ability_activity.join(",")?eachData.ability_activity.join(","):"無",
+                    eachData.ability_photo.join(",")?eachData.ability_photo.join(","):"無",
+                    eachData.ability_teach.join(",")?eachData.ability_teach.join(","):"無",
+                    eachData.ability_design.join(",")?eachData.ability_design.join(","):"無",
+                    eachData.ability_skill.join(",")?eachData.ability_skill.join(","):"無",
+                    eachData.ability_license.join(",")?eachData.ability_license.join(","):"無",
+                    eachData.ability_other?eachData.ability_other:"無",
+                    eachData.service_type.join(",")?eachData.service_type.join(","):"無",
+                    eachData.time.join(",")?eachData.time.join(","):"無",
+                    eachData.timesOfView?eachData.timesOfView:"無",
+                    eachData.applyIdArr.join(",")?eachData.applyIdArr.join(","):"無",
+                    eachData.applyNameArr.join(",")?eachData.applyNameArr.join(","):"無",
+                   ];
+        // console.log("xlsx3_"+eachIndex);
+        // console.log(rowTobeAdd);
+        sheet.addRow(rowTobeAdd).commit();
+        data_callback();
+        
+      }, function (err) {
+      if (err) console.error(err.message); 
+      // Finished the workbook.
+      // workbook.commit();
+     // sheet.commit();
+     // console.log("xlsx4");
+      workbook.xlsx.writeFile(filepath)
+        .then(function() {
+          data.length=0;
+          var nameVal = filepath.split('/');
+          // console.log("xlsx5");
+          // console.log(nameVal[nameVal.length-2]+'/'+nameVal[nameVal.length-1]);
+            callback({source: filepath, target: nameVal[nameVal.length-1]});
+
+        });
+
+    });    
+   
+      
+}

@@ -182,6 +182,12 @@ app.post('/activation/:id', passportConf.isAdminAuthenticated, adminController.p
 app.get('/localMgr', passportConf.isAdminAuthenticated, adminController.getLocalMgr );
 app.get('/serviceMgr', passportConf.isAdminAuthenticated, adminController.getServiceMgr);
 app.get('/volunMgr', passportConf.isAdminAuthenticated, adminController.getVolunMgr);
+
+//xlsx---
+app.get('/volunXlsx', passportConf.isAdminAuthenticated, adminController.getVolunXLSX);
+app.get('/serviceXlsx', passportConf.isAdminAuthenticated, adminController.getServiceXLSX);
+
+
 app.get('/administrator', passportConf.isAdminAuthenticated, adminController.getAdministrator);
 app.post('/beAdmin', passportConf.isAdminAuthenticated, adminController.postBeAdmin);
 app.post('/removeAdmin/:id', passportConf.isAdminAuthenticated, adminController.postRemoveAdmin);
