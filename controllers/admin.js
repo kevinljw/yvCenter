@@ -1056,6 +1056,80 @@ exports.getServiceXLSX = function(req, res, next) {
   });
   
 };
+exports.getOrgXLSX = function(req, res, next) {
+  
+  OrgForm.find({IsOrg: true},function(err, allOrgs) {
+      if (err) {
+        return next(err);
+      }
+      var xlsxFilename = Date.now()+"_機構列表.xlsx";
+      var xlsxFilePath = "./public/xlsx_data/"+xlsxFilename;
+      saveOrgXLSX(allOrgs, xlsxFilePath, function(){
+          res.download(xlsxFilePath);
+      });
+      
+  });
+  
+};
+function saveOrgXLSX(data, filepath, callback){
+      console.log("xlsx saving..."+filepath);
+
+      var workbook = new xlsx.Workbook();
+      var sheet = workbook.addWorksheet("機構列表");
+      var tmpMatch;
+      // console.log("xlsx1");
+      var tmpColumns = [
+              { header: "編號", key: "uid", width: 26 },
+              { header: "機構名稱", key: "name", width: 12 },
+              { header: "Email", key: "email", width: 23 },
+              { header: "機構地址", key: "month", width: 14 }, 
+              { header: "機構網站", key: "date", width: 15 },
+              { header: "機構簡介", key: "role", width: 30 },
+              { header: "聯絡人", key: "contact", width: 14 },         
+              { header: "聯絡人電話", key: "contact_phone", width: 13 },
+            ];
+      // console.log(sheet.columns);
+      sheet.columns = tmpColumns;
+      // console.log("xlsx2");
+       // console.log(sheet.columns);
+      async.forEachOf(data, function (eachData, eachIndex, data_callback) {
+        // var tmpMoment = moment(eachData.created_time);
+          var rowTobeAdd = [
+                    eachData.id,
+                    eachData.profile.name,
+                    eachData.profile.email?eachData.email:"無",
+                    eachData.profile.location?eachData.location:"無",
+                    eachData.profile.website?eachData.website:"無",
+                    eachData.profile.abstract?eachData.abstract:"無",
+                    eachData.profile.contact?eachData.contact:"無",
+                    eachData.profile.phone?eachData.phone:"無",
+                    
+                   ];
+        // console.log("xlsx3_"+eachIndex);
+        // console.log(rowTobeAdd);
+        sheet.addRow(rowTobeAdd).commit();
+        data_callback();
+        
+      }, function (err) {
+      if (err) console.error(err.message); 
+      // Finished the workbook.
+      // workbook.commit();
+     // sheet.commit();
+     // console.log("xlsx4");
+      workbook.xlsx.writeFile(filepath)
+        .then(function() {
+          data.length=0;
+          var nameVal = filepath.split('/');
+          // console.log("xlsx5");
+          // console.log(nameVal[nameVal.length-2]+'/'+nameVal[nameVal.length-1]);
+            callback({source: filepath, target: nameVal[nameVal.length-1]});
+
+        });
+
+    });    
+   
+      
+}
 function saveServiceXLSX(data, filepath, callback){
       console.log("xlsx saving..."+filepath);
 

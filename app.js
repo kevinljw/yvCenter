@@ -186,7 +186,7 @@ app.get('/volunMgr', passportConf.isAdminAuthenticated, adminController.getVolun
 //xlsx---
 app.get('/volunXlsx', passportConf.isAdminAuthenticated, adminController.getVolunXLSX);
 app.get('/serviceXlsx', passportConf.isAdminAuthenticated, adminController.getServiceXLSX);
-
+app.get('/orgXlsx', passportConf.isAdminAuthenticated, adminController.getOrgXLSX);
 
 app.get('/administrator', passportConf.isAdminAuthenticated, adminController.getAdministrator);
 app.post('/beAdmin', passportConf.isAdminAuthenticated, adminController.postBeAdmin);
