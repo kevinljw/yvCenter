@@ -1097,12 +1097,12 @@ function saveOrgXLSX(data, filepath, callback){
           var rowTobeAdd = [
                     eachData.id,
                     eachData.profile.name,
-                    eachData.profile.email?eachData.email:"無",
-                    eachData.profile.location?eachData.location:"無",
-                    eachData.profile.website?eachData.website:"無",
-                    eachData.profile.abstract?eachData.abstract:"無",
-                    eachData.profile.contact?eachData.contact:"無",
-                    eachData.profile.phone?eachData.phone:"無",
+                    eachData.profile.email?eachData.profile.email:"無",
+                    eachData.profile.location?eachData.profile.location:"無",
+                    eachData.profile.website?eachData.profile.website:"無",
+                    eachData.profile.abstract?eachData.profile.abstract:"無",
+                    eachData.profile.contact?eachData.profile.contact:"無",
+                    eachData.profile.phone?eachData.profile.phone:"無",
                     
                    ];
         // console.log("xlsx3_"+eachIndex);
