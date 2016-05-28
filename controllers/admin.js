@@ -1058,7 +1058,7 @@ exports.getServiceXLSX = function(req, res, next) {
 };
 exports.getOrgXLSX = function(req, res, next) {
   
-  OrgForm.find({IsOrg: true},function(err, allOrgs) {
+  User.find({IsOrg: true},function(err, allOrgs) {
       if (err) {
         return next(err);
       }
