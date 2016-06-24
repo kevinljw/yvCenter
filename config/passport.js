@@ -117,7 +117,7 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, function(email, passw
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_ID,
   clientSecret: process.env.FACEBOOK_SECRET,
-  callbackURL: '/auth/facebook/callback',
+  callbackURL: 'http://tkkyvc.org.tw/auth/facebook/callback',
   profileFields: ['name', 'email', 'link', 'locale', 'timezone'],
   passReqToCallback: true
 }, function(req, accessToken, refreshToken, profile, done) {
