@@ -1,10 +1,10 @@
 extends layout
 
 block content
-  .section.section-nude.text-center.landing-section.bg(style="background-image: url('/img/18018945761_707e5b412d_h.jpg');background-position: center 0;background-attachment: fixed;bottom: 0;z-index: -1;background-repeat: no-repeat;")
+  .section.section-nude.text-center.landing-section.bg(style="background-image: url('/img/18018945761_707e5b412d_b.jpg');background-position: center left;background-attachment: fixed;bottom: 0;z-index: -1;background-repeat: no-repeat;")
     .container
       .row
-        .col-md-8.col-md-offset-2.paragrahIndent(style='color:#555')
+        .col-md-8.col-md-offset-2.paragrahIndent(style='color:#000;text-shadow:0px 0px 18px #ddd;')
           h2 青年培力
           br
           h5
@@ -58,7 +58,8 @@ block content
                   td #{val.date}
                   td #{val.org}
                   td
-                    button.col-sm-12.btn.btn-info.btn-xs(type='button', data-toggle='popover', data-placement='top', title='#{val.abstract}', data-content='地點:#{val.location}') 查看
+                    button.col-sm-12.btn.btn-info.btn-xs(type='button', data-toggle="modal" data-target="#volunTrainModel_#{index}") 查看
+                    //- button.col-sm-12.btn.btn-info.btn-xs(type='button', data-toggle='popover', data-placement='top', title='#{val.abstract}', data-content='地點:#{val.location}') 查看
                   td
                     a.col-sm-12.btn.btn.btn-success.btn-xs(href='#{val.link}', target='_blank', style='font-weight:900;') 瀏覽          
           br
@@ -86,7 +87,8 @@ block content
                   td #{val.date}
                   td #{val.org}
                   td
-                    button.col-sm-12.btn.btn-info.btn-xs(type='button', data-toggle='popover', data-placement='top', title='#{val.abstract}', data-content='地點:#{val.location}') 查看
+                    button.col-sm-12.btn.btn-info.btn-xs(type='button', data-toggle="modal" data-target="#talentTrainModel_#{index}") 查看
+                    //- button.col-sm-12.btn.btn-info.btn-xs(type='button', data-toggle='popover', data-placement='top', title='#{val.abstract}', data-content='地點:#{val.location}') 查看
                   td
                     a.col-sm-12.btn.btn.btn-success.btn-xs(href='#{val.link}', target='_blank', style='font-weight:900;') 瀏覽
           
@@ -118,7 +120,8 @@ block content
                   td #{val.date}
                   td #{val.org}
                   td
-                    button.col-sm-12.btn.btn-info.btn-xs(type='button', data-toggle='popover', data-placement='top', title='#{val.abstract}', data-content='地點:#{val.location}') 查看
+                    button.col-sm-12.btn.btn-info.btn-xs(type='button', data-toggle="modal" data-target="#speechModel_#{index}") 查看
+                    //- button.col-sm-12.btn.btn-info.btn-xs(type='button', data-toggle='popover', data-placement='top', title='#{val.abstract}', data-content='地點:#{val.location}') 查看
                   td
                     a.col-sm-12.btn.btn.btn-success.btn-xs(href='#{val.link}', target='_blank', style='font-weight:900;') 瀏覽
   each val,index in allMentors
@@ -147,4 +150,96 @@ block content
             .divider
             .right-side
               button.btn.btn-danger.btn-simple(type='button', data-dismiss='modal') 關閉
-          
+  each val,index in allVolunTrains
+    .modal.fade(tabindex='-1', role='dialog', aria-labelledby='volunTrainLabel', aria-hidden='true', id='volunTrainModel_#{index}')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4#volunTrainLabel.modal-title #{val.title}
+          .modal-body(style='height: 330px;')
+            .col-sm-5
+              //- .img-circle.img-no-padding.profile_pic_inModel(style='background-image: url("/uploads/'+val.picture+'");')
+              h5.text-center #{val.title}
+                br
+                small #{val.date}
+                br
+                small #{val.org}
+                br
+                small #{val.location}
+            .col-sm-offset-1.col-sm-5
+              h5.text-center 活動資訊
+              //- h6 !{"<li>"+val.abstract.split(',')+"</li>"}
+              each eachAbs in val.abstract.split(',')
+                li=eachAbs
+
+              
+          .modal-footer
+            .left-side
+              a.btn.btn-success.btn-simple(href='#{val.link}', target='_blank')
+                | 前往連結
+            .divider
+            .right-side
+              button.btn.btn-danger.btn-simple(type='button', data-dismiss='modal') 關閉
+    each val,index in allTalentTrains
+      .modal.fade(tabindex='-1', role='dialog', aria-labelledby='talentTrainLabel', aria-hidden='true', id='talentTrainModel_#{index}')
+        .modal-dialog
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+              h4#talentTrainLabel.modal-title #{val.title}
+            .modal-body(style='height: 330px;')
+              .col-sm-5
+                //- .img-circle.img-no-padding.profile_pic_inModel(style='background-image: url("/uploads/'+val.picture+'");')
+                h5.text-center #{val.title}
+                  br
+                  small #{val.date}
+                  br
+                  small #{val.org}
+                  br
+                  small #{val.location}
+              .col-sm-offset-1.col-sm-5
+                h5.text-center 活動資訊
+                //- h6 !{"<li>"+val.abstract.split(',')+"</li>"}
+                each eachAbs in val.abstract.split(',')
+                  li=eachAbs
+
+                
+            .modal-footer
+              .left-side
+                a.btn.btn-success.btn-simple(href='#{val.link}', target='_blank')
+                  | 前往連結
+              .divider
+              .right-side
+                button.btn.btn-danger.btn-simple(type='button', data-dismiss='modal') 關閉
+    each val,index in allSpeechs
+      .modal.fade(tabindex='-1', role='dialog', aria-labelledby='speechLabel', aria-hidden='true', id='speechModel_#{index}')
+        .modal-dialog
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+              h4#speechLabel.modal-title #{val.title}
+            .modal-body(style='height: 330px;')
+              .col-sm-5
+                //- .img-circle.img-no-padding.profile_pic_inModel(style='background-image: url("/uploads/'+val.picture+'");')
+                h5.text-center #{val.title}
+                  br
+                  small #{val.date}
+                  br
+                  small #{val.org}
+                  br
+                  small #{val.location}
+              .col-sm-offset-1.col-sm-5
+                h5.text-center 活動資訊
+                //- h6 !{"<li>"+val.abstract.split(',')+"</li>"}
+                each eachAbs in val.abstract.split(',')
+                  li=eachAbs
+
+                
+            .modal-footer
+              .left-side
+                a.btn.btn-success.btn-simple(href='#{val.link}', target='_blank')
+                  | 前往連結
+              .divider
+              .right-side
+                button.btn.btn-danger.btn-simple(type='button', data-dismiss='modal') 關閉

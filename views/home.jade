@@ -7,6 +7,7 @@ block content
   //-   h1 北基金青年志工中心
   //-   p.lead A boilerplate for Node.js web applications.
   //-   hr
+  
   #carousel_home
     #carousel_home-generic.carousel.slide(data-ride='carousel')
       .carousel.slide(data-ride='carousel')
@@ -47,7 +48,7 @@ block content
         .col-sm-6.col-xs-12
           br
           br
-  .section.section-gray.text-center.landing-section
+  .section.section-white.text-center.landing-section
     .container
       .row
         .col-md-10.col-md-offset-1.paragrahIndent
@@ -71,8 +72,9 @@ block content
                 span.fa.fa-angle-left
               a.right.carousel-control(href='#carousel_goodLink-generic', data-slide='next')
                 span.fa.fa-angle-right
-
-  
+      div(style="margin-top:30px;")
+        div(style="display:inline;") 拜訪人次:
+        img(src='http://www.reliablecounter.com/count.php?page=tkkyvc.org.tw&digit=style/plain/15/&reloads=1', border='0', style="display:inline;margin-left:10px;")
   script.
     var homeCoverPageNum = !{homeCoverNum};
     var allHomeCoverArr = !{allCovers};

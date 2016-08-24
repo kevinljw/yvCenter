@@ -6,6 +6,7 @@ $(document).ready(function()
 
       setHomeCoverModel($('#carousel_home ol.carousel-indicators li.active').attr('data-slide-to'));
   });
+  
   // $('#carousel_home').bind('slide.bs.carousel', function (e) {
   //     nowHomeCarouselIndex++;
   //     if(nowHomeCarouselIndex>=allHomeCoverArr.length) nowHomeCarouselIndex=0;
